@@ -1,6 +1,6 @@
 window.onbeforeunload = function(){ return "This list of names will be discarded."; }
 
-var app = angular.module('meetapp', ['ui']);
+var app = angular.module('meetapp', ['ui', 'ngTouch']);
 
 function pad(number) {   
   var str = '' + number;
@@ -15,6 +15,11 @@ app.controller('MeetApp', function($scope){
 	var name = document.getElementById("name");
 
 	$scope.names = [];
+	$scope.title = "lol";
+	$scope.hammertime = function(){
+		$scope.title = "MeetApp"
+		alert("can't touch this");
+	}
 	$scope.add = function(name){
 		if(!name || !name.length) return;
 		$scope.names.push(name);

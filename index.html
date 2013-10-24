@@ -4,8 +4,13 @@
 	<title>MeetApp</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
 	<link rel="stylesheet/less" type="text/css" href="style.less" />
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/angular-ui.min.js"></script>
+
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-ui/build/angular-ui.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
+
+	<script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
+
 	<script type="text/javascript" src="js/less-1.4.1.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 </head>
@@ -20,7 +25,9 @@
 	  tab: 'keynav.tab(1, $event)',
 	  'shift-tab': 'keynav.tab(-1, $event)',
 	  enter: keynav.enter
-	}">
+	}" 
+	ng-swipe-left="keynav.right($event)"
+	ng-swipe-right="keynav.left($event)">
 
 	<div class="pane" id="input" ng-class="{current: currentPane == 'input'}">
 		<div ng-style="midStyle()">
@@ -69,6 +76,5 @@ Enter will add someone to the queue or move the queue forward
 			</p>
 		</div>
 	</div>
-
 </body>
 </html>
