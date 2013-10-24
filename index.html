@@ -29,10 +29,9 @@
 	ng-swipe-left="keynav.right($event)"
 	ng-swipe-right="keynav.left($event)">
 
-	<div class="pane" id="input" ng-class="{current: currentPane == 'input'}">
+	<!-- <div class="pane" id="input" ng-class="{current: currentPane == 'input'}">
 		<div ng-style="midStyle()">
-			<h1 id="label">Meet<span>App</span></h1>
-			<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
+			
 			<pre ng-style="instructionsStyle()">
 Instructions
 
@@ -49,9 +48,11 @@ Delete/backspace will remove an entry
 Enter will add someone to the queue or move the queue forward
 			</pre>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="pane" id="names" ng-class="{current: currentPane == 'names'}">
+		<h1 id="label">Meet<span>App</span></h1>
+		<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
 		<div>
 			<p ng-repeat="name in names"
 				ng-class="{focus: currentPane == 'names' && $index == nav.names}"

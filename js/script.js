@@ -15,11 +15,6 @@ app.controller('MeetApp', function($scope){
 	var name = document.getElementById("name");
 
 	$scope.names = [];
-	$scope.title = "lol";
-	$scope.hammertime = function(){
-		$scope.title = "MeetApp"
-		alert("can't touch this");
-	}
 	$scope.add = function(name){
 		if(!name || !name.length) return;
 		$scope.names.push(name);
@@ -90,14 +85,14 @@ app.controller('MeetApp', function($scope){
 		}
 	}
 
-	var panes = ['input', 'names', 'queue'];
+	var panes = ['names', 'queue'];
 	$scope.currentPane = panes[0];
 
 	function switchPane(x){
 		var i = panes.indexOf($scope.currentPane);
 		i = (i + panes.length + x) % panes.length;
 		$scope.currentPane = panes[i];
-		if($scope.currentPane == 'input'){
+		if($scope.currentPane == 'name'){
 			name.focus();
 		} else {
 			name.blur();
@@ -145,8 +140,8 @@ app.controller('MeetApp', function($scope){
 		},
 		enter: function(){
 			switch($scope.currentPane){
-				case 'input': $scope.add($scope.name); break;
-				case 'names': $scope.enqueue($scope.names[$scope.nav.names]); break;
+				case 'names': $scope.add($scope.name); break;
+				// case 'names': $scope.enqueue($scope.names[$scope.nav.names]); break;
 				case 'queue': $scope.next(); break;
 			}
 		}

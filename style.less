@@ -4,8 +4,9 @@ body {
 	font-family: 'Century Gothic';
 	position: absolute;
 	margin: 0px;
+	top: 0px;
+	bottom: 0px;
 	width: 100%;
-	height: 100%;
 }
 
 p {
@@ -21,12 +22,12 @@ p {
 div.pane {
 	float: left;
 	height: 100%;
-	width: 20%;
+	width: 40%;
 	text-align: center;
-	> div {
-		height: 100%;
-		overflow: auto;
-	}
+	// > div {
+	// 	height: 100%;
+	// 	overflow: auto;
+	// }
 	&.current { width: 60%; }
 	&#input { background-color: #0FF; }
 	&#names { background-color: #0FA; }
