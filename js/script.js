@@ -39,6 +39,10 @@ app.controller('MeetApp', function($scope){
 
 	}
 
+	$scope.sayhi = function(){
+		alert('hi');
+	}
+
 	$scope.dequeue = function(i){
 		if($scope.queue[i] == $scope.current){
 			$scope.next();
@@ -145,14 +149,6 @@ app.controller('MeetApp', function($scope){
 				case 'queue': $scope.next(); break;
 			}
 		}
-	}
-
-	$scope.midStyle = function(){
-		return {top: ($scope.currentPane == 'input' ? 20 : 40) + '%'};
-	}
-
-	$scope.instructionsStyle = function(){
-		return {opacity: $scope.currentPane == 'input' ? 1 : 0};
 	}
 
 	var loop = function(){
