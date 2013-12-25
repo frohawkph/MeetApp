@@ -42,11 +42,11 @@
 				ng-bind="name"
 				ng-swipe-left="sayhi()">
 			</li>
-			<li ng-hide="names.length">
-				^ type a name and submit to add to the roster
-			</li>
-			<li ng-show="names.length">
-				^ tap on a name to add to the queue.
+			<li class="help" ng-hide="names.length">
+				<p>^ type a name and submit to add to the roster</p>
+			</li class="help">
+			<li class="help" ng-show="names.length && !queue.length">
+				<p>^ tap on a name to add to the queue.</p>
 			</li>
 		</ul>
 	</div>
@@ -54,8 +54,8 @@
 	<div class="pane" id="queue" ng-class="{current: currentPane == 'queue'}">
 		<div class="header" ng-click="next()">
 			<h1>{{displayTime(current)}}</h1>
-			<p>{{current.name}}
-		</p>
+			<p>{{current.name}}</p>
+		</div>
 		<ul>
 			<li ng-repeat="entry in queue"
 				ng-class="{
@@ -66,6 +66,10 @@
 				ng-hide="$index <= queue.indexOf(current)"
 				ng-click="dequeue($index)">
 				{{entry.name}}
+			</li>
+			<li class="help" ng-show="queue.length">
+				<p>Tap on the timer to move to the next speaker.</p>
+				<p>Tap on a name to remove from queue.</p>
 			</li>
 		</ul>
 	</div>
