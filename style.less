@@ -19,27 +19,50 @@ p {
 .pane:not(#input) hr { margin-bottom: 0px; }
 
 .pane {
+	@headerHeight: 120px;
 	float: left;
 	height: 100%;
-	width: 40%;
-	text-align: center;
+	width: 50%;
+	// text-align: center;
 	position: relative;
+	.header {
+		border-bottom: 1px solid #ccc;
+		position: absolute;
+		padding: 10px;
+		box-sizing: border-box;
+		width: 100%;
+		height: @headerHeight;
+		background-color: rgba(255,255,255,0.2);
+	}
 	ul {
 		overflow-y: scroll;
 		position: absolute;
 		bottom: 0px;
-		top: 100px;
+		top: @headerHeight;
 		width: 100%;
 		margin-left: 0px;
+		padding: 10px;
 		li {
 			height: 48px;
 			line-height: 48px;
 		}
 	}
-	&.current { width: 60%; }
-	&#input { background-color: #0FF; }
-	&#names { background-color: #0FA; }
-	&#queue { background-color: #0AF; }
+	&#roster {
+		background-color: #eee;
+		z-index: 1;
+	}
+	&#queue {
+		background-color: #ddd;
+		z-index: 0;
+	}
+	// &.current { width: 60%; }
+	// &#input { background-color: #0FF; }
+	// &#names { background-color: #0FA; }
+	// &#queue { background-color: #0AF; }
+}
+.help p {
+	font-size: 16px;
+	font-weight: 300;
 }
 
 #label span { font-weight: normal; }
