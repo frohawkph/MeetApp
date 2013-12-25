@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="meetapp">
+<head>
+	<title>MeetApp</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+	<link rel="stylesheet/less" type="text/css" href="style.less" />
+
+	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-ui/build/angular-ui.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
+
+	<script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
+
+	<script type="text/javascript" src="js/less-1.4.1.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body ng-controller="MeetApp"
+	ui-keydown="{
+		backspace: 'keynav.press(keynav.backspace, $event)',
+		delete: 'keynav.press(keynav.delete, $event)',
+	  up: 'keynav.press(keynav.up, $event)',
+	  down: 'keynav.press(keynav.down, $event)',
+	  left: 'keynav.left($event)',
+	  right: 'keynav.right($event)',
+	  tab: 'keynav.tab(1, $event)',
+	  'shift-tab': 'keynav.tab(-1, $event)',
+	  enter: keynav.enter
+	}">
+
+	<div class="pane" id="names" ng-class="{current: currentPane == 'names'}">
+		<div>
+			<h1 id="label">Meet<span>App</span></h1>
+			<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
+		</div>
+		<ul>
+			<li ng-repeat="name in names"
+				ng-class="{focus: currentPane == 'names' && $index == nav.names}"
+				ng-click="enqueue(name)"
+				ng-bind="name"
+				ng-swipe-left="sayhi()">
+			</li>
+			<li ng-hide="names.length">
+				^ type a name and submit to add to the roster
+			</li>
+			<li ng-show="names.length">
+				^ tap on a name to add to the queue.
+			</li>
+		</ul>
+	</div>
+
+	<div class="pane" id="queue" ng-class="{current: currentPane == 'queue'}">
+		<div ng-click="next()">
+			<h1>{{displayTime(current)}}</h1>
+			<p>{{current.name}}
+		</p>
+		<ul>
+			<li ng-repeat="entry in queue"
+				ng-class="{
+					current: entry == current,
+					focus: currentPane == 'queue' && $index == nav.queue,
+					overtime: overtime(entry)
+				}"
+				ng-hide="$index <= queue.indexOf(current)"
+				ng-click="dequeue($index)">
+				{{entry.name}}
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+* { transition: all 0.2s; }
+
+body {
+	position: absolute;
+	margin: 0px;
+	top: 0px;
+	bottom: 0px;
+	width: 100%;
+}
+
+p {
+	font-size: 20px;
+	margin: 0px;
+	padding: 5px;
+}
+
+// .focus, p:hover { background-color: #FA0; }
+
+.pane:not(#input) hr { margin-bottom: 0px; }
+
+.pane {
+	float: left;
+	height: 100%;
+	width: 40%;
+	text-align: center;
+	position: relative;
+	ul {
+		overflow-y: scroll;
+		position: absolute;
+		bottom: 0px;
+		top: 100px;
+		width: 100%;
+		margin-left: 0px;
+		li {
+			height: 48px;
+			line-height: 48px;
+		}
+	}
+	&.current { width: 60%; }
+	&#input { background-color: #0FF; }
+	&#names { background-color: #0FA; }
+	&#queue { background-color: #0AF; }
+}
+
+#label span { font-weight: normal; }
+
+#input div { position: relative; }
+
+#queue {
+	.current {
+		// font-size: 50px;
+		// line-height: 50px;
+		// font-weight: bold;
+	}
+	.old { color: #999; }
+	.overtime { color: #F00; }
+	.old.overtime { color: #FFF; }
+}
