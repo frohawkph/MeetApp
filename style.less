@@ -41,6 +41,30 @@ p {
 		height: @headerHeight;
 		background-color: rgba(255,255,255,0.4);
 		text-align: center;
+		#name {
+			font-size: 18px;
+			// display: block;
+			height: 44px;
+			margin-top: 30px;
+			padding: 10px 20px;
+			width: 100%;
+			box-sizing: border-box;
+			box-shadow: none;
+			-webkit-appearance: none;
+			border: none;
+			&:focus {
+				box-shadow: none;
+			}
+		}
+		h3 {
+			font-weight: 300;
+		}
+		#timer {
+			margin-bottom: 0px;
+		}
+		#current-speaker {
+			margin-top: 0px;
+		}
 	}
 	ul {
 		overflow-y: scroll;
@@ -55,13 +79,14 @@ p {
 		-webkit-overflow-scrolling: touch;
 		li {
 			height: 48px;
-			padding: 0px 20px;
+			padding: 0px 40px;
 			line-height: 48px;
 			border-bottom: 1px solid rgba(0,0,0,0.1);
 
 			&.help {
 				height: auto;
 				margin: 20px;
+				padding: 0px 20px;
 				background-color: rgba(255,0,0,0.2);
 				p {
 					font-weight: 300;

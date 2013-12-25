@@ -33,7 +33,8 @@
 
 	<div class="pane" id="roster" ng-class="{current: currentPane == 'names'}">
 		<div class="header">
-			<h1 id="label">Meet<span>App</span></h1>
+			<!-- <h1 id="label">Meet<span>App</span></h1> -->
+			<h3>ROSTER</h3>
 			<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
 		</div>
 		<ul>
@@ -54,8 +55,9 @@
 
 	<div class="pane" id="queue" ng-class="{current: currentPane == 'queue'}">
 		<div class="header" ng-click="next()">
-			<h1>{{displayTime(current)}}</h1>
-			<h2>{{current.name}}</h2>
+			<h3>QUEUE</h3>
+			<h1 id="timer">{{displayTime(current)}}</h1>
+			<h2 id="current-speaker">{{current.name}}</h2>
 		</div>
 		<ul>
 			<li ng-repeat="entry in queue"
