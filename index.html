@@ -28,8 +28,10 @@
 	}">
 
 	<div class="pane" id="names" ng-class="{current: currentPane == 'names'}">
-		<h1 id="label">Meet<span>App</span></h1>
-		<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
+		<div>
+			<h1 id="label">Meet<span>App</span></h1>
+			<input type="text" id="name" ng-model="name" placeholder="Enter a name"/>
+		</div>
 		<ul>
 			<li ng-repeat="name in names"
 				ng-class="{focus: currentPane == 'names' && $index == nav.names}"
@@ -47,17 +49,20 @@
 	</div>
 
 	<div class="pane" id="queue" ng-class="{current: currentPane == 'queue'}">
+		<div ng-click="next()">
+			<h1>{{displayTime(current)}}</h1>
+			<p>{{current.name}}
+		</p>
 		<ul>
 			<li ng-repeat="entry in queue"
 				ng-class="{
 					current: entry == current,
-					old: $index < queue.indexOf(current),
 					focus: currentPane == 'queue' && $index == nav.queue,
 					overtime: overtime(entry)
 				}"
+				ng-hide="$index <= queue.indexOf(current)"
 				ng-click="dequeue($index)">
 				{{entry.name}}
-				<span>{{displayTime(entry)}}</span>
 			</li>
 		</ul>
 	</div>
