@@ -54,7 +54,7 @@
 	<div class="pane" id="queue" ng-class="{current: currentPane == 'queue'}">
 		<div class="header" ng-click="next()">
 			<h1>{{displayTime(current)}}</h1>
-			<p>{{current.name}}</p>
+			<h2>{{current.name}}</h2>
 		</div>
 		<ul>
 			<li ng-repeat="entry in queue"

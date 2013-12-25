@@ -49,13 +49,23 @@ p {
 		top: @headerHeight;
 		width: 100%;
 		margin-left: 0px;
-		padding: 20px;
+		// padding: 20px;
 		list-style: none;
 		box-sizing: border-box;
 		li {
 			height: 48px;
+			padding: 0px 20px;
 			line-height: 48px;
-			width: 100%;
+			border-bottom: 1px solid rgba(0,0,0,0.1);
+
+			&.help {
+				height: auto;
+				margin: 20px;
+				background-color: rgba(255,0,0,0.2);
+				p {
+					font-weight: 300;
+				}
+			}
 		}
 	}
 	&#roster {
@@ -71,9 +81,7 @@ p {
 	// &#names { background-color: #0FA; }
 	// &#queue { background-color: #0AF; }
 }
-.help p {
-	font-weight: 300;
-}
+
 
 #label span { font-weight: normal; }
 
