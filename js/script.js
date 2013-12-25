@@ -16,7 +16,7 @@ app.controller('MeetApp', function($scope){
 
 	$scope.names = [];
 	$scope.add = function(name){
-		if(!name || !name.length) return;
+		if(!name || !name.length || $scope.names.indexOf(name) != -1) return;
 		$scope.names.push(name);
 		$scope.names.sort();
 		$scope.name = null;
@@ -53,7 +53,7 @@ app.controller('MeetApp', function($scope){
 
 	$scope.displayTime = function(entry){
 
-		if(!entry.startTime) return "00:00.00";
+		if(!entry || !entry.startTime) return "00:00.00";
 
 		var dd;
 		if(entry.endTime){
@@ -145,7 +145,6 @@ app.controller('MeetApp', function($scope){
 		enter: function(){
 			switch($scope.currentPane){
 				case 'names': $scope.add($scope.name); break;
-				// case 'names': $scope.enqueue($scope.names[$scope.nav.names]); break;
 				case 'queue': $scope.next(); break;
 			}
 		}
