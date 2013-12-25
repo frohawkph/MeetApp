@@ -159,3 +159,7 @@ app.controller('MeetApp', function($scope){
 	name.focus();
 
 });
+
+$(function(){
+	FastClick.attach(document.body);
+})
