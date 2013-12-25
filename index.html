@@ -37,6 +37,12 @@
 				ng-bind="name"
 				ng-swipe-left="sayhi()">
 			</li>
+			<li ng-hide="names.length">
+				^ type a name and submit to add to the roster
+			</li>
+			<li ng-show="names.length">
+				^ tap on a name to add to the queue.
+			</li>
 		</ul>
 	</div>
 
