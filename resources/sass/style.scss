@@ -1,0 +1,97 @@
+@import "bourbon/bourbon";
+
+$accent: #85144B;
+
+body {
+  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
+  /*max-width: 600px;*/
+  margin: 0;
+  /*padding-top: 72px;*/
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.125em;
+  color: #333;
+  line-height: 1.5em;
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+#app {
+  height: 100%;
+}
+
+.app-container {
+  @include display(flex);
+  @include flex-direction(column);
+  height: 100%;
+}
+
+.toolbar {
+  height: 64px;
+  background-color: $accent;
+  color: white;
+  @include display(flex);
+  @include align-items(center);
+}
+
+.main {
+  @include display(flex);
+  @include align-items(stretch);
+  @include flex(1);
+  .roster {
+    width: 320px;
+    background-color: #eee;
+    .icon-button {
+      color: #333;
+      &:hover {
+        background-color: rgba(black, 0.1);
+      }
+    }
+  }
+  .queue {
+    @include flex(1);
+  }
+}
+
+.icon-button {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  padding: 8px;
+  cursor: pointer;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 50%;
+  &:hover {
+    text-decoration: none;
+    background-color: rgba(white, 0.2);
+  }
+}
+
+h1, h2, h3 {
+  color: #000;
+}
+h1 {
+  font-size: 2.5em
+}
+
+h2 {
+  font-size: 2em
+}
+
+h3 {
+  font-size: 1.5em
+}
+
+a {
+  text-decoration: none;
+  color: #09f;
+}
+
+a:hover {
+  text-decoration: underline;
+}

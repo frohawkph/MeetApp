@@ -1,0 +1,21 @@
+<html>
+  <head>
+    {% style "icons/style.css" %}
+    {% if dev %}
+      {% style "css/style.css" %}
+    {% else %}
+      {% style "css/style.min.css" %}
+    {% endif %}
+    <script src="http://fb.me/react-0.12.1.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    {% if dev %}
+      {% script "js/out/goog/base.js" %}
+      {% script "js/app.js" %}
+      <script type="text/javascript">goog.require("meetapp.dev");</script>
+    {% else %}
+      {% script "js/app.js" %}
+    {% endif %}
+  </body>
+</html>

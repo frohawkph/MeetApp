@@ -1,0 +1,128 @@
+body {
+  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
+  /*max-width: 600px;*/
+  margin: 0;
+  /*padding-top: 72px;*/
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.125em;
+  color: #333;
+  line-height: 1.5em; }
+
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px; }
+
+#app {
+  height: 100%; }
+
+.app-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  height: 100%; }
+
+.toolbar {
+  height: 64px;
+  background-color: #85144B;
+  color: white;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -ms-flex-align: center; }
+
+.main {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1; }
+  .main .roster {
+    width: 320px;
+    background-color: #eee; }
+    .main .roster .icon-button {
+      color: #333; }
+      .main .roster .icon-button:hover {
+        background-color: rgba(0, 0, 0, 0.1); }
+  .main .queue {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1; }
+
+.icon-button {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  padding: 8px;
+  cursor: pointer;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 50%; }
+  .icon-button:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2); }
+
+h1, h2, h3 {
+  color: #000; }
+
+h1 {
+  font-size: 2.5em; }
+
+h2 {
+  font-size: 2em; }
+
+h3 {
+  font-size: 1.5em; }
+
+a {
+  text-decoration: none;
+  color: #09f; }
+
+a:hover {
+  text-decoration: underline; }
