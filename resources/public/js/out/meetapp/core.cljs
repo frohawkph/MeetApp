@@ -18,9 +18,15 @@
 (defn add-to-roster [name] 
   (swap! roster conj name))
 
+(defn remove-from-list-atom [item list-atom]
+  (swap! list-atom
+    (fn [current-list-atom deathrow] (remove #(= % deathrow) current-list-atom)) 
+    item))
+
 (defn remove-from-roster [name] 
-  (defn remove-from-list [name-list] (remove #(= % name) name-list))
-  (swap! roster remove-from-list))
+  (swap! roster 
+    (fn [current-roster deathrow] (remove #(= % deathrow) current-roster)) 
+    name))
 
 (defn add-to-queue [name]
   (swap! queue conj name))
@@ -45,12 +51,15 @@
         [:ul (for [name @roster] 
           ^{:key name} [:li 
             [:a.entry {:on-click #(add-to-queue name)} name] 
-            [:a.icon-button {:on-click #(remove-from-roster name)} [:i.icon-close]]])]]
+            [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
       [:div.queue
         [:h2 "Timer"]
-        [:ul (for [name @queue]
-          ^{:key name} [:li name])]]]])
-
+        [:ul (map-indexed 
+          (fn [index item] ^{:key index} [:li 
+            [:a.entry {:on-click #(remove-from-list-atom item queue)} item]])
+          @queue)]]]])
+;(for [name @queue]
+          ;^{:key name} [:li name])
 (defn about-page []
   [:div [:h2 "About meetapp"]
    [:div [:a {:href "#/"} "go to the home page"]]])
