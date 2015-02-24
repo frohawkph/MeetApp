@@ -13,53 +13,68 @@
 (defonce roster (local-storage (atom (set nil)) :roster))
 (defonce queue (local-storage (atom []) :queue))
 (defonce current-name (atom ""))
+(defonce initial-time (atom (js/Date.now)))
+(defonce delta-time (atom (js/Date. 0)))
+(defonce time-color (atom "#f34"))
+
+(js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000) ;; an interval where the timer is reset.
+
+(defn clock []
+  (let [time-str (.getSeconds @delta-time)]
+    [:div.example-clock
+     {:style {:color @time-color}}
+     time-str]))
+
 (defn get-event-value [event] (-> event .-target .-value))
 
-(defn add-to-roster [name] 
+(defn add-to-roster [name]
   (swap! roster conj name))
 
 (defn remove-from-list-atom [item list-atom]
   (swap! list-atom
-    (fn [current-list-atom deathrow] (remove #(= % deathrow) current-list-atom)) 
+    (fn [current-list-atom deathrow] (remove #(= % deathrow) current-list-atom))
     item))
 
-(defn remove-from-roster [name] 
-  (swap! roster 
-    (fn [current-roster deathrow] (remove #(= % deathrow) current-roster)) 
+(defn remove-from-roster [name]
+  (swap! roster
+    (fn [current-roster deathrow] (remove #(= % deathrow) current-roster))
     name))
 
 (defn add-to-queue [name]
   (swap! queue conj name))
 
 (defn home-page []
-  [:div.app-container 
-    [:div.toolbar 
-      [:a.icon-button {:href "http://torchapps.github.io/"} 
-        [:i.icon-torch]] 
+  [:div.app-container
+    [:div.toolbar
+      [:a.icon-button {:href "http://torchapps.github.io/"}
+        [:i.icon-torch]]
       [:span "MeetApp"]]
     [:div.main
-      [:div.roster 
+
+      ;; roster.
+      [:div.roster
         [:input {
           :type "text"
           :value @current-name
           :on-change #(reset! current-name (get-event-value %))}]
         [:button {
-          :on-click #(if 
-            (> (count @current-name) 0) 
+          :on-click #(if
+            (> (count @current-name) 0)
             (add-to-roster @current-name)
             (.log js/console "Error: name is blank"))} "Add"]
-        [:ul (for [name @roster] 
-          ^{:key name} [:li 
-            [:a.entry {:on-click #(add-to-queue name)} name] 
+        [:ul (for [name @roster]
+          ^{:key name} [:li
+            [:a.entry {:on-click #(add-to-queue name)} name]
             [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
+
+      ;; queue.
       [:div.queue
-        [:h2 "Timer"]
-        [:ul (map-indexed 
-          (fn [index item] ^{:key index} [:li 
+        [:h2 (clock)]
+        [:ul (map-indexed
+          (fn [index item] ^{:key index} [:li
             [:a.entry {:on-click #(remove-from-list-atom item queue)} item]])
           @queue)]]]])
-;(for [name @queue]
-          ;^{:key name} [:li name])
+
 (defn about-page []
   [:div [:h2 "About meetapp"]
    [:div [:a {:href "#/"} "go to the home page"]]])
