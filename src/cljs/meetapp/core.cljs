@@ -16,7 +16,6 @@
 (defonce queue (local-storage (atom (list)) :queue))
 (defonce current-name (atom "")) ;; the value of input
 (defonce current-speaker (atom "")) ;; the guy talking
-(.log js/console @queue @roster)
 
 (defonce initial-time (atom (js/Date.now)))
 (defonce delta-time (atom (js/Date. 0)))
@@ -70,20 +69,23 @@
 
       ;; roster.
       [:div.roster
-        [:input {
+        [:div.search-section
+         [:input {
           :type "text"
           :value @current-name
+          :placeholder "Search or Add"
           :on-change #(reset! current-name (get-event-value %))}]
-        [:button {
+         [:button {
           :on-click #(if
             (> (count @current-name) 0)
             (add-to-roster @current-name)
-            (.log js/console "Error: name is blank"))} "Add"]
-        [:ul (for
-               [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) @roster) @roster))]
-               ^{:key name} [:li
-                [:a.entry {:on-click #(add-to-queue name)} name]
-                [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
+            (.log js/console "Error: name is blank"))} "Add"]]
+
+        [:ul.basic-list (for
+                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) @roster) @roster))]
+                         ^{:key name} [:li
+                          [:a.entry {:on-click #(add-to-queue name)} name]
+                          [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
 
       ;; queue.
       [:div.queue

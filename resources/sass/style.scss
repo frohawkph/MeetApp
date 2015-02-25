@@ -48,9 +48,38 @@ ul {
         background-color: rgba(black, 0.1);
       }
     }
+    .search-section {
+      @include display(flex);
+      input {
+        @include flex(1);
+        height: 48px;
+        line-height: 36px;
+        font-size: 24px;
+        outline: none;
+        border: none;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+    }
   }
   .queue {
     @include flex(1);
+  }
+}
+
+ul.basic-list {
+  li {
+    @include display(flex);
+    width: 100%;
+    .entry {
+      @include flex(1);
+      padding: 4px 8px;
+      display: block;
+      cursor: pointer;
+    }
+    & + li {
+      border-top: 1px solid rgba(black, 0.1)
+    }
   }
 }
 

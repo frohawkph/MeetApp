@@ -83,6 +83,29 @@ ul {
       color: #333; }
       .main .roster .icon-button:hover {
         background-color: rgba(0, 0, 0, 0.1); }
+    .main .roster .search-section {
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex; }
+      .main .roster .search-section input {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        box-flex: 1;
+        -webkit-flex: 1;
+        -moz-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        height: 48px;
+        line-height: 36px;
+        font-size: 24px;
+        outline: none;
+        border: none;
+        padding: 8px;
+        box-sizing: border-box; }
   .main .queue {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
@@ -91,6 +114,29 @@ ul {
     -moz-flex: 1;
     -ms-flex: 1;
     flex: 1; }
+
+ul.basic-list li {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%; }
+  ul.basic-list li .entry {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 4px 8px;
+    display: block;
+    cursor: pointer; }
+  ul.basic-list li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.1); }
 
 .icon-button {
   display: inline-block;
