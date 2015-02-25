@@ -75,7 +75,7 @@
         [:ul (map-indexed
           (fn [index item] ^{:key index} [:li
             [:a.entry {:on-click #(remove-from-list-atom item queue)} item]])
-          @queue)]]]])
+          (reverse @queue))]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]
