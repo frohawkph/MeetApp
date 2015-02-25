@@ -62,7 +62,7 @@
             (> (count @current-name) 0)
             (add-to-roster @current-name)
             (.log js/console "Error: name is blank"))} "Add"]
-        [:ul (for [name @roster]
+        [:ul (for [name (sort @roster)]
           ^{:key name} [:li
             [:a.entry {:on-click #(add-to-queue name)} name]
             [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
