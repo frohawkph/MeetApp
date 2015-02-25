@@ -24,7 +24,10 @@
 
 (defn reset-timer []
   (reset! initial-time (js/Date.now))
-  (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000)) ;; an interval where the timer is reset.)
+  (if (boolean @current-speaker)
+    (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000)) ;; an interval where the timer is reset.)
+    (reset! delta-time (js/Date. 0)))
+
 
 
 (defn clock []
@@ -89,7 +92,8 @@
          @current-speaker]
         [:ul (map-indexed
           (fn [index item] ^{:key index} [:li
-            [:a.entry {:on-click #(remove-from-list-atom item queue)} item]])
+                                          [:span item]
+                                          [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
           @queue)]]]])
 
 (defn about-page []

@@ -1,8 +1,6 @@
 body {
   font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
-  /*max-width: 600px;*/
   margin: 0;
-  /*padding-top: 72px;*/
   -webkit-font-smoothing: antialiased;
   font-size: 1.125em;
   color: #333;
@@ -101,7 +99,7 @@ ul {
   font-size: 24px;
   padding: 8px;
   cursor: pointer;
-  color: white;
+  color: #333;
   box-sizing: border-box;
   border-radius: 50%; }
   .icon-button:hover {
