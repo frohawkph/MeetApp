@@ -4,7 +4,9 @@
               [alandipert.storage-atom :refer [local-storage]]
               [secretary.core :as secretary :include-macros true]
               [goog.events :as events]
-              [goog.history.EventType :as EventType])
+              [goog.history.EventType :as EventType]
+              [goog.string :as gstring]
+              [goog.string.format])
     (:import goog.History))
 
 ;; -------------------------
@@ -20,7 +22,7 @@
 (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000) ;; an interval where the timer is reset.
 
 (defn clock []
-  (let [time-str (.getSeconds @delta-time)]
+  (let [time-str (clojure.string/join ":" (map #(gstring/format "%02d" %) [(.getMinutes @delta-time)(.getSeconds @delta-time)]))]
     [:div.example-clock
      {:style {:color @time-color}}
      time-str]))
