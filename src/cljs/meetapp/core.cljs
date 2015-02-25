@@ -13,13 +13,19 @@
 ;; Views
 
 (defonce roster (local-storage (atom (set nil)) :roster))
-(defonce queue (local-storage (atom []) :queue))
-(defonce current-name (atom ""))
+(defonce queue (local-storage (atom (list)) :queue))
+(defonce current-name (atom "")) ;; the value of input
+(defonce current-speaker (atom "")) ;; the guy talking
+(.log js/console @queue @roster)
+
 (defonce initial-time (atom (js/Date.now)))
 (defonce delta-time (atom (js/Date. 0)))
 (defonce time-color (atom "#f34"))
 
-(js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000) ;; an interval where the timer is reset.
+(defn reset-timer []
+  (reset! initial-time (js/Date.now))
+  (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000)) ;; an interval where the timer is reset.)
+
 
 (defn clock []
   (let [time-str (clojure.string/join ":" (map #(gstring/format "%02d" %) [(.getMinutes @delta-time)(.getSeconds @delta-time)]))]
@@ -43,7 +49,13 @@
     name))
 
 (defn add-to-queue [name]
-  (swap! queue conj name))
+  ;; normally should expect to use conj, because vector, but queue is somehow coerced into list because of local-storage.
+  (swap! queue concat [name]))
+
+(defn next-speaker []
+  (reset-timer)
+  (reset! current-speaker (first @queue))
+  (swap! queue rest))
 
 (defn home-page []
   [:div.app-container
@@ -72,11 +84,13 @@
 
       ;; queue.
       [:div.queue
-        [:h2 (clock)]
+        [:h2 {:on-click #(next-speaker)}
+         (clock)
+         @current-speaker]
         [:ul (map-indexed
           (fn [index item] ^{:key index} [:li
             [:a.entry {:on-click #(remove-from-list-atom item queue)} item]])
-          (reverse @queue))]]]])
+          @queue)]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]
