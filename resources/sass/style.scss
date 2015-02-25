@@ -71,10 +71,15 @@ ul.basic-list {
   li {
     @include display(flex);
     width: 100%;
+    &:hover {
+      background-color: rgba(black, 0.05);
+    }
     .entry {
       @include flex(1);
       padding: 4px 8px;
       display: block;
+    }
+    a.entry {
       cursor: pointer;
     }
     & + li {

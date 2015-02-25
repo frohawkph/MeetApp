@@ -124,6 +124,8 @@ ul.basic-list li {
   display: -ms-flexbox;
   display: flex;
   width: 100%; }
+  ul.basic-list li:hover {
+    background-color: rgba(0, 0, 0, 0.05); }
   ul.basic-list li .entry {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
@@ -133,7 +135,8 @@ ul.basic-list li {
     -ms-flex: 1;
     flex: 1;
     padding: 4px 8px;
-    display: block;
+    display: block; }
+  ul.basic-list li a.entry {
     cursor: pointer; }
   ul.basic-list li + li {
     border-top: 1px solid rgba(0, 0, 0, 0.1); }

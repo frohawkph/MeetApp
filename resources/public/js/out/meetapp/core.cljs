@@ -92,9 +92,9 @@
         [:h2 {:on-click #(next-speaker)}
          (clock)
          @current-speaker]
-        [:ul (map-indexed
+        [:ul.basic-list (map-indexed
           (fn [index item] ^{:key index} [:li
-                                          [:span item]
+                                          [:div.entry item]
                                           [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
           @queue)]]]])
 
