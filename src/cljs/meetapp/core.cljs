@@ -59,6 +59,21 @@
   (reset! current-speaker (first @queue))
   (swap! queue rest))
 
+(defn swap "swap indices i1 and i2 withiin vector v" [v i1 i2]
+   (assoc v i2 (v i1) i1 (v i2)))
+
+(defn in-bounds? [value upper lower]
+  (max value ))
+
+(defn drag-start-handler [event]
+  (let
+    [boundingbox (.getBoundingClientRect event.target)
+     top (.-top boundingbox)
+     bottom (+ top (.-height boundingbox))]
+    (cond
+     (< event.pageY top) (.log js/console "going up")
+     (> event.pageY bottom) (.log js/console "going down"))))
+
 (defn home-page []
   [:div.app-container
     [:div.toolbar
@@ -89,13 +104,15 @@
 
       ;; queue.
       [:div.queue
-        [:h2 {:on-click #(next-speaker)}
-         (clock)
-         @current-speaker]
-        [:ul.basic-list (map-indexed
-          (fn [index item] ^{:key index} [:li
-                                          [:div.entry item]
-                                          [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
+       {:on-drag drag-start-handler}
+       [:h2 {:on-click #(next-speaker)}
+        (clock)
+        @current-speaker]
+       [:ul.basic-list (map-indexed
+                        (fn [index item] ^{:key index} [:li
+                                                        {:on-drag drag-start-handler :draggable true}
+                                                        [:div.entry item]
+                                                        [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
           @queue)]]]])
 
 (defn about-page []
