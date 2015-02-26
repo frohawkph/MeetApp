@@ -59,20 +59,26 @@
   (reset! current-speaker (first @queue))
   (swap! queue rest))
 
-(defn swap "swap indices i1 and i2 withiin vector v" [v i1 i2]
+(defn vector-swap "swap indices i1 and i2 within vector v" [v i1 i2]
    (assoc v i2 (v i1) i1 (v i2)))
 
-(defn in-bounds? [value upper lower]
-  (max value ))
+(defn bound-check [value upper lower]
+  (cond
+   (< value upper) -1
+   (> value lower) 1
+   :else 0))
 
-(defn drag-start-handler [event]
+(defn drag-end-handler [index event]
   (let
     [boundingbox (.getBoundingClientRect event.target)
-     top (.-top boundingbox)
-     bottom (.-bottom boundingbox)]
-    (cond
-     (< event.pageY top) (.log js/console "going up")
-     (> event.pageY bottom) (.log js/console "going down"))))
+     top (+ (.-top boundingbox) document.body.scrollTop)
+     height (+ (.-height boundingbox) document.body.scrollTop)
+     bottom (+ (.-bottom boundingbox) document.body.scrollTop)
+     mouseY (- event.pageY (/ height 2))
+     direction (bound-check mouseY top bottom)]
+    (if (not= 0 direction)
+      (swap! queue (fn [queue]
+                   (vector-swap (into [] queue) index (+ index direction)))))))
 
 (defn home-page []
   [:div.app-container
@@ -104,16 +110,16 @@
 
       ;; queue.
       [:div.queue
-       {:on-drag drag-start-handler}
        [:h2 {:on-click #(next-speaker)}
         (clock)
         @current-speaker]
        [:ul.basic-list (map-indexed
                         (fn [index item] ^{:key index} [:li
-                                                        {:on-drag drag-start-handler :draggable true}
+                                                        {:on-drag-end (partial drag-end-handler index)
+                                                         :draggable true}
                                                         [:div.entry item]
                                                         [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
-          @queue)]]]])
+                        @queue)]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]
