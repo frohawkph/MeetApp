@@ -69,7 +69,7 @@
   (let
     [boundingbox (.getBoundingClientRect event.target)
      top (.-top boundingbox)
-     bottom (+ top (.-height boundingbox))]
+     bottom (.-bottom boundingbox)]
     (cond
      (< event.pageY top) (.log js/console "going up")
      (> event.pageY bottom) (.log js/console "going down"))))
