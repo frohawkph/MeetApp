@@ -21,15 +21,6 @@ ul {
   height: 100%;
 }
 
-li.placeholder {
-  background: rgb(255,240,120);
-  height: 40px;
-}
-li.placeholder:before {
-  content: "Drop here";
-  color: rgb(225,210,90);
-}
-
 .app-container {
   @include display(flex);
   @include flex-direction(column);
@@ -99,6 +90,9 @@ ul.basic-list {
     }
     & + li {
       border-top: 1px solid rgba(black, 0.1)
+    }
+    &.dragging {
+      background-color: rgba(yellow, 0.1)
     }
   }
 }

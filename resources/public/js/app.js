@@ -14,12 +14,13 @@ goog.addDependency("../reagent/impl/batching.js", ['reagent.impl.batching'], ['r
 goog.addDependency("../reagent/impl/component.js", ['reagent.impl.component'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.batching', 'reagent.debug']);
 goog.addDependency("../reagent/impl/template.js", ['reagent.impl.template'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'clojure.string']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug']);
+goog.addDependency("../meetapp/lib/collections.js", ['meetapp.lib.collections'], ['cljs.core']);
 goog.addDependency("../reagent/session.js", ['reagent.session'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../tailrecursion/cljson.js", ['tailrecursion.cljson'], ['cljs.core', 'goog.date.DateTime', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../alandipert/storage_atom.js", ['alandipert.storage_atom'], ['goog.Timer', 'tailrecursion.cljson', 'cljs.core']);
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
-goog.addDependency("../meetapp/core.js", ['meetapp.core'], ['reagent.session', 'goog.string', 'reagent.core', 'cljs.core', 'goog.history.EventType', 'alandipert.storage_atom', 'goog.History', 'goog.string.format', 'secretary.core', 'goog.events']);
+goog.addDependency("../meetapp/core.js", ['meetapp.core'], ['meetapp.lib.collections', 'reagent.session', 'goog.string', 'reagent.core', 'cljs.core', 'goog.history.EventType', 'alandipert.storage_atom', 'goog.History', 'goog.string.format', 'secretary.core', 'goog.events']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers', 'goog.async.nextTick']);
@@ -29,4 +30,3 @@ goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.t
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.timers']);
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.net.jsloader', 'cljs.core', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../meetapp/dev.js", ['meetapp.dev'], ['weasel.repl', 'reagent.core', 'cljs.core', 'meetapp.core', 'figwheel.client']);
-goog.addDependency("../lib/collections.js", ['lib.collections'], ['cljs.core']);

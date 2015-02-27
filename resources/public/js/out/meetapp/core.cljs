@@ -7,6 +7,7 @@
               [goog.history.EventType :as EventType]
               [goog.string :as gstring]
               [goog.string.format])
+    (:use     [meetapp.lib.collections :only [without insert reposition]])
     (:import goog.History))
 
 ;; -------------------------
@@ -20,19 +21,13 @@
 (defonce initial-time (atom (js/Date.now)))
 (defonce delta-time (atom (js/Date. 0)))
 (defonce time-color (atom "#f34"))
-
-(defonce over (atom nil))
-(defonce dragged (atom nil))
-(defonce placeholder (.createElement js/document "li"))
-(set! (.-className placeholder) "placeholder")
+(defonce dragging (atom nil))
 
 (defn reset-timer []
   (reset! initial-time (js/Date.now))
   (if (boolean @current-speaker)
     (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000)) ;; an interval where the timer is reset.)
     (reset! delta-time (js/Date. 0)))
-
-
 
 (defn clock []
   (let [time-str (clojure.string/join ":" (map #(gstring/format "%02d" %) [(.getMinutes @delta-time)(.getSeconds @delta-time)]))]
@@ -64,61 +59,24 @@
   (reset! current-speaker (first @queue))
   (swap! queue rest))
 
-(defn vector-swap "swap indices i1 and i2 within vector v" [v i1 i2]
-   (assoc v i2 (v i1) i1 (v i2)))
-
-(defn bound-check [value upper lower]
-  (cond
-   (< value upper) -1
-   (> value lower) 1
-   :else 0))
-
-(defn mouse-rel-elem [mouse-y elem]
-  (let [bound (.getBoundingClientRect elem)
-        top (.-top bound)
-        height (/ (.-height bound) 2)
-        rel-y (- mouse-y top)]
-    (- rel-y height)))
-
-(defn without [n coll]
-  (let [v (into [] coll)]
-    (concat (subvec v 0 n) (subvec v (inc n)))))
-
-(defn insert [coll n value]
-  (let [v (into [] coll)]
-    (concat (subvec v 0 n) [value] (subvec v n))))
-
-(defn reposition [coll from to]
-  (let [v (into [] coll)]
-    (insert (without from v) to (v from))))
-
-(defn drag-over-handler [event]
-  (let [target (.-currentTarget event)
-        parent (.-parentNode target)
-        rel-pos (mouse-rel-elem (.-clientY event) target)]
-    (.preventDefault event)
-    (set! (.-display (.-style @dragged)) "none")
-    (cond
-     (> rel-pos 0) (.insertBefore parent placeholder (.-nextElementSibling target))
-     (< rel-pos 0) (.insertBefore parent placeholder target)
-     :else nil)
-
-    (if (not= @over target) (reset! over target))))
-
 (defn drag-start-handler [event]
-  (reset! dragged event.currentTarget)
+  (reset! dragging (js/Number event.currentTarget.dataset.id))
 
   ; for use with firefox
   (set! (.-effectAllowed (.-dataTransfer event)) "move")
   (.setData event.dataTransfer "text/html" event.currentTarget))
 
 (defn drag-end-handler [index event]
-  (let [rel-pos  (mouse-rel-elem (.-clientY event) (.-currentTarget event))
-        from     (js/Number (aget @dragged "dataset" "id"))
-        to       (js/Number (aget @over "dataset" "id"))]
-    (set! (.-display (.-style @dragged)) nil)
-    (.removeChild (.-parentNode @dragged) placeholder)
-    (swap! queue #(reposition @queue from to))))
+  (reset! dragging nil))
+
+(defn drag-over-handler [event]
+  (let [from @dragging
+        to (js/Number event.currentTarget.dataset.id)]
+    (swap! queue #(reposition % from to))
+    (reset! dragging to)))
+
+(defn dragging? [index]
+  (= index @dragging))
 
 (defn home-page []
   [:div.app-container
@@ -161,7 +119,9 @@
                             :draggable true
                             :on-drag-end (partial drag-end-handler index)
                             :on-drag-over drag-over-handler
-                            :on-drag-start drag-start-handler}
+                            :on-drag-start drag-start-handler
+;                            :class-name (if (dragging? index) "dragging" "")
+                            }
                            [:div.entry item]
                            [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
                         @queue)]]]])
