@@ -14,7 +14,7 @@
 ;; Views
 
 (defonce roster (local-storage (atom (set nil)) :roster))
-(defonce queue (local-storage (atom (list)) :queue))
+(defonce queue (local-storage (atom []) :queue))
 (defonce current-name (atom "")) ;; the value of input
 (defonce current-speaker (atom "")) ;; the guy talking
 
@@ -40,24 +40,20 @@
 (defn add-to-roster [name]
   (swap! roster conj name))
 
-(defn remove-from-list-atom [item list-atom]
-  (swap! list-atom
-    (fn [current-list-atom deathrow] (remove #(= % deathrow) current-list-atom))
-    item))
-
 (defn remove-from-roster [name]
-  (swap! roster
-    (fn [current-roster deathrow] (remove #(= % deathrow) current-roster))
-    name))
+  (swap! roster disj name))
+
+(defn remove-from-queue [index]
+  (swap! queue (partial without index)))
 
 (defn add-to-queue [name]
   ;; normally should expect to use conj, because vector, but queue is somehow coerced into list because of local-storage.
-  (swap! queue concat [name]))
+  (swap! queue conj name))
 
 (defn next-speaker []
   (reset-timer)
   (reset! current-speaker (first @queue))
-  (swap! queue rest))
+  (swap! queue subvec 1))
 
 (defn drag-start-handler [event]
   (reset! dragging (js/Number event.currentTarget.dataset.id))
@@ -106,7 +102,7 @@
                           [:li
                            {:key name}
                            [:a.entry {:on-click #(add-to-queue name)} name]
-                           [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
+                           [:a.icon-button {:on-click #(remove-from-roster name)} [:i.icon-close]]])]]
 
       ;; queue.
       [:div.queue
@@ -125,7 +121,7 @@
 ;                            :class-name (if (dragging? index) "dragging" "")
                             }
                            [:div.entry item]
-                           [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
+                           [:a.icon-button {:on-click #(remove-from-queue index)} [:i.icon-close]]])
                         @queue)]]]])
 
 (defn about-page []

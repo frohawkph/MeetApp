@@ -1,2 +1,16 @@
 (require '[clojure.math.numeric-tower :as math])
 (math/expt 4 6)
+@roster
+(browser-repl)
+(ns meetapp.core)
+@roster
+(dissoc (set 1 2 3 4) 1)
+(set 1 2 3 4)
+(def a (set 1 2 3 4))
+a
+(dissoc (set [1 2 3 4])))
+(dissoc (set [1 2 3 4]) 3))
+(dissoc (set [1 2 3 4]) 3)
+(dissoc (set [1 2 3 4]) "3")
+(disj (set [1 2 3 4]) 3)
+(vec [1 2] [3 4])
