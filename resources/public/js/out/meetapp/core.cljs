@@ -38,6 +38,7 @@
 (defn get-event-value [event] (-> event .-target .-value))
 
 (defn add-to-roster [name]
+  (reset! current-name nil)
   (swap! roster conj name))
 
 (defn remove-from-roster [name]
@@ -47,7 +48,6 @@
   (swap! queue (partial without index)))
 
 (defn add-to-queue [name]
-  ;; normally should expect to use conj, because vector, but queue is somehow coerced into list because of local-storage.
   (swap! queue conj name))
 
 (defn next-speaker []
