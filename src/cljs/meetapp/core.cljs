@@ -63,7 +63,7 @@
   (reset! dragging (js/Number event.currentTarget.dataset.id))
 
   ; for use with firefox
-  (set! (.-effectAllowed (.-dataTransfer event)) "move")
+  (set! (.-effectAllowed event.dataTransfer) "move")
   (.setData event.dataTransfer "text/html" event.currentTarget))
 
 (defn drag-end-handler [index event]
@@ -102,9 +102,10 @@
 
         [:ul.basic-list (for
                          [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) @roster) @roster))]
-                         ^{:key name} [:li
-                          [:a.entry {:on-click #(add-to-queue name)} name]
-                          [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
+                          [:li
+                           {:key name}
+                           [:a.entry {:on-click #(add-to-queue name)} name]
+                           [:a.icon-button {:on-click #(remove-from-list-atom name roster)} [:i.icon-close]]])]]
 
       ;; queue.
       [:div.queue
@@ -113,9 +114,9 @@
         @current-speaker]
        [:ul.basic-list (map-indexed
                         (fn [index item]
-                          ^{:key index}
                           [:li
-                           {:data-id index
+                           {:key index
+                            :data-id index
                             :draggable true
                             :on-drag-end (partial drag-end-handler index)
                             :on-drag-over drag-over-handler
