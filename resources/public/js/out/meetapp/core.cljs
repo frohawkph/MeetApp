@@ -73,8 +73,8 @@
 
 (defn drag-over-handler [event]
   (.preventDefault event)
-  (if (not= @over event.target) (.log js/console @over event.target))
-  (if (not= @over event.target) (reset! over event.target))
+  (if (not= @over event.currentTarget) (.log js/console @over event.currentTarget))
+  (if (not= @over event.currentTarget) (reset! over event.currentTarget))
   (set! (.-display (.-style @dragged)) "none"))
 
 (defn drag-start-handler [event]
@@ -86,7 +86,11 @@
   (.log js/console event))
 
 (defn drag-end-handler [index event]
-  (set! (.-display (.-style @dragged)) "")
+  (set! (.-display (.-style @dragged)) nil)
+  (let [from (js/Number (aget @dragged "dataset" "id")) to (js/Number (aget @over "dataset" "id"))]
+    (.log js/console from to)
+    (swap! queue (fn [queue]
+                   (vector-swap (into [] queue) from to))))
   (let
     [boundingbox (.getBoundingClientRect event.target)
      top (+ (.-top boundingbox) document.body.scrollTop)
@@ -134,12 +138,14 @@
        [:h2 {:on-click #(next-speaker)}
         (clock)
         @current-speaker]
-       [:ul.basic-list {:on-drag-over drag-over-handler} (map-indexed
+       [:ul.basic-list (map-indexed
                         (fn [index item]
-                          ^{:key index :data-id index}
+                          ^{:key index}
                           [:li
-                           {:draggable true
+                           {:data-id index
+                            :draggable true
                             :on-drag-end (partial drag-end-handler index)
+                            :on-drag-over drag-over-handler
                             :on-drag-start drag-start-handler}
                            [:div.entry item]
                            [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
