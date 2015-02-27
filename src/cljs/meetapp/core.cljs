@@ -55,6 +55,8 @@
   (reset! current-speaker (first @queue))
   (swap! queue subvec 1))
 
+;; drag things
+
 (defn drag-start-handler [event]
   (reset! dragging (js/Number event.currentTarget.dataset.id))
 
@@ -72,8 +74,7 @@
     (swap! queue #(reposition % from to))
     (reset! dragging to)))
 
-(defn dragging? [index]
-  (= index @dragging))
+;; components
 
 (defn home-page []
   [:div.app-container
