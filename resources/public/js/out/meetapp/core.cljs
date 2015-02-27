@@ -23,6 +23,8 @@
 
 (defonce over (atom nil))
 (defonce dragged (atom nil))
+(defonce placeholder (.createElement js/document "li"))
+(set! (.-className placeholder) "placeholder")
 
 (defn reset-timer []
   (reset! initial-time (js/Date.now))
@@ -71,39 +73,52 @@
    (> value lower) 1
    :else 0))
 
+(defn mouse-rel-elem [mouse-y elem]
+  (let [bound (.getBoundingClientRect elem)
+        top (.-top bound)
+        height (/ (.-height bound) 2)
+        rel-y (- mouse-y top)]
+    (- rel-y height)))
+
+(defn without [n coll]
+  (let [v (into [] coll)]
+    (concat (subvec v 0 n) (subvec v (inc n)))))
+
+(defn insert [coll n value]
+  (let [v (into [] coll)]
+    (concat (subvec v 0 n) [value] (subvec v n))))
+
+(defn reposition [coll from to]
+  (let [v (into [] coll)]
+    (insert (without from v) to (v from))))
+
 (defn drag-over-handler [event]
-  (.preventDefault event)
-  (if (not= @over event.currentTarget) (.log js/console @over event.currentTarget))
-  (if (not= @over event.currentTarget) (reset! over event.currentTarget))
-  (set! (.-display (.-style @dragged)) "none"))
+  (let [target (.-currentTarget event)
+        parent (.-parentNode target)
+        rel-pos (mouse-rel-elem (.-clientY event) target)]
+    (.preventDefault event)
+    (set! (.-display (.-style @dragged)) "none")
+    (cond
+     (> rel-pos 0) (.insertBefore parent placeholder (.-nextElementSibling target))
+     (< rel-pos 0) (.insertBefore parent placeholder target)
+     :else nil)
+
+    (if (not= @over target) (reset! over target))))
 
 (defn drag-start-handler [event]
   (reset! dragged event.currentTarget)
 
   ; for use with firefox
-  (set! (.-effectAllowed event.dataTransfer) "move")
-  (.setData event.dataTransfer "text/html" event.currentTarget)
-  (.log js/console event))
+  (set! (.-effectAllowed (.-dataTransfer event)) "move")
+  (.setData event.dataTransfer "text/html" event.currentTarget))
 
 (defn drag-end-handler [index event]
-  (set! (.-display (.-style @dragged)) nil)
-  (let [from (js/Number (aget @dragged "dataset" "id")) to (js/Number (aget @over "dataset" "id"))]
-    (.log js/console from to)
-    (swap! queue (fn [queue]
-                   (vector-swap (into [] queue) from to))))
-  (let
-    [boundingbox (.getBoundingClientRect event.target)
-     top (+ (.-top boundingbox) document.body.scrollTop)
-     height (+ (.-height boundingbox) document.body.scrollTop)
-     bottom (+ (.-bottom boundingbox) document.body.scrollTop)
-     mouseY event.pageY
-     direction (bound-check mouseY (- top height) (+ bottom height))]
-;    (.log js/console (.ceil js/Math (/ (- top mouseY -1) height)))
-;    (.log js/console mouseY top bottom)
-;    (if (not= 0 direction)
- ;     (swap! queue (fn [queue]
-  ;                 (vector-swap (into [] queue) index (+ index direction)))))
-    ))
+  (let [rel-pos  (mouse-rel-elem (.-clientY event) (.-currentTarget event))
+        from     (js/Number (aget @dragged "dataset" "id"))
+        to       (js/Number (aget @over "dataset" "id"))]
+    (set! (.-display (.-style @dragged)) nil)
+    (.removeChild (.-parentNode @dragged) placeholder)
+    (swap! queue #(reposition @queue from to))))
 
 (defn home-page []
   [:div.app-container
