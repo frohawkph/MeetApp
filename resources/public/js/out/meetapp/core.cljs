@@ -21,6 +21,9 @@
 (defonce delta-time (atom (js/Date. 0)))
 (defonce time-color (atom "#f34"))
 
+(defonce over (atom nil))
+(defonce dragged (atom nil))
+
 (defn reset-timer []
   (reset! initial-time (js/Date.now))
   (if (boolean @current-speaker)
@@ -68,17 +71,35 @@
    (> value lower) 1
    :else 0))
 
+(defn drag-over-handler [event]
+  (.preventDefault event)
+  (if (not= @over event.target) (.log js/console @over event.target))
+  (if (not= @over event.target) (reset! over event.target))
+  (set! (.-display (.-style @dragged)) "none"))
+
+(defn drag-start-handler [event]
+  (reset! dragged event.currentTarget)
+
+  ; for use with firefox
+  (set! (.-effectAllowed event.dataTransfer) "move")
+  (.setData event.dataTransfer "text/html" event.currentTarget)
+  (.log js/console event))
+
 (defn drag-end-handler [index event]
+  (set! (.-display (.-style @dragged)) "")
   (let
     [boundingbox (.getBoundingClientRect event.target)
      top (+ (.-top boundingbox) document.body.scrollTop)
      height (+ (.-height boundingbox) document.body.scrollTop)
      bottom (+ (.-bottom boundingbox) document.body.scrollTop)
-     mouseY (- event.pageY (/ height 2))
-     direction (bound-check mouseY top bottom)]
-    (if (not= 0 direction)
-      (swap! queue (fn [queue]
-                   (vector-swap (into [] queue) index (+ index direction)))))))
+     mouseY event.pageY
+     direction (bound-check mouseY (- top height) (+ bottom height))]
+;    (.log js/console (.ceil js/Math (/ (- top mouseY -1) height)))
+;    (.log js/console mouseY top bottom)
+;    (if (not= 0 direction)
+ ;     (swap! queue (fn [queue]
+  ;                 (vector-swap (into [] queue) index (+ index direction)))))
+    ))
 
 (defn home-page []
   [:div.app-container
@@ -113,12 +134,15 @@
        [:h2 {:on-click #(next-speaker)}
         (clock)
         @current-speaker]
-       [:ul.basic-list (map-indexed
-                        (fn [index item] ^{:key index} [:li
-                                                        {:on-drag-end (partial drag-end-handler index)
-                                                         :draggable true}
-                                                        [:div.entry item]
-                                                        [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
+       [:ul.basic-list {:on-drag-over drag-over-handler} (map-indexed
+                        (fn [index item]
+                          ^{:key index :data-id index}
+                          [:li
+                           {:draggable true
+                            :on-drag-end (partial drag-end-handler index)
+                            :on-drag-start drag-start-handler}
+                           [:div.entry item]
+                           [:a.icon-button {:on-click #(remove-from-list-atom item queue)} [:i.icon-close]]])
                         @queue)]]]])
 
 (defn about-page []
