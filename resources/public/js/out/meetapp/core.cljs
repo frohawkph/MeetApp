@@ -109,7 +109,7 @@
        [:h2 {:on-click #(next-speaker)}
         (clock)
         @current-speaker]
-       [:ul.basic-list (map-indexed
+       [:ul.basic-list (doall (map-indexed
                         (fn [index item]
                           [:li
                            {:key index
@@ -118,11 +118,11 @@
                             :on-drag-end (partial drag-end-handler index)
                             :on-drag-over drag-over-handler
                             :on-drag-start drag-start-handler
-;                            :class-name (if (dragging? index) "dragging" "")
+                            :class (if (= @dragging index) "dragging" "")
                             }
                            [:div.entry item]
                            [:a.icon-button {:on-click #(remove-from-queue index)} [:i.icon-close]]])
-                        @queue)]]]])
+                        @queue))]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]
