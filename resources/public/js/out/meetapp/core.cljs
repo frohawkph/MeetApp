@@ -70,6 +70,7 @@
   (reset! dragging nil))
 
 (defn drag-over-handler [event]
+  (.preventDefault event)
   (let [from @dragging
         to (js/Number event.currentTarget.dataset.id)]
     (swap! queue #(reposition % from to))
