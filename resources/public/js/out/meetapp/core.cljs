@@ -13,8 +13,10 @@
 ;; -------------------------
 ;; Views
 
-(defonce roster (local-storage (atom (set nil)) :roster))
-(defonce queue (local-storage (atom []) :queue))
+(defonce state (local-storage (atom (hash-map
+                                     :roster (set nil)
+                                     :queue []))
+                              :meetapp-state))
 (defonce current-name (atom "")) ;; the value of input
 (defonce current-speaker (atom "")) ;; the guy talking
 
@@ -39,21 +41,21 @@
 
 (defn add-to-roster [name]
   (reset! current-name nil)
-  (swap! roster conj name))
+  (swap! state update-in [:roster] #(conj % name)))
 
 (defn remove-from-roster [name]
-  (swap! roster disj name))
-
-(defn remove-from-queue [index]
-  (swap! queue (partial without index)))
+  (swap! state update-in [:roster] #(disj % name)))
 
 (defn add-to-queue [name]
-  (swap! queue conj name))
+  (swap! state update-in [:queue] #(conj % name)))
+
+(defn remove-from-queue [index]
+  (swap! state update-in [:queue] (partial without index)))
 
 (defn next-speaker []
   (reset-timer)
-  (reset! current-speaker (first @queue))
-  (swap! queue subvec 1))
+  (reset! current-speaker (first (@state :queue)))
+  (remove-from-queue 0))
 
 ;; drag things
 
@@ -71,7 +73,7 @@
   (.preventDefault event)
   (let [from @dragging
         to (js/Number event.currentTarget.dataset.id)]
-    (swap! queue #(reposition % from to))
+    (swap! state update-in [:queue] #(reposition % from to))
     (reset! dragging to)))
 
 ;; components
@@ -99,7 +101,7 @@
             (.log js/console "Error: name is blank"))} "Add"]]
 
         [:ul.basic-list (for
-                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) @roster) @roster))]
+                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) (@state :roster)) (@state :roster)))]
                           [:li
                            {:key name}
                            [:a.entry {:on-click #(add-to-queue name)} name]
@@ -123,7 +125,7 @@
                             }
                            [:div.entry item]
                            [:a.icon-button {:on-click #(remove-from-queue index)} [:i.icon-close]]])
-                        @queue))]]]])
+                        (@state :queue)))]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]

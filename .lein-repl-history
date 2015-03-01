@@ -14,3 +14,8 @@ a
 (dissoc (set [1 2 3 4]) "3")
 (disj (set [1 2 3 4]) 3)
 (vec [1 2] [3 4])
+(def derp (hash-map :one 1 :two 2))
+derp
+(derp one)
+(derp :one)
+(browser-repl)

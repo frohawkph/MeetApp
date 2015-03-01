@@ -30,3 +30,4 @@ goog.addDependency("../cljs/core/async/impl/timers.js", ['cljs.core.async.impl.t
 goog.addDependency("../cljs/core/async.js", ['cljs.core.async'], ['cljs.core.async.impl.channels', 'cljs.core.async.impl.dispatch', 'cljs.core', 'cljs.core.async.impl.buffers', 'cljs.core.async.impl.protocols', 'cljs.core.async.impl.ioc_helpers', 'cljs.core.async.impl.timers']);
 goog.addDependency("../figwheel/client.js", ['figwheel.client'], ['goog.net.jsloader', 'cljs.core', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../meetapp/dev.js", ['meetapp.dev'], ['weasel.repl', 'reagent.core', 'cljs.core', 'meetapp.core', 'figwheel.client']);
+goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['cljs.core']);

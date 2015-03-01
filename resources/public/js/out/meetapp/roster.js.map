@@ -1,1 +1,1 @@
-{"version":3,"file":"\/Users\/levi\/meetapp\/resources\/public\/js\/out\/meetapp\/roster.js","sources":["roster.cljs"],"lineCount":7,"mappings":";AAAA;;;AAGA,AAAKA,wBAAO,4BAAA,5BAACC","names":["meetapp.roster\/roster","reagent.core\/atom"]}
+{"version":3,"file":"\/Users\/levi\/MeetApp\/resources\/public\/js\/out\/meetapp\/roster.js","sources":["roster.cljs"],"lineCount":5,"mappings":";AAAA","names":[]}
