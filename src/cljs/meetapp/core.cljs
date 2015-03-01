@@ -7,61 +7,14 @@
               [goog.history.EventType :as EventType]
               [goog.string :as gstring]
               [goog.string.format]
-              [meetapp.store :as store])
+              [meetapp.store :as store]
+              [meetapp.roster :as roster]
+              [meetapp.queue :as queue])
     (:use     [meetapp.lib.collections :only [without insert reposition]])
     (:import goog.History))
 
 ;; -------------------------
 ;; Views
-
-
-(defonce current-name (atom "")) ;; the value of input
-(defonce current-speaker (atom "")) ;; the guy talking
-
-(defonce initial-time (atom (js/Date.now)))
-(defonce delta-time (atom (js/Date. 0)))
-(defonce time-color (atom "#f34"))
-(defonce dragging (atom nil))
-
-(defn reset-timer []
-  (reset! initial-time (js/Date.now))
-  (if (boolean @current-speaker)
-    (js/setInterval #(reset! delta-time (js/Date. (- (js/Date.now) @initial-time))) 1000)) ;; an interval where the timer is reset.)
-    (reset! delta-time (js/Date. 0)))
-
-(defn clock []
-  (let [time-str (clojure.string/join ":" (map #(gstring/format "%02d" %) [(.getMinutes @delta-time)(.getSeconds @delta-time)]))]
-    [:div.example-clock
-     {:style {:color @time-color}}
-     time-str]))
-
-(defn get-event-value [event] (-> event .-target .-value))
-
-(defn next-speaker []
-  (reset-timer)
-  (reset! current-speaker (first (@store/state :queue)))
-  (store/remove-from-queue 0))
-
-;; drag things
-
-(defn drag-start-handler [event]
-  (reset! dragging (js/Number event.currentTarget.dataset.id))
-
-  ; for use with firefox
-  (set! (.-effectAllowed event.dataTransfer) "move")
-  (.setData event.dataTransfer "text/html" event.currentTarget))
-
-(defn drag-end-handler [index event]
-  (reset! dragging nil))
-
-(defn drag-over-handler [event]
-  (.preventDefault event)
-  (let [from @dragging
-        to (js/Number event.currentTarget.dataset.id)]
-    (swap! store/state update-in [:queue] #(reposition % from to))
-    (reset! dragging to)))
-
-;; components
 
 (defn home-page []
   [:div.app-container
@@ -70,47 +23,10 @@
         [:i.icon-torch]]
       [:span "MeetApp"]]
     [:div.main
-
-      ;; roster.
-      [:div.roster
-        [:div.search-section
-         [:input {
-          :type "text"
-          :value @current-name
-          :placeholder "Search or Add"
-          :on-change #(reset! current-name (get-event-value %))}]
-         [:button {
-          :on-click #(if
-            (> (count @current-name) 0)
-            (store/add-to-roster @current-name)
-            (.log js/console "Error: name is blank"))} "Add"]]
-
-        [:ul.basic-list (for
-                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) (@store/state :roster)) (@store/state :roster)))]
-                          [:li
-                           {:key name}
-                           [:a.entry {:on-click #(store/add-to-queue name)} name]
-                           [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]
-
-      ;; queue.
-      [:div.queue
-       [:h2 {:on-click #(next-speaker)}
-        (clock)
-        @current-speaker]
-       [:ul.basic-list (doall (map-indexed
-                        (fn [index item]
-                          [:li
-                           {:key index
-                            :data-id index
-                            :draggable true
-                            :on-drag-end (partial drag-end-handler index)
-                            :on-drag-over drag-over-handler
-                            :on-drag-start drag-start-handler
-                            :class (if (= @dragging index) "dragging" "")
-                            }
-                           [:div.entry item]
-                           [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
-                        (@store/state :queue)))]]]])
+     ;; roster
+     [roster/main]
+     ;; queue.
+     [queue/main]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]

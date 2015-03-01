@@ -8,6 +8,8 @@
                                      :queue []))
                               :meetapp-state))
 
+(defonce current-name (atom "")) ;; the value of input
+
 (defn add-to-roster [name]
   (reset! current-name nil)
   (swap! state update-in [:roster] #(conj % name)))
@@ -19,4 +21,5 @@
   (swap! state update-in [:queue] #(conj % name)))
 
 (defn remove-from-queue [index]
-  (swap! state update-in [:queue] (partial without index)))
+  (if (boolean index)
+    (swap! state update-in [:queue] (partial without index))))

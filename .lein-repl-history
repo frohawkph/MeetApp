@@ -19,3 +19,4 @@ derp
 (derp one)
 (derp :one)
 (browser-repl)
+(subvec [] 1)
