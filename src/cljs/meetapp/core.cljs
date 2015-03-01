@@ -6,17 +6,15 @@
               [goog.events :as events]
               [goog.history.EventType :as EventType]
               [goog.string :as gstring]
-              [goog.string.format])
+              [goog.string.format]
+              [meetapp.store :as store])
     (:use     [meetapp.lib.collections :only [without insert reposition]])
     (:import goog.History))
 
 ;; -------------------------
 ;; Views
 
-(defonce state (local-storage (atom (hash-map
-                                     :roster (set nil)
-                                     :queue []))
-                              :meetapp-state))
+
 (defonce current-name (atom "")) ;; the value of input
 (defonce current-speaker (atom "")) ;; the guy talking
 
@@ -39,23 +37,10 @@
 
 (defn get-event-value [event] (-> event .-target .-value))
 
-(defn add-to-roster [name]
-  (reset! current-name nil)
-  (swap! state update-in [:roster] #(conj % name)))
-
-(defn remove-from-roster [name]
-  (swap! state update-in [:roster] #(disj % name)))
-
-(defn add-to-queue [name]
-  (swap! state update-in [:queue] #(conj % name)))
-
-(defn remove-from-queue [index]
-  (swap! state update-in [:queue] (partial without index)))
-
 (defn next-speaker []
   (reset-timer)
-  (reset! current-speaker (first (@state :queue)))
-  (remove-from-queue 0))
+  (reset! current-speaker (first (@store/state :queue)))
+  (store/remove-from-queue 0))
 
 ;; drag things
 
@@ -73,7 +58,7 @@
   (.preventDefault event)
   (let [from @dragging
         to (js/Number event.currentTarget.dataset.id)]
-    (swap! state update-in [:queue] #(reposition % from to))
+    (swap! store/state update-in [:queue] #(reposition % from to))
     (reset! dragging to)))
 
 ;; components
@@ -97,15 +82,15 @@
          [:button {
           :on-click #(if
             (> (count @current-name) 0)
-            (add-to-roster @current-name)
+            (store/add-to-roster @current-name)
             (.log js/console "Error: name is blank"))} "Add"]]
 
         [:ul.basic-list (for
-                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) (@state :roster)) (@state :roster)))]
+                         [name (sort (if (boolean @current-name) (filter #(gstring/caseInsensitiveContains % @current-name) (@store/state :roster)) (@store/state :roster)))]
                           [:li
                            {:key name}
-                           [:a.entry {:on-click #(add-to-queue name)} name]
-                           [:a.icon-button {:on-click #(remove-from-roster name)} [:i.icon-close]]])]]
+                           [:a.entry {:on-click #(store/add-to-queue name)} name]
+                           [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]
 
       ;; queue.
       [:div.queue
@@ -124,8 +109,8 @@
                             :class (if (= @dragging index) "dragging" "")
                             }
                            [:div.entry item]
-                           [:a.icon-button {:on-click #(remove-from-queue index)} [:i.icon-close]]])
-                        (@state :queue)))]]]])
+                           [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
+                        (@store/state :queue)))]]]])
 
 (defn about-page []
   [:div [:h2 "About meetapp"]
