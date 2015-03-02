@@ -23,7 +23,8 @@ goog.addDependency("../reagent/session.js", ['reagent.session'], ['reagent.core'
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../meetapp/lib/drag_list.js", ['meetapp.lib.drag_list'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core']);
-goog.addDependency("../meetapp/queue.js", ['meetapp.queue'], ['meetapp.lib.collections', 'goog.string', 'reagent.core', 'cljs.core', 'meetapp.lib.drag_list', 'meetapp.store']);
+goog.addDependency("../meetapp/timer.js", ['meetapp.timer'], ['goog.string', 'reagent.core', 'cljs.core']);
+goog.addDependency("../meetapp/queue.js", ['meetapp.queue'], ['meetapp.lib.collections', 'goog.string', 'reagent.core', 'cljs.core', 'meetapp.lib.drag_list', 'meetapp.store', 'meetapp.timer']);
 goog.addDependency("../meetapp/core.js", ['meetapp.core'], ['meetapp.lib.collections', 'meetapp.roster', 'reagent.session', 'goog.string', 'reagent.core', 'cljs.core', 'goog.history.EventType', 'alandipert.storage_atom', 'goog.History', 'goog.string.format', 'secretary.core', 'meetapp.queue', 'meetapp.store', 'goog.events']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
