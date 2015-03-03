@@ -9,7 +9,6 @@
 (defn get-event-value [event] (-> event .-target .-value))
 
 (defn blur-handler [event]
-  (.preventDefault event)
   (reset! collapse-open? false))
 
 (defn main []
@@ -29,11 +28,10 @@
                            (.log js/console "Error: name is blank"))} "Add"]]
    [collapse/main @collapse-open? 
     [:div {:on-mouse-down #(.preventDefault %)} 
-     "derp"]]
-   [:ul.basic-list (for
-                     [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
-                     [:li
-                      {:key name}
-                      [:a.entry {:on-click #(store/add-to-queue name)} name]
-                      [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]])
+     [:ul.basic-list (for
+                       [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
+                       [:li
+                        {:key name}
+                        [:a.entry {:on-click #(store/add-to-queue name)} name]
+                        [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]]])
 
