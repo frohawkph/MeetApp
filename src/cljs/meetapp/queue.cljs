@@ -31,3 +31,4 @@
                                 [:div.entry item]
                                 [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
                              (@store/state :queue)))]]))
+;(subvec (@store/state :queue) 1)

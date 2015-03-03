@@ -102,6 +102,7 @@ ul {
       font-size: 18px;
       outline: none;
       border: none;
+      margin: 0px;
       padding: 8px;
       box-sizing: border-box;
       background-color: #590d32;
