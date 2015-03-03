@@ -27,7 +27,9 @@
                            (> (count @store/current-name) 0)
                            (store/add-to-roster @store/current-name)
                            (.log js/console "Error: name is blank"))} "Add"]]
-   [collapse/main @collapse-open? [:div "derp"]]
+   [collapse/main @collapse-open? 
+    [:div {:on-mouse-down #(.preventDefault %)} 
+     "derp"]]
    [:ul.basic-list (for
                      [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
                      [:li
