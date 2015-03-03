@@ -15,10 +15,11 @@ goog.addDependency("../reagent/impl/component.js", ['reagent.impl.component'], [
 goog.addDependency("../reagent/impl/template.js", ['reagent.impl.template'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'clojure.string']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug']);
 goog.addDependency("../meetapp/lib/collections.js", ['meetapp.lib.collections'], ['cljs.core']);
+goog.addDependency("../meetapp/lib/collapse.js", ['meetapp.lib.collapse'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../tailrecursion/cljson.js", ['tailrecursion.cljson'], ['cljs.core', 'goog.date.DateTime', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../alandipert/storage_atom.js", ['alandipert.storage_atom'], ['goog.Timer', 'tailrecursion.cljson', 'cljs.core']);
 goog.addDependency("../meetapp/store.js", ['meetapp.store'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core', 'alandipert.storage_atom']);
-goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['goog.string', 'reagent.core', 'cljs.core', 'meetapp.store']);
+goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['goog.string', 'reagent.core', 'meetapp.lib.collapse', 'cljs.core', 'meetapp.store']);
 goog.addDependency("../reagent/session.js", ['reagent.session'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);

@@ -20,3 +20,4 @@ derp
 (derp :one)
 (browser-repl)
 (subvec [] 1)
+(into [] nil)

@@ -24,49 +24,49 @@ meetapp.core.current_page = (function current_page(){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent.session.get.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180))], null)], null);
 });
 secretary.core.set_config_BANG_.call(null,new cljs.core.Keyword(null,"prefix","prefix",-265908465),"#");
-var action__19339__auto___23528 = (function (params__19340__auto__){
+var action__19339__auto___24255 = (function (params__19340__auto__){
 if(cljs.core.map_QMARK_.call(null,params__19340__auto__)){
-var map__23526 = params__19340__auto__;
-var map__23526__$1 = ((cljs.core.seq_QMARK_.call(null,map__23526))?cljs.core.apply.call(null,cljs.core.hash_map,map__23526):map__23526);
+var map__24253 = params__19340__auto__;
+var map__24253__$1 = ((cljs.core.seq_QMARK_.call(null,map__24253))?cljs.core.apply.call(null,cljs.core.hash_map,map__24253):map__24253);
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.home_page;},new cljs.core.Symbol("meetapp.core","home-page","meetapp.core/home-page",-493532420,null),new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(cljs.core.PersistentVector.EMPTY),new cljs.core.Keyword(null,"test","test",577538877),(cljs.core.truth_(meetapp.core.home_page)?meetapp.core.home_page.cljs$lang$test:null),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Symbol(null,"home-page","home-page",-850279575,null),new cljs.core.Keyword(null,"column","column",2078222095),1,new cljs.core.Keyword(null,"line","line",212345235),19,new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",new cljs.core.Keyword(null,"doc","doc",1913296891),null,new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null)], null)));
 } else {
 if(cljs.core.vector_QMARK_.call(null,params__19340__auto__)){
-var vec__23527 = params__19340__auto__;
+var vec__24254 = params__19340__auto__;
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.home_page;},new cljs.core.Symbol("meetapp.core","home-page","meetapp.core/home-page",-493532420,null),new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(cljs.core.PersistentVector.EMPTY),new cljs.core.Keyword(null,"test","test",577538877),(cljs.core.truth_(meetapp.core.home_page)?meetapp.core.home_page.cljs$lang$test:null),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Symbol(null,"home-page","home-page",-850279575,null),new cljs.core.Keyword(null,"column","column",2078222095),1,new cljs.core.Keyword(null,"line","line",212345235),19,new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",new cljs.core.Keyword(null,"doc","doc",1913296891),null,new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null)], null)));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/",action__19339__auto___23528);
+secretary.core.add_route_BANG_.call(null,"/",action__19339__auto___24255);
 
-var action__19339__auto___23531 = (function (params__19340__auto__){
+var action__19339__auto___24258 = (function (params__19340__auto__){
 if(cljs.core.map_QMARK_.call(null,params__19340__auto__)){
-var map__23529 = params__19340__auto__;
-var map__23529__$1 = ((cljs.core.seq_QMARK_.call(null,map__23529))?cljs.core.apply.call(null,cljs.core.hash_map,map__23529):map__23529);
+var map__24256 = params__19340__auto__;
+var map__24256__$1 = ((cljs.core.seq_QMARK_.call(null,map__24256))?cljs.core.apply.call(null,cljs.core.hash_map,map__24256):map__24256);
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.about_page;},new cljs.core.Symbol("meetapp.core","about-page","meetapp.core/about-page",-1772091460,null),new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(cljs.core.PersistentVector.EMPTY),new cljs.core.Keyword(null,"test","test",577538877),(cljs.core.truth_(meetapp.core.about_page)?meetapp.core.about_page.cljs$lang$test:null),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Symbol(null,"about-page","about-page",2116788009,null),new cljs.core.Keyword(null,"column","column",2078222095),1,new cljs.core.Keyword(null,"line","line",212345235),31,new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",new cljs.core.Keyword(null,"doc","doc",1913296891),null,new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null)], null)));
 } else {
 if(cljs.core.vector_QMARK_.call(null,params__19340__auto__)){
-var vec__23530 = params__19340__auto__;
+var vec__24257 = params__19340__auto__;
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.about_page;},new cljs.core.Symbol("meetapp.core","about-page","meetapp.core/about-page",-1772091460,null),new cljs.core.PersistentArrayMap(null, 8, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(cljs.core.PersistentVector.EMPTY),new cljs.core.Keyword(null,"test","test",577538877),(cljs.core.truth_(meetapp.core.about_page)?meetapp.core.about_page.cljs$lang$test:null),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Symbol(null,"about-page","about-page",2116788009,null),new cljs.core.Keyword(null,"column","column",2078222095),1,new cljs.core.Keyword(null,"line","line",212345235),31,new cljs.core.Keyword(null,"file","file",-1269645878),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",new cljs.core.Keyword(null,"doc","doc",1913296891),null,new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null)], null)));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/about",action__19339__auto___23531);
+secretary.core.add_route_BANG_.call(null,"/about",action__19339__auto___24258);
 
 meetapp.core.hook_browser_navigation_BANG_ = (function hook_browser_navigation_BANG_(){
-var G__23533 = (new goog.History());
-goog.events.listen(G__23533,goog.history.EventType.NAVIGATE,((function (G__23533){
+var G__24260 = (new goog.History());
+goog.events.listen(G__24260,goog.history.EventType.NAVIGATE,((function (G__24260){
 return (function (event){
 return secretary.core.dispatch_BANG_.call(null,event.token);
-});})(G__23533))
+});})(G__24260))
 );
 
-G__23533.setEnabled(true);
+G__24260.setEnabled(true);
 
-return G__23533;
+return G__24260;
 });
 meetapp.core.init_BANG_ = (function init_BANG_(){
 meetapp.core.hook_browser_navigation_BANG_.call(null);

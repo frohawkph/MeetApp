@@ -4,7 +4,9 @@
 
 (defonce counter (atom 0))
 
-(defonce interval (js/setInterval (fn [] (swap! counter #(+ % 1000))) 1000))
+;; defonce because you don't want interval being triggered more than once ever.
+(defonce interval (js/setInterval
+                   (fn [] (swap! counter #(+ % 1000))) 1000))
 
 (defn format-timer [delta]
   (clojure.string/join ":" (map #(gstring/format "%02d" %) [(.getMinutes delta)(.getSeconds delta)])))
