@@ -49,6 +49,11 @@ ul {
   .queue {
     max-width: 640px;
     margin: 0px auto;
+    .basic-list {
+      li:first-child {
+        font-size: 36px;
+      }
+    }
   }
 }
 
