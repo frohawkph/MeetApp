@@ -15,7 +15,8 @@
     [:div.queue
      [:h2 {:on-click #(next-speaker)}
       [timer/main]
-      (first (@store/state :queue))]
+      ;(first (@store/state :queue))
+      ]
      [:ul.basic-list (doall (map-indexed
                              (fn [index item]
                                [:li

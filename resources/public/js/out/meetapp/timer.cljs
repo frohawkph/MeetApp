@@ -16,5 +16,5 @@
 
 (defn main []
   (fn []
-    [:div.example-clock
+    [:div.timer
      (-> @counter js/Date. format-timer)]))

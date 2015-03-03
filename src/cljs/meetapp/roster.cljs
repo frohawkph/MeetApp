@@ -27,11 +27,11 @@
                            (store/add-to-roster @store/current-name)
                            (.log js/console "Error: name is blank"))} "Add"]]
    [collapse/main @collapse-open? 
-    [:div {:on-mouse-down #(.preventDefault %)} 
-     [:ul.basic-list (for
-                       [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
-                       [:li
-                        {:key name}
-                        [:a.entry {:on-click #(store/add-to-queue name)} name]
-                        [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]]])
+    [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
+     (for
+       [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
+       [:li
+        {:key name}
+        [:a.entry {:on-click #(store/add-to-queue name)} name]
+        [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]])
 

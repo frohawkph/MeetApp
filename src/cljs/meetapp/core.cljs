@@ -21,10 +21,10 @@
     [:div.toolbar
       [:a.icon-button {:href "http://torchapps.github.io/"}
         [:i.icon-torch]]
-      [:span "MeetApp"]]
+      [:span "MeetApp"]
+      [:div.spacer]
+      [roster/main]]
     [:div.main
-     ;; roster
-     [roster/main]
      ;; queue.
      [queue/main]]])
 

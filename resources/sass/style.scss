@@ -33,41 +33,62 @@ ul {
   color: white;
   @include display(flex);
   @include align-items(center);
-}
-
-.main {
-  @include display(flex);
-  @include align-items(stretch);
-  @include flex(1);
-  .roster {
-    width: 320px;
-    background-color: #eee;
-    .icon-button {
-      color: #333;
-      &:hover {
-        background-color: rgba(black, 0.1);
-      }
-    }
-    .search-section {
-      @include display(flex);
-      input {
-        @include flex(1);
-        height: 48px;
-        line-height: 36px;
-        font-size: 24px;
-        outline: none;
-        border: none;
-        padding: 8px;
-        box-sizing: border-box;
-      }
-    }
+  .icon-button {
+    color: white;
   }
-  .queue {
+  .spacer {
     @include flex(1);
   }
 }
 
+.timer {
+  text-align: center;
+}
+
+.main {
+  .queue {
+    max-width: 640px;
+    margin: 0px auto;
+  }
+}
+
+.roster {
+  width: 320px;
+  position: relative;
+  .icon-button {
+    color: #333;
+    &:hover {
+      background-color: rgba(black, 0.1);
+    }
+  }
+  .basic-list {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    box-shadow: 0px 8px 8px rgba(black, 0.1);
+  }
+  .search-section {
+    @include display(flex);
+    input {
+      @include flex(1);
+      height: 48px;
+      line-height: 36px;
+      font-size: 18px;
+      outline: none;
+      border: none;
+      padding: 8px;
+      box-sizing: border-box;
+      background-color: darken($accent, 10%);
+      color: white;
+      @include placeholder {
+        color: $accent;
+      }
+    }
+  }
+}
+
 ul.basic-list {
+  background-color: white;
   li {
     @include display(flex);
     width: 100%;
