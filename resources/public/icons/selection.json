@@ -4,6 +4,38 @@
 		{
 			"icon": {
 				"paths": [
+					"M810.667 554.667h-256v256h-85.333v-256h-256v-85.333h256v-256h85.333v256h256v85.333z"
+				],
+				"attrs": [
+					{}
+				],
+				"isMulticolor": false,
+				"tags": [
+					"add"
+				],
+				"grid": 24,
+				"colorPermutations": {
+					"6868681": [
+						0
+					]
+				}
+			},
+			"attrs": [
+				{}
+			],
+			"properties": {
+				"order": 1,
+				"id": 0,
+				"prevSize": 24,
+				"code": 58883,
+				"name": "add"
+			},
+			"setIdx": 0,
+			"iconIdx": 0
+		},
+		{
+			"icon": {
+				"paths": [
 					"M810.667 273.707l-60.373-60.373-238.293 238.293-238.293-238.293-60.373 60.373 238.293 238.293-238.293 238.293 60.373 60.373 238.293-238.293 238.293 238.293 60.373-60.373-238.293-238.293z"
 				],
 				"attrs": [
@@ -12,15 +44,15 @@
 					}
 				],
 				"isMulticolor": false,
-				"tags": [
-					"close"
-				],
-				"grid": 24,
 				"colorPermutations": {
 					"6868681": [
 						0
 					]
-				}
+				},
+				"tags": [
+					"close"
+				],
+				"grid": 24
 			},
 			"attrs": [
 				{
@@ -34,7 +66,7 @@
 				"code": 58881,
 				"name": "close"
 			},
-			"setIdx": 0,
+			"setIdx": 1,
 			"iconIdx": 0
 		},
 		{
@@ -48,15 +80,15 @@
 					}
 				],
 				"isMulticolor": false,
-				"tags": [
-					"arrow-back"
-				],
-				"grid": 24,
 				"colorPermutations": {
 					"6868681": [
 						0
 					]
-				}
+				},
+				"tags": [
+					"arrow-back"
+				],
+				"grid": 24
 			},
 			"attrs": [
 				{
@@ -70,8 +102,8 @@
 				"code": 58882,
 				"name": "arrow-back"
 			},
-			"setIdx": 0,
-			"iconIdx": 2
+			"setIdx": 1,
+			"iconIdx": 1
 		},
 		{
 			"icon": {
@@ -92,17 +124,17 @@
 					}
 				],
 				"isMulticolor": false,
-				"grid": 0,
-				"tags": [
-					"torch"
-				],
 				"colorPermutations": {
 					"6868681": [
 						0,
 						0,
 						0
 					]
-				}
+				},
+				"tags": [
+					"torch"
+				],
+				"grid": 0
 			},
 			"attrs": [
 				{
@@ -123,7 +155,7 @@
 				"name": "torch"
 			},
 			"setIdx": 1,
-			"iconIdx": 0
+			"iconIdx": 2
 		}
 	],
 	"height": 1024,
@@ -148,19 +180,14 @@
 				"whitespace": 50
 			},
 			"showSelector": true,
-			"selector": "i",
-			"embed": true,
-			"includeMetadata": true,
-			"showMetrics": false,
-			"showMetadata": false
+			"selector": "i"
 		},
 		"imagePref": {
 			"prefix": "icon-",
 			"png": true,
 			"useClassSelector": true,
 			"color": 4473924,
-			"bgColor": 16777215,
-			"classSelector": ".icon"
+			"bgColor": 16777215
 		},
 		"historySize": 100,
 		"showCodes": true

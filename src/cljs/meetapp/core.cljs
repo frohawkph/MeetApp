@@ -16,21 +16,26 @@
 ;; -------------------------
 ;; Views
 
-(defn home-page []
+(defn queue-page []
   [:div.app-container
     [:div.toolbar
       [:a.icon-button {:href "http://torchapps.github.io/"}
         [:i.icon-torch]]
       [:span "MeetApp"]
       [:div.spacer]
-      [roster/main]]
+      ;[roster/main]
+      [:a.icon-button {:href "#/roster"}
+       [:i.icon-add]]]
     [:div.main
      ;; queue.
      [queue/main]]])
 
-(defn about-page []
-  [:div [:h2 "About meetapp"]
-   [:div [:a {:href "#/"} "go to the home page"]]])
+(defn roster-page []
+  [:div 
+   [:div.toolbar
+    [:a.icon-button {:href "#/"} 
+     [:i.icon-arrow-back]]]
+   [roster/main]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
@@ -40,10 +45,10 @@
 (secretary/set-config! :prefix "#")
 
 (secretary/defroute "/" []
-  (session/put! :current-page #'home-page))
+  (session/put! :current-page #'queue-page))
 
-(secretary/defroute "/about" []
-  (session/put! :current-page #'about-page))
+(secretary/defroute "/roster" []
+  (session/put! :current-page #'roster-page))
 
 ;; -------------------------
 ;; History
