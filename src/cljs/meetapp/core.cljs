@@ -9,7 +9,8 @@
             [goog.string.format]
             [meetapp.store :as store]
             [meetapp.roster :as roster]
-            [meetapp.queue :as queue])
+            [meetapp.queue :as queue]
+            [meetapp.util :as util])
   (:use     [meetapp.lib.collections :only [without insert reposition]])
   (:import goog.History))
 
@@ -19,26 +20,10 @@
 (defn key-handler [page-id event]
   (defn preventDefault [] (.preventDefault event))
   ;(.log js/console page-id)
-  (case (.-keyCode event)
-    40 (do 
-         (.log js/console "down")
-         (preventDefault))
-    38 (do 
-         (.log js/console "up")
-         (preventDefault))
-    13 (do 
-         (.log js/console "return")
-         (preventDefault))
-    27 (do
-         (.log js/console "escape")
-         (preventDefault))
-    32 (do 
-         #_(.log js/console "space")
-         #_(preventDefault))
-    8 (do 
-        #_(.log js/console "delete")
-        #_(preventDefault))
-    (.log js/console "other keys" (.-keyCode event))))
+  
+  #_(case (util/key-mapping (.-keyCode event))
+    "down"  (.log js/console "going down")
+    "up"    (.log js/console "going up")))
 
 (defn queue-view []
   [:div.app-container
@@ -62,7 +47,10 @@
 
 (defn roster-page []
   (reagent/create-class
-    {:component-did-mount #(.addEventListener js/document "keydown" (partial key-handler "roster"))
+    {:component-did-mount (fn [this]
+                            (.log js/console this) 
+                            (.addEventListener js/document "keydown" (partial key-handler "roster"))
+                            (roster/trigger-focus))
      :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "roster"))
      :component-function (fn [] 
                            [:div 

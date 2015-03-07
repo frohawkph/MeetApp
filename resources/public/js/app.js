@@ -21,12 +21,13 @@ goog.addDependency("../alandipert/storage_atom.js", ['alandipert.storage_atom'],
 goog.addDependency("../meetapp/store.js", ['meetapp.store'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core', 'alandipert.storage_atom']);
 goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['goog.string', 'reagent.core', 'meetapp.lib.collapse', 'cljs.core', 'meetapp.store']);
 goog.addDependency("../reagent/session.js", ['reagent.session'], ['reagent.core', 'cljs.core']);
+goog.addDependency("../meetapp/util.js", ['meetapp.util'], ['cljs.core']);
 goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
 goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../meetapp/lib/drag_list.js", ['meetapp.lib.drag_list'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core']);
 goog.addDependency("../meetapp/timer.js", ['meetapp.timer'], ['goog.string', 'reagent.core', 'cljs.core']);
 goog.addDependency("../meetapp/queue.js", ['meetapp.queue'], ['meetapp.lib.collections', 'goog.string', 'reagent.core', 'cljs.core', 'meetapp.lib.drag_list', 'meetapp.store', 'meetapp.timer']);
-goog.addDependency("../meetapp/core.js", ['meetapp.core'], ['meetapp.lib.collections', 'meetapp.roster', 'reagent.session', 'goog.string', 'reagent.core', 'cljs.core', 'goog.history.EventType', 'alandipert.storage_atom', 'goog.History', 'goog.string.format', 'secretary.core', 'meetapp.queue', 'meetapp.store', 'goog.events']);
+goog.addDependency("../meetapp/core.js", ['meetapp.core'], ['meetapp.lib.collections', 'meetapp.roster', 'reagent.session', 'goog.string', 'reagent.core', 'cljs.core', 'goog.history.EventType', 'alandipert.storage_atom', 'goog.History', 'meetapp.util', 'goog.string.format', 'secretary.core', 'meetapp.queue', 'meetapp.store', 'goog.events']);
 goog.addDependency("../cljs/core/async/impl/protocols.js", ['cljs.core.async.impl.protocols'], ['cljs.core']);
 goog.addDependency("../cljs/core/async/impl/buffers.js", ['cljs.core.async.impl.buffers'], ['cljs.core', 'cljs.core.async.impl.protocols']);
 goog.addDependency("../cljs/core/async/impl/dispatch.js", ['cljs.core.async.impl.dispatch'], ['cljs.core', 'cljs.core.async.impl.buffers', 'goog.async.nextTick']);

@@ -27,17 +27,23 @@
     "Enter" (enter-handler)
     "default"))
 
+(defn roster-input []
+  (reagent/create-class 
+    {:component-did-mount (fn [this] (.focus (reagent/dom-node this)))
+     :component-function (fn []
+                           [:input {:ref "focus"
+                                    :type "text"
+                                    :on-focus #(reset! collapse-open? true)
+                                    :on-blur blur-handler
+                                    :value @store/current-name
+                                    :placeholder "Search or Add"
+                                    :on-key-press keyhandler
+                                    :on-change #(reset! store/current-name (get-event-value %))}])}))
+
 (defn main []
   [:div.roster
    [:div.search-section
-    [:input {
-             :type "text"
-             :on-focus #(reset! collapse-open? true)
-             :on-blur blur-handler
-             :value @store/current-name
-             :placeholder "Search or Add"
-             :on-key-press keyhandler
-             :on-change #(reset! store/current-name (get-event-value %))}]] 
+    [roster-input]] 
    [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
     (for
       [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]

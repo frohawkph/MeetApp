@@ -22,3 +22,16 @@ derp
 (subvec [] 1)
 (into [] nil)
 (contains? #{1 2 3} 2)
+{:1 "derp"}
+(def wat {:1 "derp"}
+)
+wat
+(wat 1)
+(wat "derp")
+(wat '1)
+(wat "1")
+(def huh {1 2, 2 3, 3 4}
+)
+huh
+(huh 1)
+(huh 2)
