@@ -16,6 +16,30 @@
 ;; -------------------------
 ;; Views
 
+(defn key-handler [page-id event]
+  (defn preventDefault [] (.preventDefault event))
+  ;(.log js/console page-id)
+  (case (.-keyCode event)
+    40 (do 
+         (.log js/console "down")
+         (preventDefault))
+    38 (do 
+         (.log js/console "up")
+         (preventDefault))
+    13 (do 
+         (.log js/console "return")
+         (preventDefault))
+    27 (do
+         (.log js/console "escape")
+         (preventDefault))
+    32 (do 
+         #_(.log js/console "space")
+         #_(preventDefault))
+    8 (do 
+        #_(.log js/console "delete")
+        #_(preventDefault))
+    (.log js/console "other keys" (.-keyCode event))))
+
 (defn queue-view []
   [:div.app-container
    [:div.toolbar
@@ -31,28 +55,22 @@
     [queue/main]]])
 
 (defn queue-page []
-  (defn key-handler [event]
-    (.preventDefault event)
-    (case (.-keyCode event)
-      40 (.log js/console "down")
-      38 (.log js/console "up")
-      13 (.log js/console "return")
-      27 (.log js/console "escape")
-      32 (.log js/console "space")
-      8 (.log js/console "delete")
-      (.log js/console "other keys" (.-keyCode event))))
   (reagent/create-class
-    {:component-did-mount #(.addEventListener js/document "keydown" key-handler)
-     :component-will-unmount #(.removeEventListener js/document "keydown" key-handler)
+    {:component-did-mount #(.addEventListener js/document "keydown" (partial key-handler "queue"))
+     :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "queue"))
      :component-function queue-view}))
 
 (defn roster-page []
-  [:div 
-   [:div.toolbar
-    [:a.icon-button {:href "#/"} 
-     [:i.icon-arrow-back]]]
-   [:div.main 
-    [roster/main]]])
+  (reagent/create-class
+    {:component-did-mount #(.addEventListener js/document "keydown" (partial key-handler "roster"))
+     :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "roster"))
+     :component-function (fn [] 
+                           [:div 
+                            [:div.toolbar
+                             [:a.icon-button {:href "#/"} 
+                              [:i.icon-arrow-back]]]
+                            [:div.main 
+                             [roster/main]]])}))
 
 (defn current-page []
   [:div [(session/get :current-page)]])

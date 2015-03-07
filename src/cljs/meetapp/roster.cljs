@@ -22,6 +22,7 @@
 
 (defn keyhandler [event]
   (.log js/console (.-key event))
+  (.stopPropagation event)
   (case (.-key event)
     "Enter" (enter-handler)
     "default"))
@@ -36,12 +37,7 @@
              :value @store/current-name
              :placeholder "Search or Add"
              :on-key-press keyhandler
-             :on-change #(reset! store/current-name (get-event-value %))}]
-    [:button {
-              :on-click #(if
-                           (> (count @store/current-name) 0)
-                           (store/add-to-roster @store/current-name)
-                           (.log js/console "Error: name is blank"))} "Add"]] 
+             :on-change #(reset! store/current-name (get-event-value %))}]] 
    [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
     (for
       [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
