@@ -65,26 +65,18 @@ ul {
 .timer {
   text-align: center; }
 
-.main .queue {
+.main {
   max-width: 640px;
   margin: 0px auto; }
   .main .queue .basic-list li:first-child {
     font-size: 36px; }
 
 .roster {
-  width: 320px;
   position: relative; }
   .roster .icon-button {
     color: #333; }
     .roster .icon-button:hover {
       background-color: rgba(0, 0, 0, 0.1); }
-  .roster .basic-list {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    max-height: 320px;
-    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; }
   .roster .search-section {
     display: -webkit-box;
     display: -moz-box;
@@ -109,16 +101,15 @@ ul {
       margin: 0px;
       padding: 8px;
       box-sizing: border-box;
-      background-color: #590d32;
-      color: white; }
+      color: #333; }
       .roster .search-section input::-webkit-input-placeholder {
-        color: #85144B; }
+        color: #eee; }
       .roster .search-section input::-moz-placeholder {
-        color: #85144B; }
+        color: #eee; }
       .roster .search-section input:-moz-placeholder {
-        color: #85144B; }
+        color: #eee; }
       .roster .search-section input:-ms-input-placeholder {
-        color: #85144B; }
+        color: #eee; }
 
 ul.basic-list {
   background-color: white; }

@@ -46,9 +46,9 @@ ul {
 }
 
 .main {
+  max-width: 640px;
+  margin: 0px auto;
   .queue {
-    max-width: 640px;
-    margin: 0px auto;
     .basic-list {
       li:first-child {
         font-size: 36px;
@@ -58,7 +58,6 @@ ul {
 }
 
 .roster {
-  width: 320px;
   position: relative;
   .icon-button {
     color: #333;
@@ -66,14 +65,14 @@ ul {
       background-color: rgba(black, 0.1);
     }
   }
-  .basic-list {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    max-height: 320px;
-    box-shadow: 0px 8px 8px rgba(black, 0.1);
-    overflow-y: auto;
-  }
+  // .basic-list {
+  //   position: absolute;
+  //   z-index: 10;
+  //   width: 100%;
+  //   max-height: 320px;
+  //   box-shadow: 0px 8px 8px rgba(black, 0.1);
+  //   overflow-y: auto;
+  // }
   .search-section {
     @include display(flex);
     input {
@@ -86,10 +85,12 @@ ul {
       margin: 0px;
       padding: 8px;
       box-sizing: border-box;
-      background-color: darken($accent, 10%);
-      color: white;
+      // background-color: darken($accent, 10%);
+      // color: white;
+      color: #333;
       @include placeholder {
-        color: $accent;
+        color: #eee;
+        // color: $accent;
       }
     }
   }

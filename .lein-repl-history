@@ -21,3 +21,4 @@ derp
 (browser-repl)
 (subvec [] 1)
 (into [] nil)
+(contains? #{1 2 3} 2)
