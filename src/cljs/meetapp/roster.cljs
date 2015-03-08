@@ -3,7 +3,8 @@
             [meetapp.store :as store]
             [meetapp.lib.collapse :as collapse]
             [meetapp.util :as util]
-            [goog.string :as gstring]))
+            [goog.string :as gstring]
+            [clojure.set :as clj-set]))
 
 (defonce collapse-open? (atom false))
 (defonce selected-index (atom nil))
@@ -44,7 +45,7 @@
 
 (defn filtered-roster []
   (if (boolean @store/current-name)
-    (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster))
+    (apply sorted-set (clj-set/select #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)))
     (@store/state :roster)))
 
 (defn main-keyhandler [event]

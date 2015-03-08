@@ -58,3 +58,9 @@ derp-set
 (sorted-set_
 )
 (sorted-set)
+(sorted-set :what :hoh :huh)
+sorted-set
+(def derpset (sorted-set :what :hoh :huh :alex))
+derpset
+(select identity derpset)
+select
