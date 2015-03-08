@@ -40,15 +40,30 @@
                                     :on-key-press keyhandler
                                     :on-change #(reset! store/current-name (get-event-value %))}])}))
 
+(defn main-keyhandler [event]
+  )
+
 (defn main []
-  [:div.roster
-   [:div.search-section
-    [roster-input]] 
-   [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
-    (for
-      [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
-      [:li
-       {:key name}
-       [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-       [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]])
+  (reagent/create-class
+    {:component-did-mount 
+     (fn [] (.addEventListener js/document "keydown" main-keyhandler))
+     :component-will-unmount 
+     (fn [] (.removeEventListener js/document "keydown" main-keyhandler))
+     :component-function 
+     (fn [] 
+       [:div 
+        [:div.toolbar
+         [:a.icon-button {:href "#/"} 
+          [:i.icon-arrow-back]]]
+        [:div.roster.main
+         [:div.search-section
+          [roster-input]] 
+         [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
+          (for
+            [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
+            [:li
+             {:key name}
+             [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
+             [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]])}))
+
 

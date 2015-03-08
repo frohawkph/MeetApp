@@ -46,19 +46,7 @@
      :component-function queue-view}))
 
 (defn roster-page []
-  (reagent/create-class
-    {:component-did-mount (fn [this]
-                            (.log js/console this) 
-                            (.addEventListener js/document "keydown" (partial key-handler "roster"))
-                            (roster/trigger-focus))
-     :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "roster"))
-     :component-function (fn [] 
-                           [:div 
-                            [:div.toolbar
-                             [:a.icon-button {:href "#/"} 
-                              [:i.icon-arrow-back]]]
-                            [:div.main 
-                             [roster/main]]])}))
+  [roster/main])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
