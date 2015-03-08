@@ -42,13 +42,13 @@
                                     :on-key-press keyhandler
                                     :on-change #(reset! store/current-name (get-event-value %))}])}))
 
-(defn roster-matches-input []
+(defn filtered-roster []
   (sort (if (boolean @store/current-name)
           (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster))
           (@store/state :roster))))
 
 (defn main-keyhandler [event]
-  (let [max-count (-> (roster-matches-input) count dec)
+  (let [max-count (-> (filtered-roster) count dec)
         within-bounds? (and 
                          (boolean @selected-item) 
                          (<= @selected-item max-count) 
@@ -90,7 +90,7 @@
                           {:key name
                            :class (if (= index @selected-item) "selected")}
                           [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-                          [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) (roster-matches-input)))
+                          [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) (filtered-roster)))
           ]]])}))
 
 
