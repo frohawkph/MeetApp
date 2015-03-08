@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2760 {}
+// Compiled by ClojureScript 0.0-2913 {}
 goog.provide('meetapp.queue');
 goog.require('cljs.core');
 goog.require('meetapp.lib.collections');

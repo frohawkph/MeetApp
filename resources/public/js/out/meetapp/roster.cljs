@@ -2,9 +2,11 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [meetapp.store :as store]
             [meetapp.lib.collapse :as collapse]
+            [meetapp.util :as util]
             [goog.string :as gstring]))
 
 (defonce collapse-open? (atom false))
+(defonce selected-item (atom nil))
 
 (defn get-event-value [event] (-> event .-target .-value))
 
@@ -41,7 +43,21 @@
                                     :on-change #(reset! store/current-name (get-event-value %))}])}))
 
 (defn main-keyhandler [event]
-  )
+  (let [max-count (-> (@store/state :roster) count dec)]
+    (case (util/key-mapping (.-keyCode event))
+      "enter" (.log js/console "what")
+      "escape" (reset! selected-item nil)
+      "down" (do 
+               (.preventDefault event)
+               (if (boolean @selected-item) 
+                 (swap! selected-item (if (< @selected-item max-count) inc identity)) 
+                 (reset! selected-item 0)))
+      "up" (do
+             (.preventDefault event)
+             (if (boolean @selected-item)
+               (swap! selected-item (if (pos? @selected-item) dec identity))
+               (reset! selected-item max-count)))
+      (.log js/console "any key"))))
 
 (defn main []
   (reagent/create-class

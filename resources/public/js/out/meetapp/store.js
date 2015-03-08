@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2760 {}
+// Compiled by ClojureScript 0.0-2913 {}
 goog.provide('meetapp.store');
 goog.require('cljs.core');
 goog.require('meetapp.lib.collections');
@@ -15,18 +15,18 @@ meetapp.store.current_name = reagent.core.atom.call(null,"");
 meetapp.store.add_to_roster = (function add_to_roster(name){
 cljs.core.reset_BANG_.call(null,meetapp.store.current_name,null);
 
-return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"roster","roster",-2092272532)], null),(function (p1__25172_SHARP_){
-return cljs.core.conj.call(null,p1__25172_SHARP_,name);
+return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"roster","roster",-2092272532)], null),(function (p1__19694_SHARP_){
+return cljs.core.conj.call(null,p1__19694_SHARP_,name);
 }));
 });
 meetapp.store.remove_from_roster = (function remove_from_roster(name){
-return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"roster","roster",-2092272532)], null),(function (p1__25173_SHARP_){
-return cljs.core.disj.call(null,p1__25173_SHARP_,name);
+return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"roster","roster",-2092272532)], null),(function (p1__19695_SHARP_){
+return cljs.core.disj.call(null,p1__19695_SHARP_,name);
 }));
 });
 meetapp.store.add_to_queue = (function add_to_queue(name){
-return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"queue","queue",1455835879)], null),(function (p1__25174_SHARP_){
-return cljs.core.conj.call(null,p1__25174_SHARP_,name);
+return cljs.core.swap_BANG_.call(null,meetapp.store.state,cljs.core.update_in,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"queue","queue",1455835879)], null),(function (p1__19696_SHARP_){
+return cljs.core.conj.call(null,p1__19696_SHARP_,name);
 }));
 });
 meetapp.store.remove_from_queue = (function remove_from_queue(index){

@@ -1,7 +1,8 @@
 
 (ns reagent.core
   (:refer-clojure :exclude [partial atom flush])
-  (:require [reagent.impl.template :as tmpl]
+  (:require [cljsjs.react]
+            [reagent.impl.template :as tmpl]
             [reagent.impl.component :as comp]
             [reagent.impl.util :as util]
             [reagent.impl.batching :as batch]
@@ -41,6 +42,19 @@ which is equivalent to
   "Turns a vector of Hiccup syntax into a React element. Returns form unchanged if it is not a vector."
   [form]
   (tmpl/as-element form))
+
+(defn adapt-react-class
+  "Returns an adapter for a native React class, that may be used
+just like a Reagent component function or class in Hiccup forms."
+  [c]
+  (tmpl/adapt-react-class c))
+
+(defn reactify-component
+  "Returns an adapter for a Reagent component, that may be used from
+  React, for example in JSX. A single argument, props, is passed to
+  the component, converted to a map."
+  [c]
+  (comp/reactify-component c))
 
 (defn render
   "Render a Reagent component into the DOM. The first argument may be 
@@ -92,9 +106,10 @@ looking like this:
 :component-will-update (fn [this new-argv])
 :component-did-update (fn [this old-argv])
 :component-will-unmount (fn [this])
-:render (fn [this])}
+:reagent-render (fn [args....])   ;; or :render (fn [this])
+}
 
-Everything is optional, except :render.
+Everything is optional, except either :reagent-render or :render.
 "
   [spec]
   (comp/create-class spec))
@@ -106,27 +121,34 @@ Everything is optional, except :render.
   []
   comp/*current-component*)
 
-
-(defn state
-  "Returns the state of a component, as set with replace-state or set-state."
+(defn state-atom
+  "Returns an atom containing a components state."
   [this]
   (assert (util/reagent-component? this))
-  ;; TODO: Warn if top-level component
-  (comp/state this))
+  (comp/state-atom this))
+
+(defn state
+  "Returns the state of a component, as set with replace-state or set-state.
+Equivalent to (deref (r/state-atom this))"
+  [this]
+  (assert (util/reagent-component? this))
+  (deref (state-atom this)))
 
 (defn replace-state
-  "Set state of a component."
+  "Set state of a component.
+Equivalent to (reset! (state-atom this) new-state)"
   [this new-state]
   (assert (util/reagent-component? this))
   (assert (or (nil? new-state) (map? new-state)))
-  (comp/replace-state this new-state))
+  (reset! (state-atom this) new-state))
 
 (defn set-state
-  "Merge component state with new-state."
+  "Merge component state with new-state.
+Equivalent to (swap! (state-atom this) merge new-state)"
   [this new-state]
   (assert (util/reagent-component? this))
   (assert (or (nil? new-state) (map? new-state)))
-  (comp/set-state this new-state))
+  (swap! (state-atom this) merge new-state))
 
 
 (defn props
@@ -196,7 +218,7 @@ re-rendered."
   Probably useful only for passing to child components."
   [value reset-fn & args]
   (assert (ifn? reset-fn))
-  (util/make-wrapper value reset-fn args))
+  (ratom/make-wrapper value reset-fn args))
 
 
 ;; RCursor
@@ -206,24 +228,30 @@ re-rendered."
 
 Behaves like a Reagent atom but focuses updates and derefs to
 the specified path within the wrapped Reagent atom. e.g.,
-  (let [c (cursor [:nested :content] ra)]
+  (let [c (cursor ra [:nested :content])]
     ... @c ;; equivalent to (get-in @ra [:nested :content])
     ... (reset! c 42) ;; equivalent to (swap! ra assoc-in [:nested :content] 42)
     ... (swap! c inc) ;; equivalence to (swap! ra update-in [:nested :content] inc)
     )
-The third argument may be a function, that is called with
-optional extra arguments provided to cursor, and the new value of the
-resulting 'atom'. If such a function is given, it should update the
-given Reagent atom.
+
+The first parameter can also be a function, that should look something
+like this:
+
+(defn set-get
+  ([k] (get-in @state k))
+  ([k v] (swap! state assoc-in k v)))
+
+The function will be called with one argument – the path passed to
+cursor – when the cursor is deref'ed, and two arguments (path and new
+value) when the cursor is modified.
+
+Given that set-get function, (and that state is a Reagent atom, or
+another cursor) these cursors are equivalent:
+(cursor state [:foo]) and (cursor set-get [:foo]).
 "
-  ([path] (fn [ra] (cursor path ra)))
-  ([path ra]
-   (assert (satisfies? IDeref ra))
-   (ratom/cursor path ra))
-  ([path ra reset-fn & args]
-   (assert (satisfies? IDeref ra))
-   (assert (ifn? reset-fn))
-   (ratom/cursor path ra reset-fn args)))
+  ([src path]
+   (ratom/cursor src path)))
+
 
 ;; Utilities
 

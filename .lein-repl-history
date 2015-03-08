@@ -35,3 +35,8 @@ wat
 huh
 (huh 1)
 (huh 2)
+(inc nil)
+(inc 0)
+(if nil "wat" "derp")
+(boolean nil)
+(boolean 0)

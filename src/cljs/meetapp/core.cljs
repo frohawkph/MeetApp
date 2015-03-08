@@ -10,7 +10,8 @@
             [meetapp.store :as store]
             [meetapp.roster :as roster]
             [meetapp.queue :as queue]
-            [meetapp.util :as util])
+            [meetapp.util :as util]
+            [cljsjs.react :as react])
   (:use     [meetapp.lib.collections :only [without insert reposition]])
   (:import goog.History))
 

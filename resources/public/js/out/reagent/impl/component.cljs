@@ -3,7 +3,7 @@
             [reagent.impl.batching :as batch]
             [reagent.ratom :as ratom]
             [reagent.interop :refer-macros [.' .!]]
-            [reagent.debug :refer-macros [dbg prn]]))
+            [reagent.debug :refer-macros [dbg prn dev?]]))
 
 (declare ^:dynamic *current-component*)
 
@@ -17,17 +17,6 @@
       sa
       (.! this :cljsState (ratom/atom nil)))))
 
-(defn state [this]
-  (deref (state-atom this)))
-
-(defn replace-state [this new-state]
-  ;; Don't use React's replaceState, since it doesn't play well
-  ;; with clojure maps
-  (reset! (state-atom this) new-state))
-
-(defn set-state [this new-state]
-  (swap! (state-atom this) merge new-state))
-
 ;; ugly circular dependency
 (defn as-element [x]
   (js/reagent.impl.template.as-element x))
@@ -39,7 +28,7 @@
     (let [f (.' c :cljsRender)
           _ (assert (ifn? f))
           p (.' c :props)
-          res (if (nil? (.' c :componentFunction))
+          res (if (nil? (.' c :reagentRender))
                 (f c)
                 (let [argv (.' p :argv)
                       n (count argv)]
@@ -76,7 +65,7 @@
     :getInitialState
     (fn []
       (this-as c
-               (set-state c (f c))))
+               (reset! (state-atom c) (f c))))
 
     :componentWillReceiveProps
     (fn [props]
@@ -129,10 +118,10 @@
       (this-as c (apply f c args)))
     f))
 
-(def dont-wrap #{:cljsRender :render :componentFunction})
+(def dont-wrap #{:cljsRender :render :reagentRender :cljsName})
 
 (defn dont-bind [f]
-  (if (ifn? f)
+  (if (fn? f)
     (doto f
       (.! :__reactDontBind true))
     f))
@@ -160,25 +149,42 @@
 (defn add-obligatory [fun-map]
   (merge obligatory fun-map))
 
-(defn add-render [fun-map render-f]
-  (assoc fun-map
-    :cljsRender render-f
-    :render (:render static-fns)))
+(defn add-render [fun-map render-f name]
+  (let [fm (assoc fun-map
+                  :cljsRender render-f
+                  :render (:render static-fns))]
+    (if (dev?)
+      (assoc fm :cljsName (fn [] name))
+      fm)))
 
-(defn wrap-funs [fun-map]
-  (let [render-fun (or (:componentFunction fun-map)
+(defn fun-name [f]
+  (or (and (fn? f)
+           (or (.' f :displayName)
+               (.' f :name)))
+      (and (implements? INamed f)
+           (name f))
+      (let [m (meta f)]
+        (if (map? m)
+          (:name m)))))
+
+(defn wrap-funs [fmap]
+  (let [fun-map (if-some [cf (:componentFunction fmap)]
+                  (-> fmap
+                      (assoc :reagentRender cf)
+                      (dissoc :componentFunction))
+                  fmap)
+        render-fun (or (:reagentRender fun-map)
                        (:render fun-map))
         _ (assert (ifn? render-fun)
                   (str "Render must be a function, not "
                        (pr-str render-fun)))
         name (str (or (:displayName fun-map)
-                      (.' render-fun :displayName)
-                      (.' render-fun :name)
-                      ""))
-        name' (if (empty? name) (str (gensym "reagent")) name)
+                      (fun-name render-fun)))
+        name' (if (empty? name)
+                (str (gensym "reagent")) name)
         fmap (-> fun-map
                  (assoc :displayName name')
-                 (add-render render-fun))]
+                 (add-render render-fun name'))]
     (reduce-kv (fn [m k v]
                  (assoc m k (get-wrapper k v name')))
                {} fmap)))
@@ -206,3 +212,33 @@
     (util/cache-react-class f res)
     (util/cache-react-class res res)
     f))
+
+(defn comp-name []
+  (if (dev?)
+    (let [n (some-> *current-component*
+                    (.' cljsName))]
+      (if-not (empty? n)
+        (str " (in " n ")")
+        ""))
+    ""))
+
+(defn shallow-obj-to-map [o]
+  (into {} (for [k (js-keys o)]
+             [(keyword k) (aget o k)])))
+
+(def elem-counter 0)
+
+(defn reactify-component [comp]
+  (.' js/React createClass
+      #js{:displayName "react-wrapper"
+          :render
+          (fn []
+            (this-as this
+                     (as-element
+                      [comp
+                       (-> (.' this :props)
+                           shallow-obj-to-map
+                           ;; ensure re-render, might get mutable js data
+                           (assoc :-elem-count
+                                  (set! elem-counter
+                                        (inc elem-counter))))])))}))

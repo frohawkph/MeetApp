@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 0.0-2760 {}
+// Compiled by ClojureScript 0.0-2913 {}
 goog.provide('meetapp.lib.drag_list');
 goog.require('cljs.core');
 goog.require('meetapp.lib.collections');
@@ -23,8 +23,8 @@ event.preventDefault();
 var from = cljs.core.deref.call(null,meetapp.lib.drag_list.dragging);
 var to = Number(event.currentTarget.dataset.id);
 cljs.core.swap_BANG_.call(null,store,cljs.core.update_in,address,((function (from,to){
-return (function (p1__24727_SHARP_){
-return meetapp.lib.collections.reposition.call(null,p1__24727_SHARP_,from,to);
+return (function (p1__19669_SHARP_){
+return meetapp.lib.collections.reposition.call(null,p1__19669_SHARP_,from,to);
 });})(from,to))
 );
 

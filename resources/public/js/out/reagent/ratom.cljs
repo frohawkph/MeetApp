@@ -1,6 +1,6 @@
 (ns reagent.ratom
   (:refer-clojure :exclude [atom])
-  (:require-macros [reagent.debug :refer (dbg log dev?)])
+  (:require-macros [reagent.debug :refer (dbg log warn dev?)])
   (:require [reagent.impl.util :as util]))
 
 (declare ^:dynamic *ratom-context*)
@@ -29,8 +29,14 @@
               (conj (if (nil? captured) #{} captured)
                     derefable))))))
 
+
+;;; Atom
+
+(defprotocol IReactiveAtom)
+
 (deftype RAtom [^:mutable state meta validator ^:mutable watches]
   IAtom
+  IReactiveAtom
 
   IEquiv
   (-equiv [o other] (identical? o other))
@@ -88,77 +94,96 @@
   ([x] (RAtom. x nil nil nil))
   ([x & {:keys [meta validator]}] (RAtom. x meta validator nil)))
 
+
+
+;;; cursor
+
 (declare make-reaction)
 
-(defn peek-at [a path]
-  (binding [*ratom-context* nil]
-    (get-in @a path)))
-
-
-(deftype RCursor [path ratom setf ^:mutable reaction]
+(deftype RCursor [ratom path ^:mutable reaction]
   IAtom
+  IReactiveAtom
 
   IEquiv
   (-equiv [o other]
     (and (instance? RCursor other)
          (= path (.-path other))
-         (= ratom (.-ratom other))
-         (= setf (.-setf other))))
+         (= ratom (.-ratom other))))
+
+  Object
+  (_reaction [this]
+    (if (nil? reaction)
+      (set! reaction
+            (if (satisfies? IDeref ratom)
+              (make-reaction #(get-in @ratom path)
+                             :on-set (if (= path [])
+                                       #(reset! ratom %2)
+                                       #(swap! ratom assoc-in path %2)))
+              (make-reaction #(ratom path)
+                             :on-set #(ratom path %2))))
+      reaction))
+
+  (_peek [this]
+    (binding [*ratom-context* nil]
+      (-deref (._reaction this))))
 
   IDeref
   (-deref [this]
-    (if (nil? *ratom-context*)
-      (get-in @ratom path)
-      (do
-        (if (nil? reaction)
-          (set! reaction (make-reaction #(get-in @ratom path))))
-        @reaction)))
+    (-deref (._reaction this)))
 
   IReset
-  (-reset! [a new-value]
-    (if (nil? setf)
-      (swap! ratom assoc-in path new-value)
-      (setf new-value)))
+  (-reset! [this new-value]
+    (-reset! (._reaction this) new-value))
 
   ISwap
   (-swap! [a f]
-    (-reset! a (f (peek-at ratom path))))
+    (-swap! (._reaction a) f))
   (-swap! [a f x]
-    (-reset! a (f (peek-at ratom path) x)))
+    (-swap! (._reaction a) f x))
   (-swap! [a f x y]
-    (-reset! a (f (peek-at ratom path) x y)))
+    (-swap! (._reaction a) f x y))
   (-swap! [a f x y more]
-    (-reset! a (apply f (peek-at ratom path) x y more)))
+    (-swap! (._reaction a) f x y more))
 
   IPrintWithWriter
   (-pr-writer [a writer opts]
-    ;; not sure about how this should be implemented?
-    ;; should it print as an atom focused on the appropriate part of
-    ;; the ratom - (pr-writer (get-in @ratom path)) - or should it be
-    ;; a completely separate type? and do we need a reader for it?
-    (-write writer "#<Cursor: ")
-    (pr-writer path writer opts)
-    (-write writer " ")
-    (pr-writer ratom writer opts)
+    (-write writer (str "#<Cursor: " path " "))
+    (pr-writer (._peek a) writer opts)
     (-write writer ">"))
 
   IWatchable
   (-notify-watches [this oldval newval]
-    (-notify-watches ratom oldval newval))
+    (-notify-watches (._reaction this) oldval newval))
   (-add-watch [this key f]
-    (-add-watch ratom key f))
+    (-add-watch (._reaction this) key f))
   (-remove-watch [this key]
-    (-remove-watch ratom key))
+    (-remove-watch (._reaction this) key))
 
   IHash
-  (-hash [this] (hash [ratom path setf])))
+  (-hash [this] (hash [ratom path])))
 
 (defn cursor
-  ([path ra]
-     (RCursor. path ra nil nil))
-  ([path ra setf args]
-     (RCursor. path ra
-               (util/partial-ifn. setf args nil) nil)))
+  [src path]
+  (if (satisfies? IDeref path)
+    (do
+      (warn "Calling cursor with an atom as the second arg is "
+            "deprecated, in (cursor "
+            src " " (pr-str path) ")")
+      (assert (satisfies? IReactiveAtom path)
+              (str "src must be a reactive atom, not "
+                   (pr-str path)))
+      (RCursor. path src nil))
+    (do
+      (assert (or (satisfies? IReactiveAtom src)
+                  (and (ifn? src)
+                       (not (vector? src))))
+              (str "src must be a reactive atom or a function, not "
+                   (pr-str src)))
+      (RCursor. src path nil))))
+
+
+
+;;;; reaction
 
 (defprotocol IDisposable
   (dispose! [this]))
@@ -170,37 +195,37 @@
   (-update-watching [this derefed])
   (-handle-change [k sender oldval newval]))
 
-(defn- call-watches [obs watches oldval newval]
-  (reduce-kv (fn [_ key f]
-               (f key obs oldval newval)
-               nil)
-             nil watches))
-
 (deftype Reaction [f ^:mutable state ^:mutable dirty? ^:mutable active?
                    ^:mutable watching ^:mutable watches
                    auto-run on-set on-dispose]
   IAtom
+  IReactiveAtom
 
   IWatchable
   (-notify-watches [this oldval newval]
-    (when on-set
-      (on-set oldval newval))
-    (call-watches this watches oldval newval))
+    (reduce-kv (fn [_ key f]
+                 (f key this oldval newval)
+                 nil)
+               nil watches))
 
   (-add-watch [this k wf]
     (set! watches (assoc watches k wf)))
 
   (-remove-watch [this k]
     (set! watches (dissoc watches k))
-    (when (empty? watches)
+    (when (and (empty? watches)
+               (not auto-run))
       (dispose! this)))
 
   IReset
-  (-reset! [a new-value]
-    (let [old-value state]
-      (set! state new-value)
-      (-notify-watches a old-value new-value)
-      new-value))
+  (-reset! [a newval]
+    (let [oldval state]
+      (set! state newval)
+      (when on-set
+        (set! dirty? true)
+        (on-set oldval newval))
+      (-notify-watches a oldval newval)
+      newval))
 
   ISwap
   (-swap! [a f]
@@ -239,26 +264,30 @@
         (set! active? true))
       (set! dirty? false)
       (set! state res)
-      (call-watches this watches oldstate state)
+      (-notify-watches this oldstate state)
       res))
 
   IDeref
   (-deref [this]
-    ;; TODO: relax this?
-    (when (not (or auto-run *ratom-context*))
-      (dbg [auto-run *ratom-context*]))
-    (assert (or auto-run *ratom-context*)
-            "Reaction derefed outside auto-running context")
-    (notify-deref-watcher! this)
-    (if dirty?
-      (run this)
-      state))
+    (if-not (or auto-run (some? *ratom-context*))
+      (do
+        (when dirty?
+          (let [oldstate state]
+            (set! state (f))
+            (when-not (identical? oldstate state)
+              (-notify-watches this oldstate state))))
+        state)
+      (do
+        (notify-deref-watcher! this)
+        (if dirty?
+          (run this)
+          state))))
 
   IDisposable
   (dispose! [this]
     (doseq [w watching]
       (remove-watch w this))
-    (set! watching #{})
+    (set! watching nil)
     (set! state nil)
     (set! dirty? true)
     (when active?
@@ -284,9 +313,79 @@
         active (not (nil? derefed))
         dirty (not active)
         reaction (Reaction. f nil dirty active
-                            nil {}
+                            nil nil
                             runner on-set on-dispose)]
     (when-not (nil? derefed)
       (when debug (swap! -running inc))
       (-update-watching reaction derefed))
     reaction))
+
+
+
+;;; wrap
+
+(deftype Wrapper [^:mutable state callback ^:mutable changed
+                  ^:mutable watches]
+
+  IAtom
+
+  IDeref
+  (-deref [this]
+    (when (dev?)
+      (when (and changed (some? *ratom-context*))
+        (warn "derefing stale wrap: "
+              (pr-str this))))
+    state)
+
+  IReset
+  (-reset! [this newval]
+    (let [oldval state]
+      (set! changed true)
+      (set! state newval)
+      (when-not (nil? watches)
+        (-notify-watches this oldval newval))
+      (callback newval)
+      newval))
+
+  ISwap
+  (-swap! [a f]
+    (-reset! a (f state)))
+  (-swap! [a f x]
+    (-reset! a (f state x)))
+  (-swap! [a f x y]
+    (-reset! a (f state x y)))
+  (-swap! [a f x y more]
+    (-reset! a (apply f state x y more)))
+
+  IEquiv
+  (-equiv [_ other]
+          (and (instance? Wrapper other)
+               ;; If either of the wrappers have changed, equality
+               ;; cannot be relied on.
+               (not changed)
+               (not (.-changed other))
+               (= state (.-state other))
+               (= callback (.-callback other))))
+
+  IWatchable
+  (-notify-watches [this oldval newval]
+    (reduce-kv (fn [_ key f]
+                 (f key this oldval newval)
+                 nil)
+               nil watches))
+  (-add-watch [this key f]
+    (set! watches (assoc watches key f)))
+  (-remove-watch [this key]
+    (set! watches (dissoc watches key)))
+
+  IPrintWithWriter
+  (-pr-writer [_ writer opts]
+    (-write writer "#<wrap: ")
+    (pr-writer state writer opts)
+    (-write writer ">")))
+
+(defn make-wrapper [value callback-fn args]
+  (Wrapper. value
+            (util/partial-ifn. callback-fn args nil)
+            false nil))
+

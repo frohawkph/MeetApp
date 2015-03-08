@@ -1,31 +1,31 @@
-// Compiled by ClojureScript 0.0-2760 {}
+// Compiled by ClojureScript 0.0-2913 {}
 goog.provide('alandipert.storage_atom');
 goog.require('cljs.core');
 goog.require('goog.Timer');
 goog.require('tailrecursion.cljson');
 
-alandipert.storage_atom.IStorageBackend = (function (){var obj23344 = {};
-return obj23344;
+alandipert.storage_atom.IStorageBackend = (function (){var obj30157 = {};
+return obj30157;
 })();
 
 alandipert.storage_atom._get = (function _get(this$,not_found){
-if((function (){var and__17315__auto__ = this$;
-if(and__17315__auto__){
+if((function (){var and__17606__auto__ = this$;
+if(and__17606__auto__){
 return this$.alandipert$storage_atom$IStorageBackend$_get$arity$2;
 } else {
-return and__17315__auto__;
+return and__17606__auto__;
 }
 })()){
 return this$.alandipert$storage_atom$IStorageBackend$_get$arity$2(this$,not_found);
 } else {
-var x__17971__auto__ = (((this$ == null))?null:this$);
-return (function (){var or__17327__auto__ = (alandipert.storage_atom._get[goog.typeOf(x__17971__auto__)]);
-if(or__17327__auto__){
-return or__17327__auto__;
+var x__18262__auto__ = (((this$ == null))?null:this$);
+return (function (){var or__17618__auto__ = (alandipert.storage_atom._get[goog.typeOf(x__18262__auto__)]);
+if(or__17618__auto__){
+return or__17618__auto__;
 } else {
-var or__17327__auto____$1 = (alandipert.storage_atom._get["_"]);
-if(or__17327__auto____$1){
-return or__17327__auto____$1;
+var or__17618__auto____$1 = (alandipert.storage_atom._get["_"]);
+if(or__17618__auto____$1){
+return or__17618__auto____$1;
 } else {
 throw cljs.core.missing_protocol.call(null,"IStorageBackend.-get",this$);
 }
@@ -35,23 +35,23 @@ throw cljs.core.missing_protocol.call(null,"IStorageBackend.-get",this$);
 });
 
 alandipert.storage_atom._commit_BANG_ = (function _commit_BANG_(this$,value){
-if((function (){var and__17315__auto__ = this$;
-if(and__17315__auto__){
+if((function (){var and__17606__auto__ = this$;
+if(and__17606__auto__){
 return this$.alandipert$storage_atom$IStorageBackend$_commit_BANG_$arity$2;
 } else {
-return and__17315__auto__;
+return and__17606__auto__;
 }
 })()){
 return this$.alandipert$storage_atom$IStorageBackend$_commit_BANG_$arity$2(this$,value);
 } else {
-var x__17971__auto__ = (((this$ == null))?null:this$);
-return (function (){var or__17327__auto__ = (alandipert.storage_atom._commit_BANG_[goog.typeOf(x__17971__auto__)]);
-if(or__17327__auto__){
-return or__17327__auto__;
+var x__18262__auto__ = (((this$ == null))?null:this$);
+return (function (){var or__17618__auto__ = (alandipert.storage_atom._commit_BANG_[goog.typeOf(x__18262__auto__)]);
+if(or__17618__auto__){
+return or__17618__auto__;
 } else {
-var or__17327__auto____$1 = (alandipert.storage_atom._commit_BANG_["_"]);
-if(or__17327__auto____$1){
-return or__17327__auto____$1;
+var or__17618__auto____$1 = (alandipert.storage_atom._commit_BANG_["_"]);
+if(or__17618__auto____$1){
+return or__17618__auto____$1;
 } else {
 throw cljs.core.missing_protocol.call(null,"IStorageBackend.-commit!",this$);
 }
@@ -92,8 +92,8 @@ alandipert.storage_atom.StorageBackend.cljs$lang$type = true;
 
 alandipert.storage_atom.StorageBackend.cljs$lang$ctorStr = "alandipert.storage-atom/StorageBackend";
 
-alandipert.storage_atom.StorageBackend.cljs$lang$ctorPrWriter = (function (this__17914__auto__,writer__17915__auto__,opt__17916__auto__){
-return cljs.core._write.call(null,writer__17915__auto__,"alandipert.storage-atom/StorageBackend");
+alandipert.storage_atom.StorageBackend.cljs$lang$ctorPrWriter = (function (this__18205__auto__,writer__18206__auto__,opt__18207__auto__){
+return cljs.core._write.call(null,writer__18206__auto__,"alandipert.storage-atom/StorageBackend");
 });
 
 alandipert.storage_atom.__GT_StorageBackend = (function __GT_StorageBackend(store,key){
@@ -135,23 +135,23 @@ alandipert.storage_atom._commit_BANG_.call(null,backend,cljs.core.deref.call(nul
 cljs.core.reset_BANG_.call(null,atom,existing);
 }
 
-var G__23350 = atom;
-cljs.core.add_watch.call(null,G__23350,new cljs.core.Keyword("alandipert.storage-atom","storage-watch","alandipert.storage-atom/storage-watch",1159565749),((function (G__23350,existing,debounce){
-return (function (p1__23347_SHARP_,p2__23348_SHARP_,p3__23345_SHARP_,p4__23346_SHARP_){
-if(cljs.core.truth_((function (){var and__17315__auto__ = alandipert.storage_atom._STAR_watch_active_STAR_;
-if(cljs.core.truth_(and__17315__auto__)){
-return cljs.core.not_EQ_.call(null,p3__23345_SHARP_,p4__23346_SHARP_);
+var G__30163 = atom;
+cljs.core.add_watch.call(null,G__30163,new cljs.core.Keyword("alandipert.storage-atom","storage-watch","alandipert.storage-atom/storage-watch",1159565749),((function (G__30163,existing,debounce){
+return (function (p1__30160_SHARP_,p2__30161_SHARP_,p3__30158_SHARP_,p4__30159_SHARP_){
+if(cljs.core.truth_((function (){var and__17606__auto__ = alandipert.storage_atom._STAR_watch_active_STAR_;
+if(cljs.core.truth_(and__17606__auto__)){
+return cljs.core.not_EQ_.call(null,p3__30158_SHARP_,p4__30159_SHARP_);
 } else {
-return and__17315__auto__;
+return and__17606__auto__;
 }
 })())){
-return debounce.call(null,((function (G__23350,existing,debounce){
+return debounce.call(null,((function (G__30163,existing,debounce){
 return (function (){
-return alandipert.storage_atom._commit_BANG_.call(null,backend,p4__23346_SHARP_);
-});})(G__23350,existing,debounce))
-,(function (){var or__17327__auto__ = alandipert.storage_atom._STAR_storage_delay_STAR_;
-if(cljs.core.truth_(or__17327__auto__)){
-return or__17327__auto__;
+return alandipert.storage_atom._commit_BANG_.call(null,backend,p4__30159_SHARP_);
+});})(G__30163,existing,debounce))
+,(function (){var or__17618__auto__ = alandipert.storage_atom._STAR_storage_delay_STAR_;
+if(cljs.core.truth_(or__17618__auto__)){
+return or__17618__auto__;
 } else {
 return cljs.core.deref.call(null,alandipert.storage_atom.storage_delay);
 }
@@ -159,25 +159,25 @@ return cljs.core.deref.call(null,alandipert.storage_atom.storage_delay);
 } else {
 return null;
 }
-});})(G__23350,existing,debounce))
+});})(G__30163,existing,debounce))
 );
 
-return G__23350;
+return G__30163;
 });
 alandipert.storage_atom.maybe_update_backend = (function maybe_update_backend(atom,storage,k,default$,e){
 if((storage === e.storageArea)){
 if(cljs.core.empty_QMARK_.call(null,e.key)){
-var _STAR_watch_active_STAR_23353 = alandipert.storage_atom._STAR_watch_active_STAR_;
+var _STAR_watch_active_STAR_30166 = alandipert.storage_atom._STAR_watch_active_STAR_;
 alandipert.storage_atom._STAR_watch_active_STAR_ = false;
 
 try{return cljs.core.reset_BANG_.call(null,atom,default$);
-}finally {alandipert.storage_atom._STAR_watch_active_STAR_ = _STAR_watch_active_STAR_23353;
+}finally {alandipert.storage_atom._STAR_watch_active_STAR_ = _STAR_watch_active_STAR_30166;
 }} else {
 var temp__4126__auto__ = tailrecursion.cljson.cljson__GT_clj.call(null,e.key);
 if(cljs.core.truth_(temp__4126__auto__)){
 var sk = temp__4126__auto__;
 if(cljs.core._EQ_.call(null,sk,k)){
-var _STAR_watch_active_STAR_23354 = alandipert.storage_atom._STAR_watch_active_STAR_;
+var _STAR_watch_active_STAR_30167 = alandipert.storage_atom._STAR_watch_active_STAR_;
 alandipert.storage_atom._STAR_watch_active_STAR_ = false;
 
 try{return cljs.core.reset_BANG_.call(null,atom,(function (){var temp__4124__auto__ = e.newValue;
@@ -188,7 +188,7 @@ return tailrecursion.cljson.cljson__GT_clj.call(null,value);
 return default$;
 }
 })());
-}finally {alandipert.storage_atom._STAR_watch_active_STAR_ = _STAR_watch_active_STAR_23354;
+}finally {alandipert.storage_atom._STAR_watch_active_STAR_ = _STAR_watch_active_STAR_30167;
 }} else {
 return null;
 }
@@ -203,8 +203,8 @@ return null;
 alandipert.storage_atom.link_storage = (function link_storage(atom,storage,k){
 var default$ = cljs.core.deref.call(null,atom);
 return window.addEventListener("storage",((function (default$){
-return (function (p1__23355_SHARP_){
-return alandipert.storage_atom.maybe_update_backend.call(null,atom,storage,k,default$,p1__23355_SHARP_);
+return (function (p1__30168_SHARP_){
+return alandipert.storage_atom.maybe_update_backend.call(null,atom,storage,k,default$,p1__30168_SHARP_);
 });})(default$))
 );
 });
