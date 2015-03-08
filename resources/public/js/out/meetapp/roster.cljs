@@ -53,12 +53,16 @@
         within-bounds? (and 
                          (boolean @selected-index) 
                          (<= @selected-index max-count) 
-                         (>= @selected-index 0))]
+                         (>= @selected-index 0))
+        selected-name ((vec (filtered-roster)) @selected-index)]
     (case (util/key-mapping (.-keyCode event))
       "enter" (do 
-                (.log js/console (filtered-roster))
-                (if within-bounds? (store/add-to-queue ((vec (filtered-roster)) @selected-index)))
+                ;; trigger toast saying that the person has been added, return to queue.
+                (if within-bounds? (store/add-to-queue selected-name))
                 #_(session/put! :current-page #'queue-page))
+      "delete" (do
+                 ;; dialog if you're sure you want to remove from roster
+                 (if within-bounds? (store/remove-from-roster selected-name)))
       "escape" (reset! selected-index nil)
       "down" (do 
                (.preventDefault event)
