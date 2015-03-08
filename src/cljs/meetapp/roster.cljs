@@ -85,12 +85,13 @@
          [:div.search-section
           [roster-input]] 
          [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
-          (doall (map-indexed (fn [index name] 
-                         [:li
-                          {:key name
-                           :class (if (= index @selected-item) "selected")}
-                          [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-                          [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) (filtered-roster)))
-          ]]])}))
+          (doall (map-indexed 
+                   (fn [index name] 
+                     [:li
+                      {:key name
+                       :class (if (= index @selected-item) "selected")}
+                      [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
+                      [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) 
+                   (filtered-roster)))]]])}))
 
 
