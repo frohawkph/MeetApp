@@ -4,7 +4,7 @@
   (:use     [meetapp.lib.collections :only [without insert reposition]]))
 
 (defonce state (local-storage (atom (hash-map
-                                     :roster (set nil)
+                                     :roster (sorted-set)
                                      :queue []))
                               :meetapp-state))
 

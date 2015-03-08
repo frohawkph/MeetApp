@@ -37,49 +37,49 @@ meetapp.core.current_page = (function current_page(){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [reagent.session.get.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180))], null)], null);
 });
 secretary.core.set_config_BANG_.call(null,new cljs.core.Keyword(null,"prefix","prefix",-265908465),"#");
-var action__19645__auto___35407 = (function (params__19646__auto__){
+var action__19645__auto___35987 = (function (params__19646__auto__){
 if(cljs.core.map_QMARK_.call(null,params__19646__auto__)){
-var map__35405 = params__19646__auto__;
-var map__35405__$1 = ((cljs.core.seq_QMARK_.call(null,map__35405))?cljs.core.apply.call(null,cljs.core.hash_map,map__35405):map__35405);
+var map__35985 = params__19646__auto__;
+var map__35985__$1 = ((cljs.core.seq_QMARK_.call(null,map__35985))?cljs.core.apply.call(null,cljs.core.hash_map,map__35985):map__35985);
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.queue_page;},new cljs.core.Symbol("meetapp.core","queue-page","meetapp.core/queue-page",-1386827433,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null),new cljs.core.Symbol(null,"queue-page","queue-page",1956325432,null),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",18,7,43,43,cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(cljs.core.PersistentVector.EMPTY)),null,(cljs.core.truth_(meetapp.core.queue_page)?meetapp.core.queue_page.cljs$lang$test:null)])));
 } else {
 if(cljs.core.vector_QMARK_.call(null,params__19646__auto__)){
-var vec__35406 = params__19646__auto__;
+var vec__35986 = params__19646__auto__;
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.queue_page;},new cljs.core.Symbol("meetapp.core","queue-page","meetapp.core/queue-page",-1386827433,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null),new cljs.core.Symbol(null,"queue-page","queue-page",1956325432,null),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",18,7,43,43,cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(cljs.core.PersistentVector.EMPTY)),null,(cljs.core.truth_(meetapp.core.queue_page)?meetapp.core.queue_page.cljs$lang$test:null)])));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/",action__19645__auto___35407);
+secretary.core.add_route_BANG_.call(null,"/",action__19645__auto___35987);
 
-var action__19645__auto___35410 = (function (params__19646__auto__){
+var action__19645__auto___35990 = (function (params__19646__auto__){
 if(cljs.core.map_QMARK_.call(null,params__19646__auto__)){
-var map__35408 = params__19646__auto__;
-var map__35408__$1 = ((cljs.core.seq_QMARK_.call(null,map__35408))?cljs.core.apply.call(null,cljs.core.hash_map,map__35408):map__35408);
+var map__35988 = params__19646__auto__;
+var map__35988__$1 = ((cljs.core.seq_QMARK_.call(null,map__35988))?cljs.core.apply.call(null,cljs.core.hash_map,map__35988):map__35988);
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.roster_page;},new cljs.core.Symbol("meetapp.core","roster-page","meetapp.core/roster-page",-1628759679,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null),new cljs.core.Symbol(null,"roster-page","roster-page",-1230610404,null),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",19,7,49,49,cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(cljs.core.PersistentVector.EMPTY)),null,(cljs.core.truth_(meetapp.core.roster_page)?meetapp.core.roster_page.cljs$lang$test:null)])));
 } else {
 if(cljs.core.vector_QMARK_.call(null,params__19646__auto__)){
-var vec__35409 = params__19646__auto__;
+var vec__35989 = params__19646__auto__;
 return reagent.session.put_BANG_.call(null,new cljs.core.Keyword(null,"current-page","current-page",-101294180),new cljs.core.Var(function(){return meetapp.core.roster_page;},new cljs.core.Symbol("meetapp.core","roster-page","meetapp.core/roster-page",-1628759679,null),cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"ns","ns",441598760),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"file","file",-1269645878),new cljs.core.Keyword(null,"end-column","end-column",1425389514),new cljs.core.Keyword(null,"column","column",2078222095),new cljs.core.Keyword(null,"line","line",212345235),new cljs.core.Keyword(null,"end-line","end-line",1837326455),new cljs.core.Keyword(null,"arglists","arglists",1661989754),new cljs.core.Keyword(null,"doc","doc",1913296891),new cljs.core.Keyword(null,"test","test",577538877)],[new cljs.core.Symbol(null,"meetapp.core","meetapp.core",-712138258,null),new cljs.core.Symbol(null,"roster-page","roster-page",-1230610404,null),"/Users/levitanong/MeetApp/src/cljs/meetapp/core.cljs",19,7,49,49,cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(cljs.core.PersistentVector.EMPTY)),null,(cljs.core.truth_(meetapp.core.roster_page)?meetapp.core.roster_page.cljs$lang$test:null)])));
 } else {
 return null;
 }
 }
 });
-secretary.core.add_route_BANG_.call(null,"/roster",action__19645__auto___35410);
+secretary.core.add_route_BANG_.call(null,"/roster",action__19645__auto___35990);
 
 meetapp.core.hook_browser_navigation_BANG_ = (function hook_browser_navigation_BANG_(){
-var G__35412 = (new goog.History());
-goog.events.listen(G__35412,goog.history.EventType.NAVIGATE,((function (G__35412){
+var G__35992 = (new goog.History());
+goog.events.listen(G__35992,goog.history.EventType.NAVIGATE,((function (G__35992){
 return (function (event){
 return secretary.core.dispatch_BANG_.call(null,event.token);
-});})(G__35412))
+});})(G__35992))
 );
 
-G__35412.setEnabled(true);
+G__35992.setEnabled(true);
 
-return G__35412;
+return G__35992;
 });
 meetapp.core.init_BANG_ = (function init_BANG_(){
 meetapp.core.hook_browser_navigation_BANG_.call(null);

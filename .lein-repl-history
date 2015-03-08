@@ -40,3 +40,21 @@ huh
 (if nil "wat" "derp")
 (boolean nil)
 (boolean 0)
+(derp-vect [1 2 3 4])
+(def derp-vect [1 2 3 4])
+derp-vectr
+derp-vect
+(derp-vect 0)
+(derp-vect nil)
+(derp-vect 0)
+(derp-vect 2)
+(sort derp-vect)
+(def derp-set #{:huh :hoh})
+derp-set
+(sort derp-set)
+(sorted-set derp-set)
+(sorted-set nil)
+(sorted-set [])
+(sorted-set_
+)
+(sorted-set)
