@@ -128,7 +128,7 @@ ul.basic-list {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
-    ul.basic-list li:hover {
+    ul.basic-list li:hover, ul.basic-list li.selected {
       background-color: rgba(0, 0, 0, 0.05); }
     ul.basic-list li .entry {
       -webkit-box-flex: 1;

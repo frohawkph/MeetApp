@@ -42,22 +42,32 @@
                                     :on-key-press keyhandler
                                     :on-change #(reset! store/current-name (get-event-value %))}])}))
 
+(defn roster-matches-input []
+  (sort (if (boolean @store/current-name)
+          (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster))
+          (@store/state :roster))))
+
 (defn main-keyhandler [event]
-  (let [max-count (-> (@store/state :roster) count dec)]
+  (let [max-count (-> (roster-matches-input) count dec)
+        within-bounds? (and 
+                         (boolean @selected-item) 
+                         (<= @selected-item max-count) 
+                         (>= @selected-item 0))]
     (case (util/key-mapping (.-keyCode event))
       "enter" (.log js/console "what")
       "escape" (reset! selected-item nil)
       "down" (do 
                (.preventDefault event)
-               (if (boolean @selected-item) 
+               (if within-bounds? 
                  (swap! selected-item (if (< @selected-item max-count) inc identity)) 
                  (reset! selected-item 0)))
       "up" (do
              (.preventDefault event)
-             (if (boolean @selected-item)
+             (if within-bounds?
                (swap! selected-item (if (pos? @selected-item) dec identity))
                (reset! selected-item max-count)))
-      (.log js/console "any key"))))
+      (.log js/console "any key")))
+  #_(.log js/console @selected-item))
 
 (defn main []
   (reagent/create-class
@@ -75,11 +85,12 @@
          [:div.search-section
           [roster-input]] 
          [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
-          (for
-            [name (sort (if (boolean @store/current-name) (filter #(gstring/caseInsensitiveContains % @store/current-name) (@store/state :roster)) (@store/state :roster)))]
-            [:li
-             {:key name}
-             [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-             [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]])]]])}))
+          (doall (map-indexed (fn [index name] 
+                         [:li
+                          {:key name
+                           :class (if (= index @selected-item) "selected")}
+                          [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
+                          [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) (roster-matches-input)))
+          ]]])}))
 
 

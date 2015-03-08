@@ -107,7 +107,7 @@ ul.basic-list {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    &:hover {
+    &:hover, &.selected {
       background-color: rgba(black, 0.05);
     }
     .entry {
