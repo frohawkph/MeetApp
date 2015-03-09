@@ -24,7 +24,6 @@
     (.log js/console "Error: name is blank")))
 
 (defn keyhandler [event]
-  (.log js/console (.-key event))
   (.stopPropagation event)
   (case (.-key event)
     "Enter" (enter-handler)
@@ -49,26 +48,29 @@
     (@store/state :roster)))
 
 (defn main-keyhandler [event]
-  (let [max-count (-> (filtered-roster) count dec)
-        within-bounds? (and 
-                         (boolean @selected-index) 
-                         (<= @selected-index max-count) 
-                         (>= @selected-index 0))
-        selected-name ((vec (filtered-roster)) @selected-index)]
+  ;;;; TODO: issue for selection when there are no items in filtered-roster, because index out of bounds. 
+  (let [max-count       (-> (filtered-roster) count dec)
+        within-bounds?  (and 
+                          (boolean @selected-index) 
+                          (<= @selected-index max-count) 
+                          (>= @selected-index 0))
+        clamp           (fn [min-v max-v v] (min max-v (max min-v v)))
+        selected-name   (fn [] ((vec (filtered-roster)) @selected-index))]
     (case (util/key-mapping (.-keyCode event))
       "enter" (do 
                 ;; trigger toast saying that the person has been added, return to queue.
-                (if within-bounds? (store/add-to-queue selected-name))
+                (if within-bounds? (store/add-to-queue (selected-name)))
                 #_(session/put! :current-page #'queue-page))
       "delete" (do
                  ;; dialog if you're sure you want to remove from roster
-                 (if within-bounds? (store/remove-from-roster selected-name)))
+                 (if within-bounds? (do (store/remove-from-roster (selected-name)) (swap! selected-index (if (pos? @selected-index) dec identity)))))
       "escape" (reset! selected-index nil)
       "down" (do 
                (.preventDefault event)
                (if within-bounds? 
                  (swap! selected-index (if (< @selected-index max-count) inc identity)) 
-                 (reset! selected-index 0)))
+                 (reset! selected-index 0))
+               (.log js/console @selected-index))
       "up" (do
              (.preventDefault event)
              (if within-bounds?
