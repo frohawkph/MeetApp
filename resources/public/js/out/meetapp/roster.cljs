@@ -59,22 +59,20 @@
     (case (util/key-mapping (.-keyCode event))
       "enter"   (do 
                   ;; trigger toast saying that the person has been added, return to queue.
-                  (if within-bounds? (store/add-to-queue (selected-name)))
-                  #_(session/put! :current-page #'queue-page))
+                  (if within-bounds? (store/add-to-queue (selected-name))))
       "delete"  (do
                   ;; dialog if you're sure you want to remove from roster
-                  (if within-bounds? (do 
-                                       (store/remove-from-roster (selected-name)) 
-                                       (swap! selected-index (if (pos? @selected-index) dec identity)))))
-      "escape"  (reset! selected-index nil)
+                  (if within-bounds? (store/remove-from-roster (selected-name))))
+      "escape"  (do 
+                  (reset! selected-index nil))
       "down"    (do 
                   (.preventDefault event)
-                  (if within-bounds? 
+                  (if (boolean @selected-index)
                     (swap! selected-index #(clamp 0 max-count (inc %)))
                     (reset! selected-index 0)))
       "up"      (do
                   (.preventDefault event)
-                  (if within-bounds?
+                  (if (boolean @selected-index)
                     (swap! selected-index #(clamp 0 max-count (dec %)))
                     (reset! selected-index max-count)))
       (.log js/console "any key")))
