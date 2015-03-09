@@ -1,5 +1,6 @@
 (ns meetapp.roster
   (:require [reagent.core :as reagent :refer [atom]]
+            [secretary.core :as secretary :include-macros true]
             [meetapp.store :as store]
             [meetapp.lib.collapse :as collapse]
             [meetapp.util :as util]
@@ -11,13 +12,14 @@
 (defn get-event-value [event] (-> event .-target .-value))
 
 (defn enter-handler []
-  (if 
-    (contains? (get-in @store/state [:roster]) @store/current-name)
-    (.log js/console "Error: name exists"))
-  (if 
-    (> (count @store/current-name) 0)
-    (store/add-to-roster @store/current-name)
-    (.log js/console "Error: name is blank")))
+  (if (not @selected-index) (do 
+                              (if 
+                                (contains? (get-in @store/state [:roster]) @store/current-name)
+                                (.log js/console "Error: name exists"))
+                              (if 
+                                (> (count @store/current-name) 0)
+                                (store/add-to-roster @store/current-name)
+                                (.log js/console "Error: name is blank")))))
 
 (defn keyhandler [event]
   (.stopPropagation event)
@@ -52,18 +54,21 @@
                           (<= @selected-index max-count) 
                           (>= @selected-index 0))
         clamp           (fn [min-v max-v v] (min max-v (max min-v v)))
-        selected-name   (fn [] ((vec (filtered-roster)) @selected-index))]
+        selected-name   (fn [] ((vec (filtered-roster)) @selected-index))
+        go-home         (fn [] (secretary/dispatch! "#/"))]
     (case (util/key-mapping (.-keyCode event))
       "enter"   (do 
                   ;; trigger toast saying that the person has been added, return to queue.
                   (if within-bounds? (store/add-to-queue (selected-name)))
-                  (reset! selected-index nil))
+                  (reset! selected-index nil) ;; not yet complete. put this in conditional. only clear if there are no errors. see enter-handler.
+                  (go-home)) 
       "delete"  (do
                   ;; dialog if you're sure you want to remove from roster
                   (if within-bounds? (store/remove-from-roster (selected-name))))
       "escape"  (do 
-                  #_(.blur (.querySelector js/document "#roster-input"))
-                  (reset! selected-index nil))
+                  (if @selected-index 
+                    (reset! selected-index nil)
+                    (go-home)))
       "down"    (do 
                   (.preventDefault event)
                   (if (boolean @selected-index)
@@ -74,8 +79,8 @@
                   (if (boolean @selected-index)
                     (swap! selected-index #(clamp 0 max-count (dec %)))
                     (reset! selected-index max-count)))
-      (.log js/console "any key")))
-  #_(.log js/console @selected-index))
+      (do 
+        (reset! selected-index nil)))))
 
 (defn main []
   (reagent/create-class

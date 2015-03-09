@@ -19,13 +19,13 @@ goog.addDependency("../meetapp/lib/collections.js", ['meetapp.lib.collections'],
 goog.addDependency("../meetapp/lib/collapse.js", ['meetapp.lib.collapse'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../clojure/set.js", ['clojure.set'], ['cljs.core']);
 goog.addDependency("../meetapp/util.js", ['meetapp.util'], ['cljs.core']);
+goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
+goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../tailrecursion/cljson.js", ['tailrecursion.cljson'], ['cljs.core', 'goog.date.DateTime', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../alandipert/storage_atom.js", ['alandipert.storage_atom'], ['goog.Timer', 'tailrecursion.cljson', 'cljs.core']);
 goog.addDependency("../meetapp/store.js", ['meetapp.store'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core', 'alandipert.storage_atom']);
-goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['goog.string', 'reagent.core', 'meetapp.lib.collapse', 'cljs.core', 'clojure.set', 'meetapp.util', 'meetapp.store']);
+goog.addDependency("../meetapp/roster.js", ['meetapp.roster'], ['goog.string', 'reagent.core', 'meetapp.lib.collapse', 'cljs.core', 'clojure.set', 'meetapp.util', 'secretary.core', 'meetapp.store']);
 goog.addDependency("../reagent/session.js", ['reagent.session'], ['reagent.core', 'cljs.core']);
-goog.addDependency("../clojure/walk.js", ['clojure.walk'], ['cljs.core']);
-goog.addDependency("../secretary/core.js", ['secretary.core'], ['cljs.core', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../meetapp/lib/drag_list.js", ['meetapp.lib.drag_list'], ['meetapp.lib.collections', 'reagent.core', 'cljs.core']);
 goog.addDependency("../meetapp/timer.js", ['meetapp.timer'], ['goog.string', 'reagent.core', 'cljs.core']);
 goog.addDependency("../meetapp/queue.js", ['meetapp.queue'], ['meetapp.lib.collections', 'goog.string', 'reagent.core', 'cljs.core', 'meetapp.lib.drag_list', 'meetapp.store', 'meetapp.timer']);
