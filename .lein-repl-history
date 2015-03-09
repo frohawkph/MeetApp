@@ -64,3 +64,5 @@ sorted-set
 derpset
 (select identity derpset)
 select
+(inc nil)
+(max 0 (inc nil))
