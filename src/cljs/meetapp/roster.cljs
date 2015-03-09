@@ -56,7 +56,8 @@
     (case (util/key-mapping (.-keyCode event))
       "enter"   (do 
                   ;; trigger toast saying that the person has been added, return to queue.
-                  (if within-bounds? (store/add-to-queue (selected-name))))
+                  (if within-bounds? (store/add-to-queue (selected-name)))
+                  (reset! selected-index nil))
       "delete"  (do
                   ;; dialog if you're sure you want to remove from roster
                   (if within-bounds? (store/remove-from-roster (selected-name))))
