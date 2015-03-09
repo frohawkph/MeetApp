@@ -6,13 +6,9 @@
             [goog.string :as gstring]
             [clojure.set :as clj-set]))
 
-(defonce collapse-open? (atom false))
 (defonce selected-index (atom nil))
 
 (defn get-event-value [event] (-> event .-target .-value))
-
-(defn blur-handler [event]
-  (reset! collapse-open? false))
 
 (defn enter-handler []
   (if 
@@ -31,16 +27,17 @@
 
 (defn roster-input []
   (reagent/create-class 
-    {:component-did-mount (fn [this] (.focus (reagent/dom-node this)))
-     :component-function (fn []
-                           [:input {:ref "focus"
-                                    :type "text"
-                                    :on-focus #(reset! collapse-open? true)
-                                    :on-blur blur-handler
-                                    :value @store/current-name
-                                    :placeholder "Search or Add"
-                                    :on-key-press keyhandler
-                                    :on-change #(reset! store/current-name (get-event-value %))}])}))
+    {:component-did-mount   (fn [this] (.focus (reagent/dom-node this)))
+     :component-did-update  (fn [this] (if ((reagent/props this) :focused) 
+                                         (.focus (reagent/dom-node this)) 
+                                         (.blur (reagent/dom-node this))))
+     :render                (fn [this]
+                              [:input {:id "roster-input"
+                                       :type "text"
+                                       :value @store/current-name
+                                       :placeholder "Search or Add"
+                                       :on-key-press keyhandler
+                                       :on-change #(reset! store/current-name (get-event-value %))}])}))
 
 (defn filtered-roster []
   (if (boolean @store/current-name)
@@ -64,6 +61,7 @@
                   ;; dialog if you're sure you want to remove from roster
                   (if within-bounds? (store/remove-from-roster (selected-name))))
       "escape"  (do 
+                  #_(.blur (.querySelector js/document "#roster-input"))
                   (reset! selected-index nil))
       "down"    (do 
                   (.preventDefault event)
@@ -80,29 +78,26 @@
 
 (defn main []
   (reagent/create-class
-    {:component-did-mount 
-     (fn [] 
-       (.removeEventListener js/document "keydown" main-keyhandler) ;remove the listener if it exists, before adding. 
-       (.addEventListener js/document "keydown" main-keyhandler))
-     :component-will-unmount 
-     (fn [] (.removeEventListener js/document "keydown" main-keyhandler))
-     :component-function 
-     (fn [] 
-       [:div 
-        [:div.toolbar
-         [:a.icon-button {:href "#/"} 
-          [:i.icon-arrow-back]]]
-        [:div.roster.main
-         [:div.search-section
-          [roster-input]] 
-         [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
-          (doall (map-indexed 
-                   (fn [index name] 
-                     [:li
-                      {:key name
-                       :class (if (= index @selected-index) "selected")}
-                      [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-                      [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) 
-                   (filtered-roster)))]]])}))
+    {:component-did-mount     (fn [] 
+                                (.removeEventListener js/document "keydown" main-keyhandler) ;remove the listener if it exists, before adding. 
+                                (.addEventListener js/document "keydown" main-keyhandler))
+     :component-will-unmount  (fn [] (.removeEventListener js/document "keydown" main-keyhandler))
+     :component-function      (fn [] 
+                                [:div 
+                                 [:div.toolbar
+                                  [:a.icon-button {:href "#/"} 
+                                   [:i.icon-arrow-back]]]
+                                 [:div.roster.main
+                                  [:div.search-section
+                                   [roster-input {:focused (not @selected-index)}]] 
+                                  [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
+                                   (doall (map-indexed 
+                                            (fn [index name] 
+                                              [:li
+                                               {:key name
+                                                :class (if (= index @selected-index) "selected")}
+                                               [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
+                                               [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) 
+                                            (filtered-roster)))]]])}))
 
 
