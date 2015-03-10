@@ -12,14 +12,15 @@
 (defn get-event-value [event] (-> event .-target .-value))
 
 (defn enter-handler []
-  (if (not @selected-index) (do 
-                              (if 
-                                (contains? (get-in @store/state [:roster]) @store/current-name)
-                                (.log js/console "Error: name exists"))
-                              (if 
-                                (> (count @store/current-name) 0)
-                                (store/add-to-roster @store/current-name)
-                                (.log js/console "Error: name is blank")))))
+  (if (not @selected-index) 
+    (do 
+      (if 
+        (contains? (get-in @store/state [:roster]) @store/current-name)
+        (.log js/console "Error: name exists"))
+      (if 
+        (> (count @store/current-name) 0)
+        (store/add-to-roster @store/current-name)
+        (.log js/console "Error: name is blank")))))
 
 (defn keyhandler [event]
   (.stopPropagation event)
@@ -76,7 +77,6 @@
                     (reset! selected-index 0)))
       "up"      (do
                   (.preventDefault event)
-                  (.log js/console "Derp")
                   (if (boolean @selected-index)
                     (swap! selected-index #(clamp 0 max-count (dec %)))
                     (reset! selected-index max-count)))

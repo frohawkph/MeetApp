@@ -8,6 +8,7 @@ goog.require('goog.string');
 goog.require('meetapp.timer');
 goog.require('meetapp.store');
 goog.require('meetapp.lib.drag_list');
+goog.require('meetapp.util');
 meetapp.queue.next_speaker = (function next_speaker(){
 meetapp.timer.reset.call(null);
 

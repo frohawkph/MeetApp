@@ -4,6 +4,7 @@
             [meetapp.store :as store]
             [goog.string :as gstring]
             [meetapp.lib.drag-list :as drag-list]
+            [meetapp.util :as util]
             [meetapp.timer :as timer])
   (:use     [meetapp.lib.collections :only [without insert reposition]]))
 
@@ -47,6 +48,4 @@
                                                                  }
                                                                 [:div.entry item]
                                                                 [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
-                                                             (@store/state :queue)))]]])})
-    ))
-;(subvec (@store/state :queue) 1)
+                                                             (@store/state :queue)))]]])})))
