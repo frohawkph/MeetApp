@@ -385,3 +385,18 @@ notifying browser that file changed:  /meetapp/core.js
 notifying browser that file changed:  /meetapp/dev.js
 sending changed CSS file: resources/public/css/style.css
 sending changed CSS file: resources/public/css/style.css
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.113 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.87 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.489 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js

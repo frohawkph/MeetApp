@@ -96,8 +96,7 @@
                                     [:a.icon-button {;:href "#/"
                                                      :on-click go-home} 
                                      [:i.icon-arrow-back]]
-                                    "derp"
-                                    ]
+                                    "Roster"]
                                    [:div.roster.main
                                     [:div.search-section
                                      [roster-input {:focused (not @selected-index)}]] 
