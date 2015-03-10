@@ -23,8 +23,8 @@ event.preventDefault();
 var from = cljs.core.deref.call(null,meetapp.lib.drag_list.dragging);
 var to = Number(event.currentTarget.dataset.id);
 cljs.core.swap_BANG_.call(null,store,cljs.core.update_in,address,((function (from,to){
-return (function (p1__17724_SHARP_){
-return meetapp.lib.collections.reposition.call(null,p1__17724_SHARP_,from,to);
+return (function (p1__17763_SHARP_){
+return meetapp.lib.collections.reposition.call(null,p1__17763_SHARP_,from,to);
 });})(from,to))
 );
 

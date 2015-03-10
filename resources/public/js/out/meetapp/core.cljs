@@ -1,6 +1,7 @@
 (ns meetapp.core
   (:require [reagent.core :as reagent :refer [atom]]
             [reagent.session :as session]
+            [cljsjs.react :as react]
             [alandipert.storage-atom :refer [local-storage]]
             [secretary.core :as secretary :include-macros true]
             [goog.events :as events]
@@ -10,8 +11,7 @@
             [meetapp.store :as store]
             [meetapp.roster :as roster]
             [meetapp.queue :as queue]
-            [meetapp.util :as util]
-            [cljsjs.react :as react])
+            [meetapp.util :as util])
   (:use     [meetapp.lib.collections :only [without insert reposition]])
   (:import goog.History))
 

@@ -55,7 +55,7 @@
                           (>= @selected-index 0))
         clamp           (fn [min-v max-v v] (min max-v (max min-v v)))
         selected-name   (fn [] ((vec (filtered-roster)) @selected-index))
-        go-home         (fn [] (secretary/dispatch! "#/"))]
+        go-home         (fn [] (secretary/dispatch! "/"))]
     (case (util/key-mapping (.-keyCode event))
       "enter"   (do 
                   ;; trigger toast saying that the person has been added, return to queue.
@@ -84,29 +84,32 @@
         (reset! selected-index nil)))))
 
 (defn main []
-  (reagent/create-class
-    {:component-did-mount     (fn [] 
-                                (.removeEventListener js/document "keydown" main-keyhandler) ;remove the listener if it exists, before adding. 
-                                (.addEventListener js/document "keydown" main-keyhandler))
-     :component-will-unmount  (fn [] (.removeEventListener js/document "keydown" main-keyhandler))
-     :component-function      (fn [] 
-                                [:div 
-                                 [:div.toolbar
-                                  [:a.icon-button {;:href "#/"
-                                                   :on-click #(secretary/dispatch! "/")} 
-                                   [:i.icon-arrow-back]]
-                                  ]
-                                 [:div.roster.main
-                                  [:div.search-section
-                                   [roster-input {:focused (not @selected-index)}]] 
-                                  [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
-                                   (doall (map-indexed 
-                                            (fn [index name] 
-                                              [:li
-                                               {:key name
-                                                :class (if (= index @selected-index) "selected")}
-                                               [:a.entry {:href "#/" :on-click #(store/add-to-queue name)} name]
-                                               [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) 
-                                            (filtered-roster)))]]])}))
+  (let [go-home (fn [] (secretary/dispatch! "/"))]
+    (reagent/create-class
+      {:component-did-mount     (fn [] 
+                                  (.removeEventListener js/document "keydown" main-keyhandler) ;remove the listener if it exists, before adding. 
+                                  (.addEventListener js/document "keydown" main-keyhandler))
+       :component-will-unmount  (fn [] (.removeEventListener js/document "keydown" main-keyhandler))
+       :component-function      (fn [] 
+                                  [:div 
+                                   [:div.toolbar
+                                    [:a.icon-button {;:href "#/"
+                                                     :on-click go-home} 
+                                     [:i.icon-arrow-back]]
+                                    ]
+                                   [:div.roster.main
+                                    [:div.search-section
+                                     [roster-input {:focused (not @selected-index)}]] 
+                                    [:ul.basic-list {:on-mouse-down #(.preventDefault %)} 
+                                     (doall (map-indexed 
+                                              (fn [index name] 
+                                                [:li
+                                                 {:key name
+                                                  :class (if (= index @selected-index) "selected")}
+                                                 [:a.entry {:on-click #(do 
+                                                                         (store/add-to-queue name)
+                                                                         (go-home))} name]
+                                                 [:a.icon-button {:on-click #(store/remove-from-roster name)} [:i.icon-close]]]) 
+                                              (filtered-roster)))]]])})))
 
 

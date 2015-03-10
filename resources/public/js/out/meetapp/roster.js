@@ -34,8 +34,8 @@ return null;
 meetapp.roster.keyhandler = (function keyhandler(event){
 event.stopPropagation();
 
-var G__17721 = event.key;
-switch (G__17721) {
+var G__34728 = event.key;
+switch (G__34728) {
 case "Enter":
 return meetapp.roster.enter_handler.call(null);
 
@@ -55,15 +55,15 @@ return reagent.core.dom_node.call(null,this$).focus();
 return reagent.core.dom_node.call(null,this$).blur();
 }
 }),new cljs.core.Keyword(null,"render","render",-1408033454),(function (this$){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"id","id",-1388402092),"roster-input",new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,meetapp.store.current_name),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Search or Add",new cljs.core.Keyword(null,"on-key-press","on-key-press",-399563677),meetapp.roster.keyhandler,new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__17723_SHARP_){
-return cljs.core.reset_BANG_.call(null,meetapp.store.current_name,meetapp.roster.get_event_value.call(null,p1__17723_SHARP_));
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"id","id",-1388402092),"roster-input",new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,meetapp.store.current_name),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Search or Add",new cljs.core.Keyword(null,"on-key-press","on-key-press",-399563677),meetapp.roster.keyhandler,new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__34730_SHARP_){
+return cljs.core.reset_BANG_.call(null,meetapp.store.current_name,meetapp.roster.get_event_value.call(null,p1__34730_SHARP_));
 })], null)], null);
 })], null));
 });
 meetapp.roster.filtered_roster = (function filtered_roster(){
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.store.current_name))){
-return cljs.core.apply.call(null,cljs.core.sorted_set,clojure.set.select.call(null,(function (p1__17724_SHARP_){
-return goog.string.caseInsensitiveContains(p1__17724_SHARP_,cljs.core.deref.call(null,meetapp.store.current_name));
+return cljs.core.apply.call(null,cljs.core.sorted_set,clojure.set.select.call(null,(function (p1__34731_SHARP_){
+return goog.string.caseInsensitiveContains(p1__34731_SHARP_,cljs.core.deref.call(null,meetapp.store.current_name));
 }),cljs.core.deref.call(null,meetapp.store.state).call(null,new cljs.core.Keyword(null,"roster","roster",-2092272532))));
 } else {
 return cljs.core.deref.call(null,meetapp.store.state).call(null,new cljs.core.Keyword(null,"roster","roster",-2092272532));
@@ -89,11 +89,11 @@ return cljs.core.vec.call(null,meetapp.roster.filtered_roster.call(null)).call(n
 ;
 var go_home = ((function (max_count,within_bounds_QMARK_,clamp,selected_name){
 return (function (){
-return secretary.core.dispatch_BANG_.call(null,"#/");
+return secretary.core.dispatch_BANG_.call(null,"/");
 });})(max_count,within_bounds_QMARK_,clamp,selected_name))
 ;
-var G__17728 = meetapp.util.key_mapping.call(null,event.keyCode);
-switch (G__17728) {
+var G__34735 = meetapp.util.key_mapping.call(null,event.keyCode);
+switch (G__34735) {
 case "enter":
 if(within_bounds_QMARK_){
 meetapp.store.add_to_queue.call(null,selected_name.call(null));
@@ -125,10 +125,10 @@ case "down":
 event.preventDefault();
 
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))){
-return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__17728,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
-return (function (p1__17725_SHARP_){
-return clamp.call(null,(0),max_count,(p1__17725_SHARP_ + (1)));
-});})(G__17728,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
+return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__34735,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
+return (function (p1__34732_SHARP_){
+return clamp.call(null,(0),max_count,(p1__34732_SHARP_ + (1)));
+});})(G__34735,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
 );
 } else {
 return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,(0));
@@ -141,10 +141,10 @@ event.preventDefault();
 console.log("Derp");
 
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))){
-return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__17728,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
-return (function (p1__17726_SHARP_){
-return clamp.call(null,(0),max_count,(p1__17726_SHARP_ - (1)));
-});})(G__17728,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
+return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__34735,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
+return (function (p1__34733_SHARP_){
+return clamp.call(null,(0),max_count,(p1__34733_SHARP_ - (1)));
+});})(G__34735,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
 );
 } else {
 return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,max_count);
@@ -157,25 +157,42 @@ return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,null);
 }
 });
 meetapp.roster.main = (function main(){
-return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),(function (){
+var go_home = (function (){
+return secretary.core.dispatch_BANG_.call(null,"/");
+});
+return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),((function (go_home){
+return (function (){
 document.removeEventListener("keydown",meetapp.roster.main_keyhandler);
 
 return document.addEventListener("keydown",meetapp.roster.main_keyhandler);
-}),new cljs.core.Keyword(null,"component-will-unmount","component-will-unmount",-2058314698),(function (){
+});})(go_home))
+,new cljs.core.Keyword(null,"component-will-unmount","component-will-unmount",-2058314698),((function (go_home){
+return (function (){
 return document.removeEventListener("keydown",meetapp.roster.main_keyhandler);
-}),new cljs.core.Keyword(null,"component-function","component-function",654728922),(function (){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.toolbar","div.toolbar",-1371089148),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.icon-button","a.icon-button",989529593),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
-return secretary.core.dispatch_BANG_.call(null,"/");
-})], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i.icon-arrow-back","i.icon-arrow-back",1710557319)], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.roster.main","div.roster.main",-1846186817),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.search-section","div.search-section",318831423),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [meetapp.roster.roster_input,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"focused","focused",1851572115),cljs.core.not.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.basic-list","ul.basic-list",-684973660),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),(function (p1__17730_SHARP_){
-return p1__17730_SHARP_.preventDefault();
-})], null),cljs.core.doall.call(null,cljs.core.map_indexed.call(null,(function (index,name){
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li","li",723558921),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"key","key",-1516042587),name,new cljs.core.Keyword(null,"class","class",-2030961996),((cljs.core._EQ_.call(null,index,cljs.core.deref.call(null,meetapp.roster.selected_index)))?"selected":null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.entry","a.entry",-1521680861),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"href","href",-793805698),"#/",new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
-return meetapp.store.add_to_queue.call(null,name);
-})], null),name], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.icon-button","a.icon-button",989529593),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),(function (){
+});})(go_home))
+,new cljs.core.Keyword(null,"component-function","component-function",654728922),((function (go_home){
+return (function (){
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.toolbar","div.toolbar",-1371089148),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.icon-button","a.icon-button",989529593),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),go_home], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i.icon-arrow-back","i.icon-arrow-back",1710557319)], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.roster.main","div.roster.main",-1846186817),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.search-section","div.search-section",318831423),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [meetapp.roster.roster_input,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"focused","focused",1851572115),cljs.core.not.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.basic-list","ul.basic-list",-684973660),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),((function (go_home){
+return (function (p1__34737_SHARP_){
+return p1__34737_SHARP_.preventDefault();
+});})(go_home))
+], null),cljs.core.doall.call(null,cljs.core.map_indexed.call(null,((function (go_home){
+return (function (index,name){
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li","li",723558921),new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"key","key",-1516042587),name,new cljs.core.Keyword(null,"class","class",-2030961996),((cljs.core._EQ_.call(null,index,cljs.core.deref.call(null,meetapp.roster.selected_index)))?"selected":null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.entry","a.entry",-1521680861),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (go_home){
+return (function (){
+meetapp.store.add_to_queue.call(null,name);
+
+return go_home.call(null);
+});})(go_home))
+], null),name], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.icon-button","a.icon-button",989529593),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (go_home){
+return (function (){
 return meetapp.store.remove_from_roster.call(null,name);
-})], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i.icon-close","i.icon-close",980811899)], null)], null)], null);
-}),meetapp.roster.filtered_roster.call(null)))], null)], null)], null);
-})], null));
+});})(go_home))
+], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i.icon-close","i.icon-close",980811899)], null)], null)], null);
+});})(go_home))
+,meetapp.roster.filtered_roster.call(null)))], null)], null)], null);
+});})(go_home))
+], null));
 });
 
 //# sourceMappingURL=roster.js.map

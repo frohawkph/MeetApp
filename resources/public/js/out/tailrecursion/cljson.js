@@ -6,8 +6,8 @@ goog.require('goog.date.DateTime');
 goog.require('cljs.reader');
 
 
-tailrecursion.cljson.EncodeTagged = (function (){var obj29360 = {};
-return obj29360;
+tailrecursion.cljson.EncodeTagged = (function (){var obj29399 = {};
+return obj29399;
 })();
 
 tailrecursion.cljson._encode = (function _encode(o){
@@ -58,10 +58,10 @@ if((i < len)){
 var i__$1 = (i + (1));
 (out[i__$1] = cljs.core.first.call(null,c));
 
-var G__29361 = i__$1;
-var G__29362 = cljs.core.rest.call(null,c);
-i = G__29361;
-c = G__29362;
+var G__29400 = i__$1;
+var G__29401 = cljs.core.rest.call(null,c);
+i = G__29400;
+c = G__29401;
 continue;
 } else {
 return out;
@@ -109,26 +109,26 @@ if(cljs.core.truth_(temp__4124__auto__)){
 var m = temp__4124__auto__;
 return ["z",encode.call(null,m),encode.call(null,cljs.core.with_meta.call(null,x,null))];
 } else {
-if((function (){var G__29366 = x;
-if(G__29366){
+if((function (){var G__29405 = x;
+if(G__29405){
 var bit__16339__auto__ = null;
 if(cljs.core.truth_((function (){var or__15658__auto__ = bit__16339__auto__;
 if(cljs.core.truth_(or__15658__auto__)){
 return or__15658__auto__;
 } else {
-return G__29366.tailrecursion$cljson$EncodeTagged$;
+return G__29405.tailrecursion$cljson$EncodeTagged$;
 }
 })())){
 return true;
 } else {
-if((!G__29366.cljs$lang$protocol_mask$partition$)){
-return cljs.core.native_satisfies_QMARK_.call(null,tailrecursion.cljson.EncodeTagged,G__29366);
+if((!G__29405.cljs$lang$protocol_mask$partition$)){
+return cljs.core.native_satisfies_QMARK_.call(null,tailrecursion.cljson.EncodeTagged,G__29405);
 } else {
 return false;
 }
 }
 } else {
-return cljs.core.native_satisfies_QMARK_.call(null,tailrecursion.cljson.EncodeTagged,G__29366);
+return cljs.core.native_satisfies_QMARK_.call(null,tailrecursion.cljson.EncodeTagged,G__29405);
 }
 })()){
 return tailrecursion.cljson._encode.call(null,x);
@@ -145,20 +145,20 @@ return tailrecursion.cljson.enc_coll.call(null,"v",cljs.core.map.call(null,encod
 if(cljs.core.seq_QMARK_.call(null,x)){
 return tailrecursion.cljson.enc_coll.call(null,"l",cljs.core.map.call(null,encode,x));
 } else {
-if((cljs.core.map_QMARK_.call(null,x)) && (!((function (){var G__29368 = x;
-if(G__29368){
-var bit__16339__auto__ = (G__29368.cljs$lang$protocol_mask$partition0$ & (67108864));
-if((bit__16339__auto__) || (G__29368.cljs$core$IRecord$)){
+if((cljs.core.map_QMARK_.call(null,x)) && (!((function (){var G__29407 = x;
+if(G__29407){
+var bit__16339__auto__ = (G__29407.cljs$lang$protocol_mask$partition0$ & (67108864));
+if((bit__16339__auto__) || (G__29407.cljs$core$IRecord$)){
 return true;
 } else {
-if((!G__29368.cljs$lang$protocol_mask$partition0$)){
-return cljs.core.native_satisfies_QMARK_.call(null,cljs.core.IRecord,G__29368);
+if((!G__29407.cljs$lang$protocol_mask$partition0$)){
+return cljs.core.native_satisfies_QMARK_.call(null,cljs.core.IRecord,G__29407);
 } else {
 return false;
 }
 }
 } else {
-return cljs.core.native_satisfies_QMARK_.call(null,cljs.core.IRecord,G__29368);
+return cljs.core.native_satisfies_QMARK_.call(null,cljs.core.IRecord,G__29407);
 }
 })()))){
 return tailrecursion.cljson.enc_coll.call(null,"m",cljs.core.map.call(null,encode,cljs.core.apply.call(null,cljs.core.concat,x)));
@@ -188,20 +188,20 @@ throw (new Error([cljs.core.str("No cljson encoding for type '"),cljs.core.str(c
 });
 tailrecursion.cljson.decode_tagged = (function decode_tagged(o){
 var tag = (o[(0)]);
-var G__29370 = tag;
-switch (G__29370) {
+var G__29409 = tag;
+switch (G__29409) {
 case "v":
 var i = (1);
 var len = o.length;
 var out = cljs.core.transient$.call(null,cljs.core.PersistentVector.EMPTY);
 while(true){
 if((i < len)){
-var G__29372 = (i + (1));
-var G__29373 = len;
-var G__29374 = cljs.core.conj_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
-i = G__29372;
-len = G__29373;
-out = G__29374;
+var G__29411 = (i + (1));
+var G__29412 = len;
+var G__29413 = cljs.core.conj_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
+i = G__29411;
+len = G__29412;
+out = G__29413;
 continue;
 } else {
 return cljs.core.persistent_BANG_.call(null,out);
@@ -216,12 +216,12 @@ var len = o.length;
 var out = cljs.core.transient$.call(null,cljs.core.PersistentArrayMap.EMPTY);
 while(true){
 if((i < len)){
-var G__29375 = (i + (2));
-var G__29376 = len;
-var G__29377 = cljs.core.assoc_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])),tailrecursion.cljson.decode.call(null,(o[(i + (1))])));
-i = G__29375;
-len = G__29376;
-out = G__29377;
+var G__29414 = (i + (2));
+var G__29415 = len;
+var G__29416 = cljs.core.assoc_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])),tailrecursion.cljson.decode.call(null,(o[(i + (1))])));
+i = G__29414;
+len = G__29415;
+out = G__29416;
 continue;
 } else {
 return cljs.core.persistent_BANG_.call(null,out);
@@ -235,10 +235,10 @@ var i = (o.length - (1));
 var out = cljs.core.List.EMPTY;
 while(true){
 if((i > (0))){
-var G__29378 = (i - (1));
-var G__29379 = cljs.core.conj.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
-i = G__29378;
-out = G__29379;
+var G__29417 = (i - (1));
+var G__29418 = cljs.core.conj.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
+i = G__29417;
+out = G__29418;
 continue;
 } else {
 return out;
@@ -253,12 +253,12 @@ var len = o.length;
 var out = cljs.core.transient$.call(null,cljs.core.PersistentHashSet.EMPTY);
 while(true){
 if((i < len)){
-var G__29380 = (i + (1));
-var G__29381 = len;
-var G__29382 = cljs.core.conj_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
-i = G__29380;
-len = G__29381;
-out = G__29382;
+var G__29419 = (i + (1));
+var G__29420 = len;
+var G__29421 = cljs.core.conj_BANG_.call(null,out,tailrecursion.cljson.decode.call(null,(o[i])));
+i = G__29419;
+len = G__29420;
+out = G__29421;
 continue;
 } else {
 return cljs.core.persistent_BANG_.call(null,out);
