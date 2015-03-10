@@ -34,7 +34,8 @@
     [:span "MeetApp"]
     [:div.spacer]
     ;[roster/main]
-    [:a.icon-button {:href "#/roster"}
+    [:a.icon-button {;:href "#/roster"
+                     :on-click #(secretary/dispatch! "/roster")}
      [:i.icon-add]]]
    [:div.main
     ;; queue.

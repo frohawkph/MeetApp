@@ -1,4 +1,4 @@
-(ns meetapp.dev
+(ns ^:figwheel-no-load meetapp.dev
   (:require [meetapp.core :as core]
             [figwheel.client :as figwheel :include-macros true]
             [weasel.repl :as weasel]

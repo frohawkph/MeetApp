@@ -76,6 +76,7 @@
                     (reset! selected-index 0)))
       "up"      (do
                   (.preventDefault event)
+                  (.log js/console "Derp")
                   (if (boolean @selected-index)
                     (swap! selected-index #(clamp 0 max-count (dec %)))
                     (reset! selected-index max-count)))
@@ -91,8 +92,10 @@
      :component-function      (fn [] 
                                 [:div 
                                  [:div.toolbar
-                                  [:a.icon-button {:href "#/"} 
-                                   [:i.icon-arrow-back]]]
+                                  [:a.icon-button {;:href "#/"
+                                                   :on-click #(secretary/dispatch! "/")} 
+                                   [:i.icon-arrow-back]]
+                                  ]
                                  [:div.roster.main
                                   [:div.search-section
                                    [roster-input {:focused (not @selected-index)}]] 

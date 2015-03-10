@@ -10,14 +10,14 @@ meetapp.timer.counter = reagent.core.atom.call(null,(0));
 if(typeof meetapp.timer.interval !== 'undefined'){
 } else {
 meetapp.timer.interval = setInterval((function (){
-return cljs.core.swap_BANG_.call(null,meetapp.timer.counter,(function (p1__19699_SHARP_){
-return (p1__19699_SHARP_ + (1000));
+return cljs.core.swap_BANG_.call(null,meetapp.timer.counter,(function (p1__17747_SHARP_){
+return (p1__17747_SHARP_ + (1000));
 }));
 }),(1000));
 }
 meetapp.timer.format_timer = (function format_timer(delta){
-return clojure.string.join.call(null,":",cljs.core.map.call(null,(function (p1__19700_SHARP_){
-return goog.string.format("%02d",p1__19700_SHARP_);
+return clojure.string.join.call(null,":",cljs.core.map.call(null,(function (p1__17748_SHARP_){
+return goog.string.format("%02d",p1__17748_SHARP_);
 }),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [delta.getMinutes(),delta.getSeconds()], null)));
 });
 meetapp.timer.reset = (function reset(){

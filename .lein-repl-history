@@ -69,3 +69,8 @@ select
 (not 1)
 (not nil)
 (not 0)
+(browser-repl)
+(in-ns 'meetapp.dev)
+(browser-repl)
+start figwheel
+(start-figwheel)

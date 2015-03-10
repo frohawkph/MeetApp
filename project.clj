@@ -9,21 +9,17 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [cljsjs/react "0.12.2-5"]
                  [reagent "0.5.0-alpha3"]
-                 [reagent-forms "0.4.3"]
+                 [reagent-forms "0.4.4"]
                  [reagent-utils "0.1.3"]
                  [secretary "1.2.1"]
                  [org.clojure/clojurescript "0.0-2913" :scope "provided"]
-                 [com.cemerick/piggieback "0.1.5"]
-                 [weasel "0.5.0"]
                  [ring "1.3.2"]
                  [ring/ring-defaults "0.1.3"]
                  [prone "0.8.0"]
-                 [alandipert/storage-atom "1.2.4"]
                  [compojure "1.3.2"]
                  [selmer "0.8.0"]
-                 [environ "1.0.0"]
-                 [leiningen "2.5.1"]
-                 [figwheel "0.1.6-SNAPSHOT"]]
+                 [alandipert/storage-atom "1.2.4"]
+                 [environ "1.0.0"]]
 
   :plugins [
             [lein-cljsbuild "1.0.4"]
@@ -32,15 +28,13 @@
             [lein-asset-minifier "0.2.2"]
             [lein-sass "0.3.5"]]
 
-  :hooks [leiningen.sass]
-
   :ring {:handler meetapp.handler/app
          :uberwar-name "meetapp.war"}
 
   :min-lein-version "2.5.0"
 
   :uberjar-name "meetapp.jar"
-
+  
   :sass {:src "resources/sass"
           :output-directory "resources/public/css"}
 
@@ -53,10 +47,10 @@
     {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:preamble      ["reagent/react.js"]
-                                        :output-to     "resources/public/js/app.js"
+                             :compiler {:output-to     "resources/public/js/app.js"
                                         :output-dir    "resources/public/js/out"
-                                        :externs       ["react/externs/react.js"]
+                                        ;;:externs       ["react/externs/react.js"]
+                                        :asset-path   "js/out"
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
@@ -65,9 +59,14 @@
 
                    :dependencies [[ring-mock "0.1.5"]
                                   [ring/ring-devel "1.3.2"]
+                                  [leiningen "2.5.1"]
+                                  [figwheel "0.2.5-SNAPSHOT"]
+                                  [weasel "0.6.0-SNAPSHOT"]
+                                  [com.cemerick/piggieback "0.1.6-SNAPSHOT"]
                                   [pjstadig/humane-test-output "0.6.0"]]
 
-                   :plugins [[lein-figwheel "0.2.0-SNAPSHOT"]]
+                   :source-paths ["env/dev/clj"]
+                   :plugins [[lein-figwheel "0.2.3-SNAPSHOT"]]
 
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]
@@ -80,7 +79,10 @@
                    :env {:dev? true}
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
-                                              :compiler {:source-map true}}}}}
+                                              :compiler {   :main "meetapp.dev"
+                                                         :source-map true}}
+}
+}}
 
              :uberjar {:hooks [leiningen.cljsbuild minify-assets.plugin/hooks]
                        :env {:production true}
@@ -95,4 +97,6 @@
 
              :production {:ring {:open-browser? false
                                  :stacktraces?  false
-                                 :auto-reload?  false}}})
+                                 :auto-reload?  false}
+                          :cljsbuild {:builds {:app {:compiler {:main "meetapp.prod"}}}}
+                          }})
