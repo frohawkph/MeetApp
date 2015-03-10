@@ -33,6 +33,7 @@ ul {
 
 .toolbar {
   height: 64px;
+  min-height: 64px;
   background-color: #85144B;
   color: white;
   display: -webkit-box;

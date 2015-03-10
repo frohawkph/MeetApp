@@ -96,6 +96,7 @@
                                     [:a.icon-button {;:href "#/"
                                                      :on-click go-home} 
                                      [:i.icon-arrow-back]]
+                                    "derp"
                                     ]
                                    [:div.roster.main
                                     [:div.search-section
