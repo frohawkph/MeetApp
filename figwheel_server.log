@@ -454,3 +454,62 @@ notifying browser that file changed:  /meetapp/dev.js
 notifying browser that file changed:  /meetapp/queue.js
 notifying browser that file changed:  /meetapp/core.js
 notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.376 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.288 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.312 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.277 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var meetapp.queue/go-roster at line 22 src/cljs/meetapp/queue.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.412 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.27 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.317 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.412 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.3 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.263 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.388 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.285 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js

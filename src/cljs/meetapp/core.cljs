@@ -18,22 +18,9 @@
 ;; -------------------------
 ;; Views
 
-(defn key-handler [page-id event]
-  (defn preventDefault [] (.preventDefault event))
-  ;(.log js/console page-id)
-  
-  #_(case (util/key-mapping (.-keyCode event))
-      "down"  (.log js/console "going down")
-      "up"    (.log js/console "going up")))
+(defn queue-page [] [queue/main])
 
-(defn queue-page []
-  (reagent/create-class
-    {:component-did-mount #(.addEventListener js/document "keydown" (partial key-handler "queue"))
-     :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "queue"))
-     :component-function queue/main}))
-
-(defn roster-page []
-  [roster/main])
+(defn roster-page [] [roster/main])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
