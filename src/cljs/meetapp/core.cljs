@@ -23,29 +23,14 @@
   ;(.log js/console page-id)
   
   #_(case (util/key-mapping (.-keyCode event))
-    "down"  (.log js/console "going down")
-    "up"    (.log js/console "going up")))
-
-(defn queue-view []
-  [:div.app-container
-   [:div.toolbar
-    [:a.icon-button {:href "http://torchapps.github.io/"}
-     [:i.icon-torch]]
-    [:span "MeetApp"]
-    [:div.spacer]
-    ;[roster/main]
-    [:a.icon-button {;:href "#/roster"
-                     :on-click #(secretary/dispatch! "/roster")}
-     [:i.icon-add]]]
-   [:div.main
-    ;; queue.
-    [queue/main]]])
+      "down"  (.log js/console "going down")
+      "up"    (.log js/console "going up")))
 
 (defn queue-page []
   (reagent/create-class
     {:component-did-mount #(.addEventListener js/document "keydown" (partial key-handler "queue"))
      :component-will-unmount #(.removeEventListener js/document "keydown" (partial key-handler "queue"))
-     :component-function queue-view}))
+     :component-function queue/main}))
 
 (defn roster-page []
   [roster/main])

@@ -400,3 +400,57 @@ notifying browser that file changed:  /meetapp/dev.js
 notifying browser that file changed:  /meetapp/roster.js
 notifying browser that file changed:  /meetapp/core.js
 notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.325 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.279 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.32 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.321 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.254 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: secretary at line 22 src/cljs/meetapp/queue.cljs
+WARNING: Use of undeclared Var secretary/dispatch! at line 22 src/cljs/meetapp/queue.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.395 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.268 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.37 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: No such namespace: secretary at line 22 src/cljs/meetapp/queue.cljs
+WARNING: Use of undeclared Var secretary/dispatch! at line 22 src/cljs/meetapp/queue.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.526 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.464 seconds.[0m
+notifying browser that file changed:  resources/public/js/out/cljs_deps.js
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.294 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
