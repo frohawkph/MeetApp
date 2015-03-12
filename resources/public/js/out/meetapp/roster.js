@@ -34,8 +34,8 @@ return null;
 meetapp.roster.keyhandler = (function keyhandler(event){
 event.stopPropagation();
 
-var G__35244 = event.key;
-switch (G__35244) {
+var G__23512 = event.key;
+switch (G__23512) {
 case "Enter":
 return meetapp.roster.enter_handler.call(null);
 
@@ -55,15 +55,15 @@ return reagent.core.dom_node.call(null,this$).focus();
 return reagent.core.dom_node.call(null,this$).blur();
 }
 }),new cljs.core.Keyword(null,"render","render",-1408033454),(function (this$){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"id","id",-1388402092),"roster-input",new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,meetapp.store.current_name),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Search or Add",new cljs.core.Keyword(null,"on-key-press","on-key-press",-399563677),meetapp.roster.keyhandler,new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__35246_SHARP_){
-return cljs.core.reset_BANG_.call(null,meetapp.store.current_name,meetapp.roster.get_event_value.call(null,p1__35246_SHARP_));
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"input","input",556931961),new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"id","id",-1388402092),"roster-input",new cljs.core.Keyword(null,"type","type",1174270348),"text",new cljs.core.Keyword(null,"value","value",305978217),cljs.core.deref.call(null,meetapp.store.current_name),new cljs.core.Keyword(null,"placeholder","placeholder",-104873083),"Search or Add",new cljs.core.Keyword(null,"on-key-press","on-key-press",-399563677),meetapp.roster.keyhandler,new cljs.core.Keyword(null,"on-change","on-change",-732046149),(function (p1__23514_SHARP_){
+return cljs.core.reset_BANG_.call(null,meetapp.store.current_name,meetapp.roster.get_event_value.call(null,p1__23514_SHARP_));
 })], null)], null);
 })], null));
 });
 meetapp.roster.filtered_roster = (function filtered_roster(){
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.store.current_name))){
-return cljs.core.apply.call(null,cljs.core.sorted_set,clojure.set.select.call(null,(function (p1__35247_SHARP_){
-return goog.string.caseInsensitiveContains(p1__35247_SHARP_,cljs.core.deref.call(null,meetapp.store.current_name));
+return cljs.core.apply.call(null,cljs.core.sorted_set,clojure.set.select.call(null,(function (p1__23515_SHARP_){
+return goog.string.caseInsensitiveContains(p1__23515_SHARP_,cljs.core.deref.call(null,meetapp.store.current_name));
 }),cljs.core.deref.call(null,meetapp.store.state).call(null,new cljs.core.Keyword(null,"roster","roster",-2092272532))));
 } else {
 return cljs.core.deref.call(null,meetapp.store.state).call(null,new cljs.core.Keyword(null,"roster","roster",-2092272532));
@@ -92,8 +92,9 @@ return (function (){
 return secretary.core.dispatch_BANG_.call(null,"/");
 });})(max_count,within_bounds_QMARK_,clamp,selected_name))
 ;
-var G__35251 = meetapp.util.key_mapping.call(null,event.keyCode);
-switch (G__35251) {
+var character = String.fromCharCode(event.which);
+var G__23520 = meetapp.util.key_mapping.call(null,event.which);
+switch (G__23520) {
 case "enter":
 if(within_bounds_QMARK_){
 meetapp.store.add_to_queue.call(null,selected_name.call(null));
@@ -102,10 +103,16 @@ meetapp.store.add_to_queue.call(null,selected_name.call(null));
 
 cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,null);
 
+if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))){
 return go_home.call(null);
+} else {
+return null;
+}
 
 break;
 case "delete":
+event.preventDefault();
+
 if(within_bounds_QMARK_){
 return meetapp.store.remove_from_roster.call(null,selected_name.call(null));
 } else {
@@ -125,10 +132,10 @@ case "down":
 event.preventDefault();
 
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))){
-return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__35251,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
-return (function (p1__35248_SHARP_){
-return clamp.call(null,(0),max_count,(p1__35248_SHARP_ + (1)));
-});})(G__35251,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
+return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character){
+return (function (p1__23516_SHARP_){
+return clamp.call(null,(0),max_count,(p1__23516_SHARP_ + (1)));
+});})(G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character))
 );
 } else {
 return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,(0));
@@ -139,10 +146,10 @@ case "up":
 event.preventDefault();
 
 if(cljs.core.boolean$.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))){
-return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__35251,max_count,within_bounds_QMARK_,clamp,selected_name,go_home){
-return (function (p1__35249_SHARP_){
-return clamp.call(null,(0),max_count,(p1__35249_SHARP_ - (1)));
-});})(G__35251,max_count,within_bounds_QMARK_,clamp,selected_name,go_home))
+return cljs.core.swap_BANG_.call(null,meetapp.roster.selected_index,((function (G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character){
+return (function (p1__23517_SHARP_){
+return clamp.call(null,(0),max_count,(p1__23517_SHARP_ - (1)));
+});})(G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character))
 );
 } else {
 return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,max_count);
@@ -150,7 +157,15 @@ return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,max_count);
 
 break;
 default:
-return cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,null);
+cljs.core.reset_BANG_.call(null,meetapp.roster.selected_index,null);
+
+cljs.core.swap_BANG_.call(null,meetapp.store.current_name,((function (G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character){
+return (function (p1__23518_SHARP_){
+return [cljs.core.str(p1__23518_SHARP_),cljs.core.str(character)].join('');
+});})(G__23520,max_count,within_bounds_QMARK_,clamp,selected_name,go_home,character))
+);
+
+return console.log(cljs.core._EQ_.call(null,character,""));
 
 }
 });
@@ -171,8 +186,8 @@ return document.removeEventListener("keydown",meetapp.roster.main_keyhandler);
 ,new cljs.core.Keyword(null,"component-function","component-function",654728922),((function (go_home){
 return (function (){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.toolbar","div.toolbar",-1371089148),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a.icon-button","a.icon-button",989529593),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),go_home], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"i.icon-arrow-back","i.icon-arrow-back",1710557319)], null)], null),"Roster"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.roster.main","div.roster.main",-1846186817),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div.search-section","div.search-section",318831423),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [meetapp.roster.roster_input,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"focused","focused",1851572115),cljs.core.not.call(null,cljs.core.deref.call(null,meetapp.roster.selected_index))], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.basic-list","ul.basic-list",-684973660),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-mouse-down","on-mouse-down",1147755470),((function (go_home){
-return (function (p1__35253_SHARP_){
-return p1__35253_SHARP_.preventDefault();
+return (function (p1__23522_SHARP_){
+return p1__23522_SHARP_.preventDefault();
 });})(go_home))
 ], null),cljs.core.doall.call(null,cljs.core.map_indexed.call(null,((function (go_home){
 return (function (index,name){

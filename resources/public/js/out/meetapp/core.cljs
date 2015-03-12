@@ -18,10 +18,6 @@
 ;; -------------------------
 ;; Views
 
-(defn queue-page [] [queue/main])
-
-(defn roster-page [] [roster/main])
-
 (defn current-page []
   [:div [(session/get :current-page)]])
 
@@ -30,10 +26,10 @@
 (secretary/set-config! :prefix "#")
 
 (secretary/defroute "/" []
-                    (session/put! :current-page #'queue-page))
+                    (session/put! :current-page #'queue/main))
 
 (secretary/defroute "/roster" []
-                    (session/put! :current-page #'roster-page))
+                    (session/put! :current-page #'roster/main))
 
 ;; -------------------------
 ;; History

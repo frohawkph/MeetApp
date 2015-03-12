@@ -539,3 +539,337 @@ notifying browser that file changed:  /meetapp/dev.js
 notifying browser that file changed:  /meetapp/roster.js
 notifying browser that file changed:  /meetapp/core.js
 notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.013 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[31mCompiling "resources/public/js/app.js" failed.[0m
+[31mclojure.lang.ExceptionInfo: [39m[31mfailed compiling file:src/cljs/meetapp/queue.cljs[39m
+[35m               core.clj:4403 clojure.core/ex-info[39m
+[32m           compiler.clj:1060 cljs.compiler/compile-file[fn][39m
+[32m           compiler.clj:1035 cljs.compiler/compile-file[39m
+[32m           compiler.clj:1090 cljs.compiler/compile-root[39m
+[32m             closure.clj:357 cljs.closure/compile-dir[39m
+[32m             closure.clj:397 cljs.closure/eval11537[fn][39m
+[32m             closure.clj:305 cljs.closure/eval11473[fn][39m
+[32m             closure.clj:411 cljs.closure/eval11524[fn][39m
+[32m             closure.clj:305 cljs.closure/eval11473[fn][39m
+[32m                 core.clj:18 clojurescript-build.core.CompilableSourcePaths/fn[39m
+[35m               core.clj:2557 clojure.core/map[fn][39m
+[36m             LazySeq.java:40 clojure.lang.LazySeq.sval[39m
+[36m             LazySeq.java:49 clojure.lang.LazySeq.seq[39m
+[36m                 RT.java:484 clojure.lang.RT.seq[39m
+[35m                core.clj:133 clojure.core/seq[39m
+[35m                core.clj:624 clojure.core/apply[39m
+[35m               core.clj:2586 clojure.core/mapcat[39m
+[36m             RestFn.java:423 clojure.lang.RestFn.invoke[39m
+[32m                 core.clj:18 clojurescript-build.core/clojurescript-build.core.CompilableSourcePaths[39m
+[32m            closure.clj:1367 cljs.closure/build[39m
+[32m                core.clj:150 clojurescript-build.core/build-source-paths*[39m
+[32m         auto_builder.clj:59 figwheel-sidecar.auto-builder/warning[fn][39m
+[32m                 auto.clj:55 clojurescript-build.auto/time-build[fn][39m
+[32m                 auto.clj:64 clojurescript-build.auto/after[fn][39m
+[32m                 auto.clj:64 clojurescript-build.auto/after[fn][39m
+[32m                 auto.clj:64 clojurescript-build.auto/after[fn][39m
+[32m                 auto.clj:71 clojurescript-build.auto/error[fn][39m
+[32m                 auto.clj:60 clojurescript-build.auto/before[fn][39m
+[32m                auto.clj:103 clojurescript-build.auto/make-conditional-builder[fn][39m
+[35m               core.clj:6353 clojure.core/mapv[fn][39m
+[36m          ArrayChunk.java:58 clojure.lang.ArrayChunk.reduce[39m
+[35m            protocols.clj:98 clojure.core.protocols/fn[39m
+[35m            protocols.clj:19 clojure.core.protocols/fn[fn][39m
+[35m            protocols.clj:31 clojure.core.protocols/seq-reduce[39m
+[35m            protocols.clj:60 clojure.core.protocols/fn[39m
+[35m            protocols.clj:13 clojure.core.protocols/fn[fn][39m
+[35m               core.clj:6289 clojure.core/reduce[39m
+[35m               core.clj:6353 clojure.core/mapv[39m
+[32m                auto.clj:184 clojurescript-build.auto/autobuild*[fn][39m
+[32m                auto.clj:177 clojurescript-build.auto/autobuild*[fn][39m
+[35m          ioc_macros.clj:940 clojure.core.async.impl.ioc-macros/run-state-machine[39m
+[35m          ioc_macros.clj:944 clojure.core.async.impl.ioc-macros/run-state-machine-wrapped[39m
+[35m               async.clj:362 clojure.core.async/ioc-alts![fn][39m
+[35m               async.clj:231 clojure.core.async/do-alts[fn][39m
+[35m            channels.clj:262 clojure.core.async.impl.channels.ManyToManyChannel/fn[39m
+[36m                 AFn.java:22 clojure.lang.AFn.run[39m
+[34mThreadPoolExecutor.java:1142 java.util.concurrent.ThreadPoolExecutor.runWorker[39m
+[34m ThreadPoolExecutor.java:617 java.util.concurrent.ThreadPoolExecutor$Worker.run[39m
+[34m             Thread.java:745 java.lang.Thread.run[39m
+[31mCaused by: [39m[31mclojure.lang.ExceptionInfo: [39m[31mMap literal must contain an even number of forms[39m
+[35m               core.clj:4403 clojure.core/ex-info[39m
+[35m        reader_types.clj:337 clojure.tools.reader.reader-types/reader-error[39m
+[36m             RestFn.java:423 clojure.lang.RestFn.invoke[39m
+[35m              reader.clj:211 clojure.tools.reader/read-map[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:189 clojure.tools.reader/read-vector[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:170 clojure.tools.reader/read-list[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:206 clojure.tools.reader/read-map[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:170 clojure.tools.reader/read-list[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:170 clojure.tools.reader/read-list[39m
+[35m              reader.clj:158 clojure.tools.reader/read-delimited[39m
+[35m              reader.clj:170 clojure.tools.reader/read-list[39m
+[35m              reader.clj:745 clojure.tools.reader/read[39m
+[35m              reader.clj:730 clojure.tools.reader/read[39m
+[32m           analyzer.clj:1813 cljs.analyzer/forms-seq[fn][39m
+[32m           analyzer.clj:1807 cljs.analyzer/forms-seq[fn][39m
+[36m             LazySeq.java:40 clojure.lang.LazySeq.sval[39m
+[36m             LazySeq.java:49 clojure.lang.LazySeq.seq[39m
+[36m                 RT.java:484 clojure.lang.RT.seq[39m
+[35m                core.clj:133 clojure.core/seq[39m
+[32m            compiler.clj:951 cljs.compiler/compile-file*[fn][39m
+[32m            compiler.clj:912 cljs.compiler/with-core-cljs[39m
+[32m            compiler.clj:932 cljs.compiler/compile-file*[39m
+[32m           compiler.clj:1048 cljs.compiler/compile-file[fn][39m
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.093 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.055 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.57 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.426 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.305 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.384 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.317 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.278 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.342 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.343 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.632 seconds.[0m
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  resources/public/js/out/cljs_deps.js
+notifying browser that file changed:  /meetapp/lib/collections.js
+notifying browser that file changed:  /meetapp/lib/collapse.js
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/lib/drag_list.js
+notifying browser that file changed:  /meetapp/util.js
+notifying browser that file changed:  /meetapp/store.js
+notifying browser that file changed:  /meetapp/timer.js
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+sending changed CSS file: resources/public/css/style.css
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.885 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.106 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 1.118 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.494 seconds.[0m
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.892 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+Figwheel: focusing on build-ids (app)
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.4 seconds.[0m
+notifying browser that file changed:  resources/public/js/out/goog/deps.js
+notifying browser that file changed:  resources/public/js/out/cljs_deps.js
+notifying browser that file changed:  /meetapp/lib/collections.js
+notifying browser that file changed:  /meetapp/lib/collapse.js
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/lib/drag_list.js
+notifying browser that file changed:  /meetapp/util.js
+notifying browser that file changed:  /meetapp/store.js
+notifying browser that file changed:  /meetapp/timer.js
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.659 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.675 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.478 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.418 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.493 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.461 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.382 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.294 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.459 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.475 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.702 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.482 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.511 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.367 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.342 seconds.[0m
+notifying browser that file changed:  /meetapp/queue.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.329 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.405 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var meetapp.roster/current-name at line 86 src/cljs/meetapp/roster.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.366 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var meetapp.roster/current-name at line 86 src/cljs/meetapp/roster.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.539 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+WARNING: Use of undeclared Var meetapp.roster/current-name at line 86 src/cljs/meetapp/roster.cljs
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.409 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.308 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.351 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.299 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.561 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.343 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.326 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.325 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js
+[0mCompiling "resources/public/js/app.js" from ["src/cljs" "env/dev/cljs"]...
+[32mSuccessfully compiled "resources/public/js/app.js" in 0.333 seconds.[0m
+notifying browser that file changed:  /meetapp/roster.js
+notifying browser that file changed:  /meetapp/core.js
+notifying browser that file changed:  /meetapp/dev.js

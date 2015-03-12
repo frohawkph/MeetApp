@@ -14,11 +14,15 @@
 
 (defn key-handler [event]
   (defn preventDefault [] (.preventDefault event))
-  ;(.log js/console page-id)
   
-  #_(case (util/key-mapping (.-keyCode event))
-      "down"  (.log js/console "going down")
-      "up"    (.log js/console "going up")))
+  (case (util/key-mapping (.-keyCode event))
+    "down"    (.log js/console "going down")
+    "up"      (.log js/console "going up")
+    "left"    (.log js/console "left")
+    "right"   (.log js/console "right")
+    "enter"   (.log js/console "enter")
+    "delete"  (.log js/console "delete")
+    (secretary/dispatch! "/roster")))
 
 (defn main []
   (let [go-roster #(secretary/dispatch! "/roster")] 
@@ -29,23 +33,24 @@
                                   [:div.app-container 
                                    [:div.toolbar
                                     [:a.icon-button {:href "http://torchapps.github.io/"} [:i.icon-torch]]
-                                    [:span "MeetApp"]
+                                    [:span "MeetApp beta"]
                                     [:div.spacer]
                                     [:a.icon-button {:on-click go-roster} [:i.icon-add]]]
                                    [:div.queue.main
                                     [:h2 {:on-click #(next-speaker)}
                                      [timer/main]]
-                                    [:ul.basic-list (doall (map-indexed
-                                                             (fn [index item]
-                                                               [:li
-                                                                {:key index
-                                                                 :data-id index
-                                                                 :draggable true
-                                                                 :on-drag-end drag-list/end
-                                                                 :on-drag-over (partial drag-list/over store/state [:queue])
-                                                                 :on-drag-start drag-list/start
-                                                                 :class (if (= @drag-list/dragging index) "dragging" "")
-                                                                 }
-                                                                [:div.entry item]
-                                                                [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
-                                                             (@store/state :queue)))]]])})))
+                                    [:ul.basic-list 
+                                     (doall (map-indexed
+                                              (fn [index item]
+                                                [:li
+                                                 {:key index
+                                                  :data-id index
+                                                  :draggable true
+                                                  :on-drag-end drag-list/end
+                                                  :on-drag-over (partial drag-list/over store/state [:queue])
+                                                  :on-drag-start drag-list/start
+                                                  :class (if (= @drag-list/dragging index) "dragging" "")
+                                                  }
+                                                 [:div.entry item]
+                                                 [:a.icon-button {:on-click #(store/remove-from-queue index)} [:i.icon-close]]])
+                                              (@store/state :queue)))]]])})))

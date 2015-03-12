@@ -49,6 +49,7 @@
 
 (defn main-keyhandler [event]
   ;;;; TODO: issue for selection when there are no items in filtered-roster, because index out of bounds. 
+  ;(.log js/console (.fromCharCode js/String event.which))
   (let [max-count       (-> (filtered-roster) count dec)
         within-bounds?  (and 
                           (boolean @selected-index) 
@@ -56,15 +57,17 @@
                           (>= @selected-index 0))
         clamp           (fn [min-v max-v v] (min max-v (max min-v v)))
         selected-name   (fn [] ((vec (filtered-roster)) @selected-index))
-        go-home         (fn [] (secretary/dispatch! "/"))]
-    (case (util/key-mapping (.-keyCode event))
+        go-home         (fn [] (secretary/dispatch! "/"))
+        character       (.fromCharCode js/String event.which)]
+    (case (util/key-mapping (.-which event))
       "enter"   (do 
                   ;; trigger toast saying that the person has been added, return to queue.
                   (if within-bounds? (store/add-to-queue (selected-name)))
                   (reset! selected-index nil) ;; not yet complete. put this in conditional. only clear if there are no errors. see enter-handler.
-                  (go-home)) 
+                  (if (boolean @selected-index) (go-home))) 
       "delete"  (do
                   ;; dialog if you're sure you want to remove from roster
+                  (.preventDefault event)
                   (if within-bounds? (store/remove-from-roster (selected-name))))
       "escape"  (do 
                   (if @selected-index 
@@ -81,7 +84,9 @@
                     (swap! selected-index #(clamp 0 max-count (dec %)))
                     (reset! selected-index max-count)))
       (do 
-        (reset! selected-index nil)))))
+        (reset! selected-index nil)
+        (swap! store/current-name #(str % character))
+        (.log js/console (= character ""))))))
 
 (defn main []
   (let [go-home (fn [] (secretary/dispatch! "/"))]
